@@ -230,14 +230,15 @@
                 android:id="@+id/Mobile"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/h"
+                android:src="@drawable/lenskart"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
+                android:padding="10dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recharge"
+                android:text="Lenskart"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
@@ -263,16 +264,16 @@
             >
             <Common.OvalImageView
                 android:id="@+id/iconNotice"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/e"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ajio"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notifications"
+                android:text="Ajio"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
@@ -290,16 +291,16 @@
             >
             <Common.OvalImageView
                 android:id="@+id/iconShoping"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/f"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/fabindia"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Shoping"
+                android:text="FabIndia"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
@@ -317,16 +318,16 @@
             >
             <Common.OvalImageView
                 android:id="@+id/iconPoll"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/g"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/licious"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Polling"
+                android:text="Licious"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
@@ -343,16 +344,17 @@
             >
             <Common.OvalImageView
                 android:id="@+id/Poll"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/h"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/limeroad"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
+                android:padding="10dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Polling"
+                android:text="LimeRoad"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"

@@ -8,7 +8,7 @@
     android:padding="10dp"
     >
     <TextView
-        android:id="@+id/recharge"
+        android:id="@+id/travel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
@@ -32,21 +32,20 @@
             android:orientation="vertical"
             >
             <Common.OvalImageView
-                android:id="@+id/iconDth"
+                android:id="@+id/oyo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/a"
+                android:src="@drawable/oyo"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DTH"
+                android:text="Oyo"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
         </LinearLayout>
@@ -58,21 +57,20 @@
             android:orientation="vertical"
             >
             <Common.OvalImageView
-                android:id="@+id/iconBills"
+                android:id="@+id/goibibo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/b"
+                android:src="@drawable/goibibo"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bills"
+                android:text="Goibibo"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
 
@@ -85,21 +83,20 @@
             android:orientation="vertical"
             >
             <Common.OvalImageView
-                android:id="@+id/iconOffer"
+                android:id="@+id/makemytrip"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/c"
+                android:src="@drawable/makemytrip"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Offers"
+                android:text="MakeMyTrip"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
         </LinearLayout>
@@ -111,21 +108,20 @@
             android:orientation="vertical"
             >
             <Common.OvalImageView
-                android:id="@+id/iconElectricity"
+                android:id="@+id/zoomcar"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/d"
+                android:src="@drawable/zoomcar"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Electricity"
+                android:text="Zoomcar"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
         </LinearLayout>
@@ -146,21 +142,20 @@
             android:orientation="vertical"
             >
             <Common.OvalImageView
-                android:id="@+id/Notice"
+                android:id="@+id/cleartrip"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/e"
+                android:src="@drawable/cleartrip"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notifications"
+                android:text="Cleartrip"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
 
@@ -173,24 +168,22 @@
             android:orientation="vertical"
             >
             <Common.OvalImageView
-                android:id="@+id/Shoping"
+                android:id="@+id/confirmtkt"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/f"
+                android:src="@drawable/confirmtkt"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Water"
+                android:text="ConfirmTkt"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
-
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -198,6 +191,7 @@
             android:layout_weight="1"
             android:padding="0dp"
             android:orientation="vertical"
+            android:visibility="invisible"
             >
             <Common.OvalImageView
                 android:id="@+id/Landline"
@@ -224,6 +218,7 @@
             android:layout_weight="1"
             android:padding="0dp"
             android:orientation="vertical"
+            android:visibility="invisible"
             >
             <Common.OvalImageView
                 android:id="@+id/Mobile"
@@ -245,120 +240,4 @@
                 />
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:background="#ffffff"
-        android:layout_marginTop="16dp"
-        >
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="0dp"
-            android:orientation="vertical"
-            >
-            <Common.OvalImageView
-                android:id="@+id/iconNotice"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/e"
-                android:contentDescription="Button"
-                android:layout_gravity="center"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Notifications"
-                android:textSize="12sp"
-                android:textAlignment="center"
-                android:layout_gravity="center"
-                android:textColor="#000"
-                android:layout_marginTop="5dp"
-                />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="0dp"
-            android:orientation="vertical"
-            >
-            <Common.OvalImageView
-                android:id="@+id/iconShoping"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/f"
-                android:contentDescription="Button"
-                android:layout_gravity="center"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Shoping"
-                android:textSize="12sp"
-                android:textAlignment="center"
-                android:layout_gravity="center"
-                android:textColor="#000"
-                android:layout_marginTop="5dp"
-                />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="0dp"
-            android:orientation="vertical"
-            >
-            <Common.OvalImageView
-                android:id="@+id/iconPoll"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/g"
-                android:contentDescription="Button"
-                android:layout_gravity="center"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Polling"
-                android:textSize="12sp"
-                android:textAlignment="center"
-                android:layout_gravity="center"
-                android:textColor="#000"
-                android:layout_marginTop="5dp"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="0dp"
-            android:orientation="vertical"
-            >
-            <Common.OvalImageView
-                android:id="@+id/Poll"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/h"
-                android:contentDescription="Button"
-                android:layout_gravity="center"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Polling"
-                android:textSize="12sp"
-                android:textAlignment="center"
-                android:layout_gravity="center"
-                android:textColor="#000"
-                android:layout_marginTop="5dp"
-                />
-        </LinearLayout>
-    </LinearLayout>
-
 </LinearLayout>

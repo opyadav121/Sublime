@@ -39,9 +39,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     private static ViewPager mPager;
     private static int currentPager = 0;
     ArrayList<Integer> picArray=new ArrayList<Integer>();
-    private static final Integer [] pic = {R.drawable.a, R.drawable.b,R.drawable.c,
-            R.drawable.e,R.drawable.f,R.drawable.d,R.drawable.g};
-
+    //private static final Integer [] pic = {R.drawable.ajio, R.drawable.amazon};
+    private static final Integer [] pic = {R.drawable.ban1, R.drawable.ban2,R.drawable.ban3, R.drawable.ban4};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,7 +138,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         final Runnable update=new Runnable() {
             @Override
             public void run() {
-                if (currentPager==pic.length)
+                if (currentPager == pic.length)
                 {
                     currentPager=0;
                 }
@@ -152,7 +151,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
             public void run() {
                 handler.post(update);
             }
-        },1000,1000);
+        },3000,3000);
     }
     public class MyAdapter extends PagerAdapter
     {
