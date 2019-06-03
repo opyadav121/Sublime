@@ -6,14 +6,13 @@
     android:orientation="vertical"
     android:background="#ffffff"
     android:padding="10dp"
-    android:elevation="3dp"
     >
     <TextView
         android:id="@+id/recharge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:text="Recharge and Bill Payments"
+        android:text="Travel"
         android:textColor="#000"
         android:textStyle="bold"
         android:textSize="14sp"
@@ -79,31 +78,31 @@
 
         </LinearLayout>
         <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:padding="0dp"
-        android:orientation="vertical"
-        >
-        <Common.OvalImageView
-            android:id="@+id/iconOffer"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/c"
-            android:contentDescription="Button"
-            android:layout_gravity="center"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Offers"
-            android:textSize="12sp"
-            android:textAlignment="center"
-            android:layout_gravity="center"
-            android:textColor="#000"
-            android:layout_marginTop="5dp"
-            />
-    </LinearLayout>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:orientation="vertical"
+            >
+            <Common.OvalImageView
+                android:id="@+id/iconOffer"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/c"
+                android:contentDescription="Button"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Offers"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:textColor="#000"
+                android:layout_marginTop="5dp"
+                />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
