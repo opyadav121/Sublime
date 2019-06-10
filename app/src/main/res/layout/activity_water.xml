@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Recharge.WaterActivity">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </android.support.design.widget.AppBarLayout>
+    <RelativeLayout
+        android:id="@+id/parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_white"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:elevation="5dp"
+        >
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/Board"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <AutoCompleteTextView
+                android:id="@+id/txtBoard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Select Board"
+                />
+        </android.support.design.widget.TextInputLayout>
+        <ListView
+            android:id="@+id/listViewBoard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="8dp"
+            android:background="#f9f9f9"
+            android:layout_below="@id/Board"
+            android:padding="5dp"
+            android:visibility="gone">
+        </ListView>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Board">
+
+            <EditText
+                android:id="@+id/txtService"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:paddingRight="20dp"
+                android:textColor="@color/colorOrangeDark"
+                android:hint="Service Number/Account Number" />
+        </android.support.design.widget.TextInputLayout>
+        <TextView
+            android:id="@+id/instruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:layout_below="@id/service"
+            android:textSize="12sp"
+            android:text="Your Service provider will take two working days to consider bill paid in their accounts."
+            />
+        <Button
+            android:id="@+id/btnPay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backgraund_btn"
+            android:layout_below="@id/instruction"
+            android:text="Make Payment"
+            android:textColor="@color/colorWhite"
+            android:padding="5dp"
+            />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FCF1DD"
+        >
+        <TextView
+            android:id="@+id/recent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recent Bill Payment"
+            android:padding="5dp"
+            android:textSize="14sp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+
+</LinearLayout>

@@ -32,22 +32,21 @@
             android:layout_weight="1"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
-                android:id="@+id/ic"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iconEthic"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/flipkart"
+                android:src="@drawable/ethic"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Flipkart"
+                android:text="Ethic"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
         </LinearLayout>
@@ -58,22 +57,22 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
-                android:id="@+id/iconBills"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iconRydon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/mintra"
+                android:background="@color/blue"
+                android:src="@drawable/markredon"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Myntra"
+                android:text="Mark Ryden"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
 
@@ -85,7 +84,7 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iconOffer"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -100,7 +99,6 @@
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
         </LinearLayout>
@@ -111,7 +109,7 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iconElectricity"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -126,7 +124,6 @@
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
         </LinearLayout>
@@ -146,7 +143,7 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Notice"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -161,7 +158,6 @@
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
 
@@ -173,7 +169,7 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Shoping"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -188,7 +184,6 @@
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
 
@@ -200,7 +195,7 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Landline"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -215,7 +210,6 @@
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
         </LinearLayout>
@@ -226,7 +220,7 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Mobile"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -242,7 +236,6 @@
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
         </LinearLayout>
@@ -262,7 +255,7 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iconNotice"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -277,7 +270,6 @@
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
 
@@ -289,7 +281,7 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iconShoping"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -304,7 +296,6 @@
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
 
@@ -316,7 +307,7 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iconPoll"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -331,7 +322,6 @@
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
         </LinearLayout>
@@ -342,7 +332,7 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Poll"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -358,7 +348,6 @@
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
         </LinearLayout>

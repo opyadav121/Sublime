@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Recharge.DTHActivity">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </android.support.design.widget.AppBarLayout>
+    <LinearLayout
+        android:id="@+id/parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        >
+        <TextView
+            android:id="@+id/bookDth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book your DTH"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bag Amount:"
+            android:gravity="right"
+            />
+        <TextView
+            android:id="@+id/bagAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rs 0.00"
+            android:gravity="right"
+            android:textColor="@color/colorBlack"
+            android:layout_marginRight="20dp"
+            />
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/parent1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_white"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:elevation="5dp"
+        >
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/Operator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <AutoCompleteTextView
+                android:id="@+id/txtOperator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Select Operator"
+                />
+        </android.support.design.widget.TextInputLayout>
+        <ListView
+            android:id="@+id/listViewOperator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="8dp"
+            android:background="#f9f9f9"
+            android:layout_below="@id/Operator"
+            android:padding="5dp"
+            android:visibility="gone">
+        </ListView>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/Customer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Operator">
+
+            <EditText
+                android:id="@+id/txtCustomerID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:textColor="@color/colorOrangeDark"
+                android:hint="Customer ID"
+                android:inputType="number"
+                />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/Amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Customer">
+
+            <EditText
+                android:id="@+id/txtAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:textColor="@color/colorOrangeDark"
+                android:hint="Amount"
+                android:inputType="number"
+                />
+        </android.support.design.widget.TextInputLayout>
+        <Button
+            android:id="@+id/btnPay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backgraund_btn"
+            android:layout_below="@id/Amount"
+            android:text="Make Payment"
+            android:textColor="@color/colorWhite"
+            android:padding="5dp"
+            />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FCF1DD"
+        >
+        <TextView
+            android:id="@+id/recent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recent Bill Payment"
+            android:padding="5dp"
+            android:textSize="14sp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+
+</LinearLayout>

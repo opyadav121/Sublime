@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ffffff</color>    //008577
+    <color name="colorPrimary">#f58634</color>    //008577
     <color name="colorPrimaryDark">#f58634</color> //00574B
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#828386</color>  //D81b60
 
+    <color name="color_white_semitransparent">#50ffffff</color>
     <color name="colorNavIcon">#dae9f6</color>
-    <color name="colorNavText">#01294b</color>
+    <color name="colorNavText">#f58634</color>
     <color name="colorNavBack">#48FF6A00</color>
     <color name="colorOrange">#f58634</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorOrangeDark">#FF5722</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGray">#828386</color>
+    <color name="colorOrangeTrans">#80f58634</color>
+    <color name="blue">#4193ff</color>
 </resources>

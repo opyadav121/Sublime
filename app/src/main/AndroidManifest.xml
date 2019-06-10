@@ -2,15 +2,75 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.omprakash.sublime">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="net.anvisys.NestIn.gcm.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
-        android:icon="@drawable/mainlogo"
+        android:icon="@drawable/logomain"
         android:label="@string/app_name"
-
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".Recharge.NNNOActivity"></activity>
+        <activity android:name=".Recharge.NetMaedsActivity" />
+        <activity android:name=".Recharge.MakemyTripActivity" />
+        <activity android:name=".Recharge.OyoActivity" />
+        <activity android:name=".Recharge.BigrockActivity" />
+        <activity android:name=".Recharge.RydonActivity" />
+        <activity android:name=".Recharge.EthicActivity" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:parentActivityName=".ProfileActivity" />
+        <activity
+            android:name=".Recharge.ThemeParkActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.GiftActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".DashboardActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.DTHActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.BroadbandActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.InsuranceRenualActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.WaterActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.GasBillActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.ElectricityBillActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.MobilePostpaidActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".ProfileActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".RegisterActivity"
+            android:parentActivityName=".LoginActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

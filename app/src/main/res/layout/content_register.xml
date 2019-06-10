@@ -21,34 +21,45 @@
                 android:layout_height="60dp"
                 android:src="@drawable/headerlogo"
                 android:layout_gravity="center"
-                />
-            <EditText
-                android:id="@+id/txtUseName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="User_name"
-                android:inputType="none"
-                android:drawablePadding="5dp"
-                android:layout_marginTop="20dp"
-                />
-            <EditText
-                android:id="@+id/txtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Email "
-                android:editable="false"
-                android:inputType="textEmailAddress"
-                android:drawablePadding="5dp"
                 android:visibility="gone"
                 />
-            <EditText
+        <TextView
+            android:id="@+id/Register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Register"
+            android:textSize="20dp"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            />
+        <EditText
+            android:id="@+id/txtUseName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawablePadding="5dp"
+            android:hint="Email_id"
+            android:inputType="textWebEmailAddress" />
+        <EditText
+            android:id="@+id/txtMobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mobile Number "
+            android:inputType="number"
+            android:drawablePadding="5dp"
+            android:layout_marginTop="5dp"
+            />
+        <EditText
                 android:id="@+id/txtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="password "
                 android:inputType="textAutoComplete"
                 android:drawablePadding="5dp"
+                android:layout_marginTop="5dp"
                 />
+
             <EditText
                 android:id="@+id/txtReferalCode"
                 android:layout_width="match_parent"
@@ -56,16 +67,39 @@
                 android:hint=" refral_code"
                 android:inputType="none"
                 android:drawablePadding="5dp"
+                android:layout_marginTop="5dp"
                 />
-            <EditText
-                android:id="@+id/txtAddress"
-                android:layout_width="match_parent"
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="  Side "
+           android:textColor="@color/colorBlack"
+           />
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <RadioButton
+                android:id="@+id/radioLeft"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Address "
-                android:inputType="text"
-                android:drawablePadding="5dp"
-                android:visibility="gone"
+                android:text="Left"
                 />
+            <RadioButton
+                android:id="@+id/radioRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Right"
+                />
+        </RadioGroup>
+        <CheckBox
+            android:id="@+id/checkboxPrivacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I accept the terms of use and Privacy policy"
+            />
             <Button
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"

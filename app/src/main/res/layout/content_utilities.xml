@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:background="#ffffff"
     android:padding="10dp"
+    android:elevation="3dp"
     >
     <TextView
         android:id="@+id/recharge"
@@ -31,8 +32,8 @@
             android:layout_weight="1"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
-                android:id="@+id/netmets"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/netmeds"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/netmets"
@@ -42,7 +43,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Netmets"
+                android:text="Netmeds"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
@@ -56,7 +57,7 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/pharmecy"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -82,7 +83,7 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/swigy"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -107,7 +108,7 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/bookmyshow"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -141,22 +142,21 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
-                android:id="@+id/Notice"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/bigbasket"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/e"
+                android:src="@drawable/bigbasket"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notifications"
+                android:text="BigBasket"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
 
@@ -168,49 +168,21 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
-                android:id="@+id/Shoping"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/bigrock"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/f"
+                android:src="@drawable/bigrock"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Water"
+                android:text="Bigrock"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
-                android:layout_marginTop="5dp"
-                />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="0dp"
-            android:orientation="vertical"
-            >
-            <Common.OvalImageView
-                android:id="@+id/Landline"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/g"
-                android:contentDescription="Button"
-                android:layout_gravity="center"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Broadband"
-                android:textSize="12sp"
-                android:textAlignment="center"
-                android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
         </LinearLayout>
@@ -221,22 +193,46 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
-                android:id="@+id/Mobile"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/amazonPrime"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/h"
+                android:src="@drawable/amazonprime"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recharge"
+                android:text="primeVideo"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
+                android:layout_marginTop="5dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:orientation="vertical"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/dominos"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/domino"
+                android:contentDescription="Button"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Domino's"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 />
         </LinearLayout>
@@ -256,22 +252,46 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
-                android:id="@+id/iconNotice"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/e"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/countryDelight"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/countrydelight"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notifications"
+                android:text="CountryDelight"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
+                android:layout_marginTop="5dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:orientation="vertical"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/kfc"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/kfc"
+                android:contentDescription="Button"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KFC"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 />
 
@@ -283,49 +303,21 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
-                android:id="@+id/iconShoping"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/f"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/nnnow"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/nnnow"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Shoping"
+                android:text="Nnnow"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
-                android:layout_marginTop="5dp"
-                />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="0dp"
-            android:orientation="vertical"
-            >
-            <Common.OvalImageView
-                android:id="@+id/iconPoll"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/g"
-                android:contentDescription="Button"
-                android:layout_gravity="center"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Polling"
-                android:textSize="12sp"
-                android:textAlignment="center"
-                android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
         </LinearLayout>
@@ -336,25 +328,136 @@
             android:padding="0dp"
             android:orientation="vertical"
             >
-            <Common.OvalImageView
-                android:id="@+id/Poll"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/h"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/nykaa"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/nykaa"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Polling"
+                android:text="Nykaa"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 />
         </LinearLayout>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:background="#ffffff"
+        android:layout_marginTop="16dp"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:orientation="vertical"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/fernsnPetals"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/fernspetal"
+                android:contentDescription="Button"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FernsPetal"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                />
 
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:orientation="vertical"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/pb"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/pb"
+                android:contentDescription="Button"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NewInsuranse"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/nnnow1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/nnnow"
+                android:contentDescription="Button"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nnnow"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/nykaa1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/nykaa"
+                android:contentDescription="Button"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nykaa"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

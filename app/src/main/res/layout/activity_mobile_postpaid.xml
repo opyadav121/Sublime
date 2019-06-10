@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_white"
+    tools:context=".Recharge.MobilePostpaidActivity">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </android.support.design.widget.AppBarLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:gravity="right"
+    >
+    <TextView
+        android:id="@+id/Amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="S Balance:"
+        android:gravity="right"
+        />
+    <TextView
+        android:id="@+id/bagAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rs 0.00"
+        android:gravity="right"
+        android:textColor="@color/colorBlack"
+        android:layout_marginRight="20dp"
+        />
+</LinearLayout>
+    <include layout="@layout/content_postpaid"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FCF1DD"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recent Recharges:"
+            android:padding="10dp"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            />
+        <ListView
+            android:id="@+id/recentRecharges"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
+        </ListView>
+    </LinearLayout>
+</LinearLayout>
