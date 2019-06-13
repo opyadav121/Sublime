@@ -259,7 +259,7 @@
         android:id="@+id/bannerAdd"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:src="@drawable/ban4"
+        android:src="@drawable/poster5"
         android:layout_margin="10dp"
         />
     <LinearLayout

@@ -48,31 +48,52 @@
                     android:text="Datacard"
                     />
             </RadioGroup>
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/mobile"
+            <LinearLayout
+                android:id="@+id/contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_below="@id/RadioBtnGroup"
-
+                >
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/mobile"
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/RadioBtnGroup"
                 >
             <EditText
                 android:id="@+id/txtMobileNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+91 "
                 android:layout_below="@id/RadioBtnGroup"
                 android:layout_marginTop="5dp"
-                android:drawablePadding="5dp"
+                android:hint="Mobile Number"
                 android:inputType="number"
                 android:textColorHint="@color/colorOrangeDark"
-                android:drawableRight="@drawable/ic_perm_contact"
                 />
             </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/mycont"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/RadioBtnGroup"
+                    >
+                <TextView
+                    android:id="@+id/myContact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:drawableLeft="@drawable/ic_perm_contact"
+                    />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/Operator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/mobile"
+                android:layout_below="@id/contact"
                 >
             <EditText
                 android:id="@+id/txtOperator"
@@ -86,7 +107,7 @@
             </android.support.design.widget.TextInputLayout>
             <ListView
                 android:id="@+id/listViewOperator"
-                android:layout_width="170dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:elevation="8dp"
@@ -110,6 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Operator"
                 android:hint="Amount"
+                android:inputType="number"
                 android:textColorHint="@color/colorOrangeDark"
                 />
             </android.support.design.widget.TextInputLayout>

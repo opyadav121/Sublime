@@ -8,13 +8,15 @@ public class Profile {
     public String UserLogin = "";
     public String UserPassword = "";
     public String Address = "";
+    public String joiningAmount = "";
+    public String Sponsor = "";
+    public String ActivationDate = "";
+    public String PanNumber = "";
 
     public String Coupon ="";
     public String account ="";
     public String side = "";
     public String refer_by = "";
     public String status = "";
-    public String PanNumber ="";
     public String refer_Id ="";
-    public String ActivationDate = "";
 }

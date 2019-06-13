@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,8 +24,7 @@ public class DashboardActivity extends AppCompatActivity {
     private static ViewPager mPager;
     private static int currentPager = 0;
     ArrayList<Integer> picArray=new ArrayList<Integer>();
-    private static final Integer [] pic = {R.drawable.ban1, R.drawable.ban2,R.drawable.ban3, R.drawable.ban4};
-
+    private static final Integer [] pic = {R.drawable.poster1, R.drawable.poster2,R.drawable.poster3, R.drawable.poster4};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

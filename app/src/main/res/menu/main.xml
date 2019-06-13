@@ -17,4 +17,8 @@
         android:id="@+id/action_Login"
         android:orderInCategory="50"
         android:title="Login"/>
+    <item
+        android:id="@+id/action_LogOut"
+        android:orderInCategory="50"
+        android:title="Log Out"/>
 </menu>

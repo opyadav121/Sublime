@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/background_white"
     tools:context=".Recharge.MobilePostpaidActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        >
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
@@ -27,14 +32,28 @@
     android:gravity="right"
     >
     <TextView
+        android:id="@+id/AmountE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="E-Wallet:"
+        />
+    <TextView
+        android:id="@+id/txtEWallet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rs 0.00"
+        android:textColor="@color/colorBlack"
+        android:layout_marginRight="20dp"
+        />
+    <TextView
         android:id="@+id/Amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="S Balance:"
+        android:text="S-Wallet:"
         android:gravity="right"
         />
     <TextView
-        android:id="@+id/bagAmount"
+        android:id="@+id/txtSWallet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Rs 0.00"
@@ -43,11 +62,21 @@
         android:layout_marginRight="20dp"
         />
 </LinearLayout>
+        <TextView
+            android:id="@+id/btnTransfer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Transfer E to S Wallet"
+            android:textColor="@color/blue"
+            android:gravity="right"
+            android:layout_marginRight="30dp"
+            android:padding="10dp"
+            />
+
     <include layout="@layout/content_postpaid"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FCF1DD"
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
@@ -56,13 +85,22 @@
             android:padding="10dp"
             android:textColor="@color/colorBlack"
             android:textSize="14sp"
+            android:background="#FCF1DD"
             />
         <ListView
-            android:id="@+id/recentRecharges"
+            android:id="@+id/ListRecharges"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:elevation="5dp"
             >
         </ListView>
     </LinearLayout>
-</LinearLayout>
+    </LinearLayout>
+    <include layout="@layout/content_transfer_e_to_swallet"
+       android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        />
+</android.support.design.widget.CoordinatorLayout>

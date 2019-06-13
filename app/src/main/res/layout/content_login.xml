@@ -37,7 +37,7 @@
                 android:textColor="@color/colorBlack"
                 />
             <EditText
-                android:id="@+id/txtUserName"
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Associate Id"

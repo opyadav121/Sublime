@@ -10,20 +10,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import Fragments.BankFragment;
-import Fragments.InsuranceFragment;
-import Fragments.KYCFragment;
-import Fragments.PersonalFragment;
+import Fragments.AllOrdersFragment;
+import Fragments.AmazonFragment;
+import Fragments.FlipkartFragment;
+import Fragments.IIAshopingFragment;
+import Fragments.OthersFragment;
+import Fragments.OyoFragment;
+import Fragments.RechargeBillsFragment;
+import Fragments.SwiggyFragment;
 
-public class EditProfileActivity extends AppCompatActivity {
+public class OrdersActivity extends AppCompatActivity {
+
     ViewPager viewPager;
     private FragmentPagerAdapter mAdapter;
     private String CurrentPage="";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        setContentView(R.layout.activity_orders);
 
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -31,18 +35,21 @@ public class EditProfileActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Edit Profile");
+        actionBar.setTitle("ORDERS");
         actionBar.show();
 
         TabLayout tabs =  findViewById(R.id.tabs);
         viewPager = findViewById(R.id.pager);
-        tabs.addTab(tabs.newTab().setText("Personal"));
-        tabs.addTab(tabs.newTab().setText("Bank"));
-        tabs.addTab(tabs.newTab().setText("KYC"));
-        tabs.addTab(tabs.newTab().setText("Insurance"));
-
+        tabs.addTab(tabs.newTab().setText("ALL"));
+        tabs.addTab(tabs.newTab().setText("Recharge & Bills"));
+        tabs.addTab(tabs.newTab().setText("IIAShoping"));
+        tabs.addTab(tabs.newTab().setText("Amazon"));
+        tabs.addTab(tabs.newTab().setText("Flipkart"));
+        tabs.addTab(tabs.newTab().setText("Swiggy"));
+        tabs.addTab(tabs.newTab().setText("OYO"));
+        tabs.addTab(tabs.newTab().setText("Others"));
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
-        viewPager.setOffscreenPageLimit(3);
+        //viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(mAdapter);
 
 
@@ -56,19 +63,35 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 if(tab.getPosition() == 0)
                 {
-                    CurrentPage = "PersonalFragment";
+                    CurrentPage = "AllOrdersFragment";
                 }
                 else if(tab.getPosition() == 1)
                 {
-                    CurrentPage = "BankFragment";
+                    CurrentPage = "RechargeBillsFragment";
                 }
                 else if(tab.getPosition() == 2)
                 {
-                    CurrentPage = "KYCFragment";
+                    CurrentPage = "IIAshopingFragment";
                 }
                 else if(tab.getPosition() == 3)
                 {
-                    CurrentPage = "InsuranceFragment";
+                    CurrentPage = "AmazonFragment";
+                }
+                else if(tab.getPosition() == 4)
+                {
+                    CurrentPage = "FlipkartFragment";
+                }
+                else if(tab.getPosition() == 5)
+                {
+                    CurrentPage = "SwiggyFragment";
+                }
+                else if(tab.getPosition() == 6)
+                {
+                    CurrentPage = "OyoFragment";
+                }
+                else if(tab.getPosition() == 7)
+                {
+                    CurrentPage = "OthersFragment";
                 }
             }
 
@@ -83,9 +106,10 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
     }
+
     public class TabsPagerAdapter extends FragmentPagerAdapter {
 
-        private PersonalFragment personalFragment;
+        private AllOrdersFragment allOrdersFragment;
         public TabsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -101,49 +125,73 @@ public class EditProfileActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    if(personalFragment==null)
+                    if(allOrdersFragment==null)
                     {
-                        personalFragment = new PersonalFragment();
+                        allOrdersFragment = new AllOrdersFragment();
                     }
-                    return personalFragment;
+                    return allOrdersFragment;
                 case 1:
-
-                    return new BankFragment();
-
+                    return new RechargeBillsFragment();
                 case 2:
                     // Movies fragment activity
-                    return new KYCFragment();
+                    return new IIAshopingFragment();
                 case 3:
                     // Movies fragment activity
-                    return new InsuranceFragment();
+                    return new AmazonFragment();
+                case 4:
+                    return new FlipkartFragment();
+                case 5:
+                    // Movies fragment activity
+                    return new SwiggyFragment();
+                case 6:
+                    // Movies fragment activity
+                    return new OyoFragment();
+                case 7:
+                    // Movies fragment activity
+                    return new OthersFragment();
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return 4;
+            return 8;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             if (position==0)
             {
-                return "Personal";
-
+                return "All";
             }
             else if (position==1)
             {
-                return "Bank";
+                return "Recharge & Bills";
 
             }
             else if (position==2)
             {
-                return "KYC";
+                return "IIAShopping";
             }
-            else if (position==2)
+            else if (position==3)
             {
-                return "Insurance";
+                return "Amazon";
+            }
+            else if (position==4)
+            {
+                return "Flipkart";
+            }
+            else if (position==5)
+            {
+                return "Swiggy";
+            }
+            else if (position==6)
+            {
+                return "OYO";
+            }
+            else if (position==7)
+            {
+                return "Others";
             }
             return null;
         }

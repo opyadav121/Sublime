@@ -73,10 +73,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     // mTextMessage.setText(R.string.title_notifications);
                     return true;
                 case R.id.navigation_cart:
-                   // mTextMessage.setText(R.string.title_notifications);
+                    Intent shopping = new Intent(getApplicationContext(),OrdersActivity.class);
+                    startActivity(shopping);
                     return true;
                 case R.id.navigation_profile:
-                    // mTextMessage.setText(R.string.title_notifications);
+                    Intent profile = new Intent(getApplicationContext(),ProfileActivity.class);
+                    startActivity(profile);
                     return true;
             }
             return false;
@@ -143,7 +145,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
              startActivity(intent);
             return true;
         }
-
+        if (id == R.id.action_LogOut) {
+            Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+            startActivity(intent);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -177,7 +183,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void Slider1(){
-
         for (int i=0; i<pic.length; i++)
             picArray.add(pic[i]);
         mPager=findViewById(R.id.pager);
