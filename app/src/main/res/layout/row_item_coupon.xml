@@ -5,32 +5,30 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_margin="10dp"
+    android:padding="10dp"
+    android:elevation="3dp"
     android:background="@drawable/background_white"
-    android:padding="16dp"
     >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="3dp"
         >
-        <ImageView
-            android:id="@+id/OperatorIcon"
-            android:layout_width="60dp"
-            android:layout_height="40dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_weight="3"
-            android:text="Mobile No."
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            />
+            android:text="PIn no. "
+            android:textColor="@color/colorGray"
+            android:layout_height="wrap_content" />
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text=":"
+            android:textColor="@color/colorGray"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/histMobile"
+            android:id="@+id/txtPin"
             android:layout_width="0dp"
             android:layout_weight="6"
             android:textColor="@color/colorBlack"
@@ -40,41 +38,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:text="Operator"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text=":"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/histOperator"
-            android:layout_width="0dp"
-            android:layout_weight="6"
-            android:textColor="@color/colorBlack"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:padding="3dp"
         >
         <TextView
             android:layout_width="0dp"
             android:layout_weight="3"
             android:text="Amount"
+            android:textColor="@color/colorGray"
             android:layout_height="wrap_content" />
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text=":"
+            android:textColor="@color/colorGray"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/histAmount"
+            android:id="@+id/txtCouponAmount"
             android:layout_width="0dp"
             android:layout_weight="6"
             android:textColor="@color/colorBlack"
@@ -84,19 +63,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="3dp"
         >
         <TextView
             android:layout_width="0dp"
             android:layout_weight="3"
-            android:text="Order Id"
+            android:text="Coupon"
+            android:textColor="@color/colorGray"
             android:layout_height="wrap_content" />
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text=":"
+            android:textColor="@color/colorGray"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/histOrderId"
+            android:id="@+id/txtCouponName"
             android:layout_width="0dp"
             android:layout_weight="6"
             android:textColor="@color/colorBlack"
@@ -106,19 +88,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="3dp"
         >
         <TextView
             android:layout_width="0dp"
             android:layout_weight="3"
-            android:text="Date"
+            android:text=" Date"
+            android:textColor="@color/colorGray"
             android:layout_height="wrap_content" />
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text=":"
+            android:textColor="@color/colorGray"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/histDate"
+            android:id="@+id/txtTransferDate"
             android:layout_width="0dp"
             android:layout_weight="6"
             android:textColor="@color/colorBlack"
@@ -128,44 +113,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="right"
         >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:text="Status"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text=":"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/histStatus"
-            android:layout_width="0dp"
-            android:layout_weight="6"
-            android:textColor="@color/colorBlack"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:text="TransactionId"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text=":"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/hisTransId"
-            android:layout_width="0dp"
-            android:layout_weight="6"
-            android:textColor="@color/colorBlack"
-            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="register"
+            android:textColor="@color/colorWhite"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/backgraund_btn"
+            />
     </LinearLayout>
 </LinearLayout>

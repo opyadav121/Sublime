@@ -23,8 +23,12 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 
 import com.example.omprakash.sublime.Recharge.BigrockActivity;
+import com.example.omprakash.sublime.Recharge.BinaryIncomeActivity;
 import com.example.omprakash.sublime.Recharge.BroadbandActivity;
+import com.example.omprakash.sublime.Recharge.CouponActivity;
+import com.example.omprakash.sublime.Recharge.CouponRequestActivity;
 import com.example.omprakash.sublime.Recharge.DTHActivity;
+import com.example.omprakash.sublime.Recharge.EWalletHistoryActivity;
 import com.example.omprakash.sublime.Recharge.ElectricityBillActivity;
 import com.example.omprakash.sublime.Recharge.EthicActivity;
 import com.example.omprakash.sublime.Recharge.GasBillActivity;
@@ -35,6 +39,7 @@ import com.example.omprakash.sublime.Recharge.MobilePostpaidActivity;
 import com.example.omprakash.sublime.Recharge.NNNOActivity;
 import com.example.omprakash.sublime.Recharge.NetMaedsActivity;
 import com.example.omprakash.sublime.Recharge.OyoActivity;
+import com.example.omprakash.sublime.Recharge.SWalletHistoryActivity;
 import com.example.omprakash.sublime.Recharge.ThemeParkActivity;
 import com.example.omprakash.sublime.Recharge.WaterActivity;
 
@@ -147,6 +152,32 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         if (id == R.id.action_LogOut) {
             Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_Binary) {
+
+            Intent intent = new Intent(HomeActivity.this, BinaryIncomeActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_coupon) {
+            Intent intent = new Intent(HomeActivity.this, CouponActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_couponReq) {
+            Intent intent = new Intent(HomeActivity.this, CouponRequestActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_SWallet) {
+            Intent intent = new Intent(HomeActivity.this, SWalletHistoryActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_EWallet) {
+            Intent intent = new Intent(HomeActivity.this, EWalletHistoryActivity.class);
             startActivity(intent);
             return true;
         }

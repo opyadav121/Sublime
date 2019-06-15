@@ -2,6 +2,7 @@ package com.example.omprakash.sublime.Recharge;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -10,6 +11,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -38,6 +41,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.omprakash.sublime.PaymentHistoryActivity;
 import com.example.omprakash.sublime.R;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -379,27 +383,28 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    public void RechargeHistory(){
+    public void RechargeHistory()
+    {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         String RechargeHitory_url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/Recharge/history";
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, RechargeHitory_url, new Response.Listener<JSONArray>()  {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, RechargeHitory_url, new Response.Listener<String>()  {
             @Override
-            public void onResponse(JSONArray response) {
+            public void onResponse(String response) {
                 try {
-                    int x = response.length();
-                        for (int i = 0; i < x; i++) {
-                            Recharge_History recharge = new Recharge_History();
-                            JSONObject jObj = response.getJSONObject(i);
-                            recharge.MobileNO = jObj.getString("mob_no");
-                            recharge.Operator = jObj.getString("operator");
-                            recharge.Amount = jObj.getString("amount");
-                            recharge.Date = jObj.getString("date");
-                            recharge.Status = jObj.getString("status");
-                            recharge.TransId = jObj.getString("transaction_id");
-                            recharge.RemainingBal = jObj.getString("remaining_bal");
-                            recharge.WalletBal = jObj.getString("wallet_bal");
-                            rechargeList.add(recharge);
-                        }
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        Recharge_History recharge = new Recharge_History();
+                        JSONObject jObj = jsonArray.getJSONObject(i);
+                        recharge.MobileNO = jObj.getString("mob_no");
+                        recharge.Operator = jObj.getString("operator");
+                        recharge.Amount = jObj.getString("amount");
+                        recharge.Date = jObj.getString("date");
+                        recharge.Status = jObj.getString("status");
+                        recharge.TransId = jObj.getString("transaction_id");
+                        recharge.RemainingBal = jObj.getString("remaining_bal");
+                        recharge.WalletBal = jObj.getString("wallet_bal");
+                        rechargeList.add(recharge);
+                    }
                     adapterRecharge.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -419,7 +424,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                 return params;
             }
         };
-        queue.add(jsonArrayRequest);
+        queue.add(stringRequest);
     }
 
   //--------------------------------------------------------------------------------------------------
@@ -443,7 +448,6 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
     class AdapterRecharge extends ArrayAdapter<Recharge_History>{
         LayoutInflater inflat;
@@ -471,7 +475,6 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         public int getPosition(Recharge_History item) {
             return super.getPosition(item);
         }
-
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             try {
@@ -485,6 +488,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                     holder.histDate = convertView.findViewById(R.id.histDate);
                     holder.histStatus = convertView.findViewById(R.id.histStatus);
                     holder.hisTransId = convertView.findViewById(R.id.hisTransId);
+                    holder.OperatorIcon = convertView.findViewById(R.id.OperatorIcon);
                     convertView.setTag(holder);
                 }
                 holder = (ViewHolder) convertView.getTag();
@@ -496,6 +500,9 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                 holder.histDate.setText(history.Date);
                 holder.histStatus.setText(history.Status );
                 holder.hisTransId.setText(history.TransId);
+                holder.OperatorIcon.setVisibility(View.VISIBLE);
+                String url1 = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/opt/idea.jpg";
+                Picasso.with(getApplicationContext()).load(url1).into(holder.OperatorIcon);
                 return convertView;
             }
             catch (Exception ex)
@@ -505,12 +512,12 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                 return null;
             }
         }
-
     }
 
     private class ViewHolder
     {
         TextView histMobile,histOperator,histAmount,histOrderId,histDate,histStatus,hisTransId;
+        ImageView OperatorIcon;
     }
 
 }

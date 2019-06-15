@@ -10,4 +10,5 @@ public class Recharge_History {
     public String TransId ;
     public String WalletBal ;
     public String RemainingBal;
+    public String OperatorIcon;
 }

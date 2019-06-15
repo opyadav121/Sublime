@@ -35,4 +35,12 @@
         <item>DL(Driver License)</item>
         <item>Voter ID</item>
     </string-array>
+
+    <string-array name="CouponRequest">
+        <item>Rs 2240</item>
+        <item>RS 6720</item>
+        <item>Rs 11200</item>
+        <item>Rs 22400</item>
+    </string-array>
+
 </resources>

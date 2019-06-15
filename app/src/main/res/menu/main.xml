@@ -14,6 +14,28 @@
         android:orderInCategory="50"
         android:title="Profile"/>
     <item
+        android:orderInCategory="50"
+        android:title="More">
+        <menu>
+            <item
+                android:id="@+id/action_EWallet"
+                android:orderInCategory="50"
+                android:title="E Wallet"/>
+            <item
+                android:id="@+id/action_SWallet"
+                android:orderInCategory="50"
+                android:title="S Wallet"/>
+            <item
+                android:id="@+id/action_coupon"
+                android:orderInCategory="50"
+                android:title="Coupons"/>
+            <item
+                android:id="@+id/action_couponReq"
+                android:orderInCategory="50"
+                android:title="RequestCoupons"/>
+        </menu>
+    </item>
+    <item
         android:id="@+id/action_Login"
         android:orderInCategory="50"
         android:title="Login"/>
@@ -21,4 +43,9 @@
         android:id="@+id/action_LogOut"
         android:orderInCategory="50"
         android:title="Log Out"/>
+    <item
+        android:id="@+id/action_Binary"
+        android:orderInCategory="50"
+        android:title="Binary Inc"/>
+
 </menu>

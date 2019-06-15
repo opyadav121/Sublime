@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.omprakash.sublime">
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -24,8 +25,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RefferActivity"></activity>
-        <activity android:name=".PaymentHistoryActivity" />
+        <activity android:name=".Recharge.CouponRequestActivity"
+            android:parentActivityName=".HomeActivity"></activity>
+        <activity android:name=".Recharge.CouponActivity"
+            android:parentActivityName=".HomeActivity"/>
+        <activity android:name=".Recharge.BinaryIncomeActivity"
+            android:parentActivityName=".HomeActivity"/>
+        <activity android:name=".Recharge.SWalletHistoryActivity"
+            android:parentActivityName=".HomeActivity"/>
+        <activity android:name=".Recharge.EWalletHistoryActivity"
+            android:parentActivityName=".HomeActivity"/>
+        <activity android:name=".RefferActivity"
+            android:parentActivityName=".HomeActivity"/>
+        <activity android:name=".PaymentHistoryActivity"
+            android:parentActivityName=".HomeActivity"/>
         <activity
             android:name=".OrdersActivity"
             android:parentActivityName=".HomeActivity" />
