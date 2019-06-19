@@ -13,10 +13,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/OperatorIcon"
-            android:layout_width="60dp"
-            android:layout_height="40dp" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp"
+            />
         <TextView
             android:layout_width="0dp"
             android:layout_weight="3"

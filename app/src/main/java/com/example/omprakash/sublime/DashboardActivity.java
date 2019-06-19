@@ -13,11 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import Common.Session;
+import Model.Profile;
+import de.hdodenhof.circleimageview.CircleImageView;
 import me.relex.circleindicator.CircleIndicator;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -26,11 +30,13 @@ public class DashboardActivity extends AppCompatActivity {
     ArrayList<Integer> picArray=new ArrayList<Integer>();
     private static final Integer [] pic = {R.drawable.poster1, R.drawable.poster2,R.drawable.poster3, R.drawable.poster4};
 
+    Profile myProfile;
+    CircleImageView imageProfile;
+    TextView txtName,lastLoginTime,userId,doj,txtUnclearBalance,txtMobile,txtSelfIncome,txtTeamSize;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -39,12 +45,22 @@ public class DashboardActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Dashboard");
         actionBar.show();
-
         Slider1();
+        myProfile = Session.GetProfile(this);
+        imageProfile = findViewById(R.id.imageProfile);
+        txtName = findViewById(R.id.txtName);
+        lastLoginTime = findViewById(R.id.lastLoginTime);
+        userId = findViewById(R.id.userId);
+        doj = findViewById(R.id.doj);
+        txtUnclearBalance = findViewById(R.id.txtUnclearBalance);
+        txtMobile = findViewById(R.id.txtMobile);
+        txtSelfIncome = findViewById(R.id.txtSelfIncome);
+        txtTeamSize = findViewById(R.id.txtTeamSize);
+
+        txtName.setText(myProfile.UserName);
+        txtMobile.setText(myProfile.MobileNumber);
     }
-
     public void Slider1(){
-
         for (int i=0; i<pic.length; i++)
             picArray.add(pic[i]);
         mPager=findViewById(R.id.pager);

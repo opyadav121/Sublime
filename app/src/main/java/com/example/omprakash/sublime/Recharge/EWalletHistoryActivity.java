@@ -33,7 +33,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Common.Session;
 import Model.EWallet;
+import Model.Profile;
 import Model.Recharge_History;
 
 public class EWalletHistoryActivity extends AppCompatActivity {
@@ -41,6 +43,7 @@ public class EWalletHistoryActivity extends AppCompatActivity {
     ArrayList<EWallet> EWalletHistory = new ArrayList<EWallet>();
     AdapterEWallet adapterEWallet;
     ListView listViewE_wallet;
+    Profile myProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,8 @@ public class EWalletHistoryActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("E Wallet ");
         actionBar.show();
+
+        myProfile = Session.GetProfile(this);
 
         listViewE_wallet = findViewById(R.id.listViewE_wallet);
         adapterEWallet =new AdapterEWallet(EWalletHistoryActivity.this,0,EWalletHistory);
@@ -96,7 +101,7 @@ public class EWalletHistoryActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("email", "user@tutorialvilla.com");
+                params.put("email", myProfile.UserLogin);
                 return params;
             }
         };

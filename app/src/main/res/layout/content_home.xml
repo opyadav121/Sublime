@@ -19,7 +19,7 @@
             android:orientation="vertical"
             android:layout_marginBottom="100dp"
             >
-        <LinearLayout
+            <LinearLayout
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
             android:layout_height="140dp"
@@ -46,16 +46,9 @@
                 </me.relex.circleindicator.CircleIndicator>
             </RelativeLayout>
         </LinearLayout>
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="none"
-                >
-        <include
+            <include
             android:id="@+id/scroll"
-            layout="@layout/content_horizontal_scrollview" />
-
-            </HorizontalScrollView>
+            layout="@layout/horizontal_layer" />
         <include
             android:id="@+id/recharge"
             layout="@layout/content_recharge"

@@ -27,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.omprakash.sublime.HomeActivity;
 import com.example.omprakash.sublime.LoginActivity;
 import com.example.omprakash.sublime.R;
+import com.example.omprakash.sublime.RegisterPaidActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,6 +49,7 @@ public class CouponActivity extends AppCompatActivity {
     ListView listView_Coupon;
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
+    Profile myProfile;
 
     String url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/user/CouponpinList";
 
@@ -64,7 +66,7 @@ public class CouponActivity extends AppCompatActivity {
         actionBar.setTitle("Coupons ");
         actionBar.show();
         requestQueue = Volley.newRequestQueue(this);
-
+        myProfile = Session.GetProfile(this);
         listView_Coupon = findViewById(R.id.listView_Coupon);
         adapterCoupon =new AdapterCoupon(getApplicationContext(),0,couponList);
         listView_Coupon.setAdapter(adapterCoupon);
@@ -107,7 +109,7 @@ public class CouponActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("email", "user@tutorialvilla.com");
+                params.put("email", myProfile.UserLogin);
                 return params;
             }
         };
@@ -152,7 +154,7 @@ public class CouponActivity extends AppCompatActivity {
                     convertView.setTag(holder);
                 }
                 holder = (ViewHolder) convertView.getTag();
-                Coupons history= getItem(position);
+                final Coupons history= getItem(position);
                 holder.txtPin.setText(history.PinNo);
                 holder.txtCouponAmount.setText(history.couponAmount);
                 holder.txtCouponName.setText(history.CouponName );
@@ -160,7 +162,9 @@ public class CouponActivity extends AppCompatActivity {
                 holder.btn_register.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        Intent register = new Intent(CouponActivity.this, RegisterPaidActivity.class);
+                        register.putExtra("Pin",history.PinNo);
+                        startActivity(register);
                     }
                 });
                 return convertView;

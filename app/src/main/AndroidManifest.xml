@@ -25,20 +25,53 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Recharge.CouponRequestActivity"
-            android:parentActivityName=".HomeActivity"></activity>
-        <activity android:name=".Recharge.CouponActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.BinaryIncomeActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.SWalletHistoryActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.EWalletHistoryActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".RefferActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".PaymentHistoryActivity"
-            android:parentActivityName=".HomeActivity"/>
+        <activity android:name=".Recharge.Zee5Activity"></activity>
+        <activity android:name=".Recharge.ReebokActivity" />
+        <activity android:name=".Recharge.SukhhiActivity" />
+        <activity android:name=".Recharge.MedLifeActivity" />
+        <activity android:name=".Recharge.FabHotelsActivity" />
+        <activity android:name=".Recharge.BookMyFlavoursActivity" />
+        <activity android:name=".Recharge.GiftAloveActivity" />
+        <activity android:name=".Recharge.PaperFryActivity" />
+        <activity android:name=".Recharge.PizzaHutActivity" />
+        <activity android:name=".Recharge.CleartripActivity" />
+        <activity android:name=".Recharge.NutrafyActivity" />
+        <activity android:name=".Recharge.Gud2Activity" />
+        <activity android:name=".Recharge.FirstCryActivity" />
+        <activity android:name=".Recharge.JockeyActivity" />
+        <activity
+            android:name=".RegisterPaidActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.UserListActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".TreeViewActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.GoibiboActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.CouponRequestActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.CouponActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.BinaryIncomeActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.SWalletHistoryActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.EWalletHistoryActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".RefferActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".PaymentHistoryActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".OrdersActivity"
             android:parentActivityName=".HomeActivity" />

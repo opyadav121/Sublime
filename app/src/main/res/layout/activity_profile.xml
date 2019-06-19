@@ -54,6 +54,15 @@
         app:civ_border_color="@color/colorOrange"
         android:layout_marginBottom="20dp"
         />
+    <TextView
+        android:id="@+id/btnImageUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload"
+        android:textColor="@color/colorOrange"
+        android:gravity="center"
+        android:layout_gravity="center"
+        />
     <include
         android:id="@+id/personal"
         layout="@layout/content_personalinformatin"
@@ -62,10 +71,7 @@
         android:id="@+id/bank"
         layout="@layout/content_bankdetails"
         />
-    <include
-        android:id="@+id/insurance"
-        layout="@layout/content_insurance"
-        />
+
 </LinearLayout>
     </ScrollView>
     <Button

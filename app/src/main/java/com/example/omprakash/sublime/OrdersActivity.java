@@ -49,7 +49,6 @@ public class OrdersActivity extends AppCompatActivity {
         tabs.addTab(tabs.newTab().setText("OYO"));
         tabs.addTab(tabs.newTab().setText("Others"));
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
-        //viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(mAdapter);
 
 

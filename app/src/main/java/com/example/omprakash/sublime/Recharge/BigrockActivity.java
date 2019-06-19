@@ -13,7 +13,7 @@ public class BigrockActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bigrock);
 
-        webBigrock = findViewById(R.id.webrydon);
+        webBigrock = findViewById(R.id.webBigrock);
         webBigrock.loadUrl("https://tracking.vcommission.com/aff_c?offer_id=2223&aff_id=7820");
     }
 }

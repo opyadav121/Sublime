@@ -1,23 +1,15 @@
 package com.example.omprakash.sublime;
-
-import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,13 +17,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import Common.Session;
 import Model.Profile;
 
@@ -50,8 +39,15 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        requestQueue = Volley.newRequestQueue(this);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setTitle(" Login ");
+        actionBar.show();
 
+        requestQueue = Volley.newRequestQueue(this);
         btnRegister = findViewById(R.id.btnRegister);
         txtEmail = findViewById(R.id.txtEmail);
         txtPassword = findViewById(R.id.txtPassword);
@@ -79,21 +75,43 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 progressDialog.dismiss();
-              // int x = response.length();
                 try {
                     if (response!=null) {
                         JSONObject jObj = new JSONObject(response);
                         Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                         Profile myProfile = new Profile();
-                        myProfile.UserName = jObj.getString("email");
-                       // myProfile.UserPassword = jObj.getString("Password");
+                        myProfile.UserName = jObj.getString("name");
+                        myProfile.UserID = jObj.getString("user_id");
                         myProfile.UserLogin = jObj.getString("email");
                         myProfile.MobileNumber = jObj.getString("mobile");
                         myProfile.Address = jObj.getString("address");
                         myProfile.joiningAmount = jObj.getString("joining_amount");
                         myProfile.ActivationDate = jObj.getString("activation_date");
-                        myProfile.Sponsor = jObj.getString("sponsor");
+                       // myProfile.Sponsor = jObj.getString("sponsor");
                         myProfile.PanNumber= jObj.getString("pan_no");
+                        myProfile.SponserId = jObj.getString("sponsor_id");
+                        myProfile.UnderUserId = jObj.getString("under_userid");
+                        myProfile.Dob = jObj.getString("dob");
+                        myProfile.FatherName = jObj.getString("father_name");
+                        myProfile.MotherName = jObj.getString("mother_name");
+                        myProfile.gender = jObj.getString("gender");
+                        myProfile.district = jObj.getString("district");
+                        myProfile.State = jObj.getString("state");
+                        myProfile.PinCode= jObj.getString("pincode");
+                        myProfile.Passport = jObj.getString("passport");
+                        myProfile.nominee= jObj.getString("nominee");
+                        myProfile.nomineeRelation = jObj.getString("relation");
+                        myProfile.marital = jObj.getString("marital");
+                        myProfile.commission_paid = jObj.getString("commission_paid");
+                        myProfile.total_left_user = jObj.getString("total_left_user");
+                        myProfile.total_right_user = jObj.getString("total_right_user");
+                        myProfile.left_carry = jObj.getString("left_carry");
+                        myProfile.right_carry = jObj.getString("right_carry");
+                        myProfile.left_business = jObj.getString("left_business");
+                        myProfile.right_business= jObj.getString("right_business");
+                        myProfile.occupation = jObj.getString("occupation");
+                        myProfile.JoiningAmount = jObj.getString("joining_amount");
+                        myProfile.side= jObj.getString("side");
                         Session.AddProfile(getApplicationContext(), myProfile);
                         Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(i);

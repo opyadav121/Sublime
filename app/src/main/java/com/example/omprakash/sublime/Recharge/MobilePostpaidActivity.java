@@ -54,6 +54,9 @@ import java.util.Currency;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import Common.Session;
+import Model.Profile;
 import Model.Recharge_History;
 
 
@@ -74,6 +77,9 @@ public class MobilePostpaidActivity extends AppCompatActivity {
     LinearLayout transfer_E_to_S;
     ArrayList<Recharge_History> rechargeList = new ArrayList<>();
     AdapterRecharge adapterRecharge;
+    Profile myProfile;
+    String SWallet_Balance,Ewalet_Balance,OperatorCode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +93,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Mobile Recharge");
         actionBar.show();
-
+        myProfile = Session.GetProfile(this);
         txtEWallet = findViewById(R.id.txtEWallet);
         txtSWallet = findViewById(R.id.txtSWallet);
         transfer_E_to_S = findViewById(R.id.transfer_E_to_S);
@@ -205,7 +211,8 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         }catch (Exception ex){
             int a=1;
         }
-        adapterOperator = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, OperatorList);
+
+        adapterOperator = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, OperatorList);
         adapterOperator.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         listViewOperator.setAdapter(adapterOperator);
         txtOperator.setOnClickListener(new View.OnClickListener() {
@@ -222,6 +229,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String Operator = (String) listViewOperator.getItemAtPosition(position);
                 txtOperator.setText(Operator);
+                OperatorCode = OperatorHashMap.get(Operator);
                 listViewOperator.setVisibility(View.GONE);
             }
         });
@@ -245,6 +253,8 @@ public class MobilePostpaidActivity extends AppCompatActivity {
 
   public void Recharge(){
       RandomChildCode = ChildCode() + "A";
+     final int Remain = Integer.parseInt(SWallet_Balance) - Integer.parseInt(txtAmount.getText().toString());
+
       String Recharge_url= "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/Recharge/API_recharge";
       progressDialog = progressDialog.show(MobilePostpaidActivity.this, "", "Please wait...", false, false);
       StringRequest stringRequest = new StringRequest(Request.Method.POST, Recharge_url, new Response.Listener<String>()  {
@@ -286,16 +296,16 @@ public class MobilePostpaidActivity extends AppCompatActivity {
           @Override
           protected Map<String, String> getParams() {
               Map<String, String> params = new HashMap<>();
-              params.put("email", "user@tutorialvilla.com");
+              params.put("email", myProfile.UserLogin);
               params.put("Customernumber", txtMobileNumber.getText().toString());
               params.put("Yourrchid",RandomChildCode);
               params.put("Optname",txtOperator.getText().toString());
               params.put("Optcode","A");
               params.put("operatorname",txtOperator.getText().toString());
-              params.put("wallet_bal","");
-              params.put("remaining_bal","");
+              params.put("wallet_bal",SWallet_Balance);
+              params.put("remaining_bal",Integer.toString(Remain));
               params.put("Amount",txtAmount.getText().toString());
-              params.put("date","12/06/2019");
+              params.put("date","18/06/2019");
               return params;
           }
       };
@@ -314,10 +324,10 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                   currFormat = NumberFormat.getCurrencyInstance();
                   currFormat.setCurrency(Currency.getInstance("INR"));
                   JSONObject jObj = new JSONObject(response);
-                  String EWallet = jObj.getString("E-Wallet");
-                  String SWallet = jObj.getString("S-Wallet");
-                  txtEWallet.setText(EWallet);
-                  txtSWallet.setText(SWallet);
+                  Ewalet_Balance = jObj.getString("E-Wallet");
+                  SWallet_Balance = jObj.getString("S-Wallet");
+                  txtEWallet.setText(Ewalet_Balance);
+                  txtSWallet.setText(SWallet_Balance);
                   //txtEWallet.setText(currFormat.format(EWallet));
                   //txtSWallet.setText(currFormat.format(SWallet));
 
@@ -337,7 +347,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
           @Override
           protected Map<String, String> getParams() {
               Map<String, String> params = new HashMap<>();
-              params.put("email", "user@tutorialvilla.com");
+              params.put("email", myProfile.UserLogin);
               return params;
           }
       };
@@ -375,7 +385,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("email", "user@tutorialvilla.com");
+                params.put("email", myProfile.UserLogin);
                 params.put("amount",transferAmount.getText().toString());
                 return params;
             }
@@ -420,7 +430,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("email", "user@tutorialvilla.com");
+                params.put("email", myProfile.UserLogin);
                 return params;
             }
         };

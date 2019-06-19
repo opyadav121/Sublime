@@ -84,17 +84,17 @@
             android:orientation="vertical"
             >
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/swigy"
+                android:id="@+id/iconBookmyFlaours"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/swigy"
+                android:src="@drawable/bookmyflaours"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Swiggy"
+                android:text="BookMyFlavours"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
@@ -194,17 +194,17 @@
             android:orientation="vertical"
             >
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/amazonPrime"
+                android:id="@+id/iconMedLife"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/amazonprime"
+                android:src="@drawable/medlife"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="primeVideo"
+                android:text="MedLife"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
@@ -219,17 +219,17 @@
             android:orientation="vertical"
             >
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/dominos"
+                android:id="@+id/iconPizzaHut"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/domino"
+                android:src="@drawable/pizzahut"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Domino's"
+                android:text="PizzaHut"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"
@@ -253,17 +253,17 @@
             android:orientation="vertical"
             >
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/countryDelight"
+                android:id="@+id/iconNaturefy"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/countrydelight"
+                android:src="@drawable/nutafy"
                 android:contentDescription="Button"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CountryDelight"
+                android:text="Nutrafy"
                 android:textSize="12sp"
                 android:textAlignment="center"
                 android:layout_gravity="center"

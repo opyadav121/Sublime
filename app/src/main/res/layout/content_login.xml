@@ -21,11 +21,11 @@
             >
             <ImageView
                 android:id="@+id/logo"
-                android:layout_width="150dp"
-                android:layout_height="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
                 android:src="@drawable/headerlogo"
                 android:layout_gravity="center"
-                android:visibility="gone"
+                android:visibility="visible"
                 />
             <TextView
                 android:id="@+id/text"
@@ -33,7 +33,6 @@
                 android:layout_height="wrap_content"
                 android:text="Login your account"
                 android:textSize="16dp"
-                android:layout_marginTop="5dp"
                 android:textColor="@color/colorBlack"
                 />
             <EditText

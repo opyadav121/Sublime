@@ -1,6 +1,8 @@
 package com.example.omprakash.sublime;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -14,6 +16,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,29 +27,44 @@ import android.widget.ImageView;
 
 import com.example.omprakash.sublime.Recharge.BigrockActivity;
 import com.example.omprakash.sublime.Recharge.BinaryIncomeActivity;
+import com.example.omprakash.sublime.Recharge.BookMyFlavoursActivity;
 import com.example.omprakash.sublime.Recharge.BroadbandActivity;
+import com.example.omprakash.sublime.Recharge.CleartripActivity;
 import com.example.omprakash.sublime.Recharge.CouponActivity;
 import com.example.omprakash.sublime.Recharge.CouponRequestActivity;
 import com.example.omprakash.sublime.Recharge.DTHActivity;
 import com.example.omprakash.sublime.Recharge.EWalletHistoryActivity;
 import com.example.omprakash.sublime.Recharge.ElectricityBillActivity;
 import com.example.omprakash.sublime.Recharge.EthicActivity;
+import com.example.omprakash.sublime.Recharge.FabHotelsActivity;
+import com.example.omprakash.sublime.Recharge.FirstCryActivity;
 import com.example.omprakash.sublime.Recharge.GasBillActivity;
 import com.example.omprakash.sublime.Recharge.GiftActivity;
+import com.example.omprakash.sublime.Recharge.Gud2Activity;
 import com.example.omprakash.sublime.Recharge.InsuranceRenualActivity;
+import com.example.omprakash.sublime.Recharge.JockeyActivity;
 import com.example.omprakash.sublime.Recharge.MakemyTripActivity;
+import com.example.omprakash.sublime.Recharge.MedLifeActivity;
 import com.example.omprakash.sublime.Recharge.MobilePostpaidActivity;
 import com.example.omprakash.sublime.Recharge.NNNOActivity;
 import com.example.omprakash.sublime.Recharge.NetMaedsActivity;
+import com.example.omprakash.sublime.Recharge.NutrafyActivity;
 import com.example.omprakash.sublime.Recharge.OyoActivity;
+import com.example.omprakash.sublime.Recharge.PaperFryActivity;
+import com.example.omprakash.sublime.Recharge.PizzaHutActivity;
+import com.example.omprakash.sublime.Recharge.ReebokActivity;
 import com.example.omprakash.sublime.Recharge.SWalletHistoryActivity;
+import com.example.omprakash.sublime.Recharge.SukhhiActivity;
 import com.example.omprakash.sublime.Recharge.ThemeParkActivity;
+import com.example.omprakash.sublime.Recharge.UserListActivity;
 import com.example.omprakash.sublime.Recharge.WaterActivity;
+import com.example.omprakash.sublime.Recharge.Zee5Activity;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import Common.Session;
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.relex.circleindicator.CircleIndicator;
 
@@ -60,7 +78,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private MenuItem item;
     private ImageView mobilePostpaid,mobilePrepaid,electricity,iconGas,iconWater,iconInsurance,
             iconBroadband,iconDth,iconGift,IconTheme;
-    CircleImageView iconEthic,iconRydon,bigrock,netmeds,nnnow,oyo,makemytrip;
+    CircleImageView iconEthic,iconRydon,bigrock,netmeds,nnnow,oyo,makemytrip,iconfirstCry,iconJockey,
+            iconGiftAlove,iconSukhhi,iconPaperFry,icongud2,iconFabHotels,cleartrip,iconBookmyFlaours,
+            iconMedLife,iconPizzaHut,iconNaturefy,iconZee5,iconReebok;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -117,16 +137,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.main, menu);
@@ -151,13 +161,40 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
         if (id == R.id.action_LogOut) {
-            Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
-            startActivity(intent);
+            AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
+            builder.setTitle("Log Out");
+            builder.setMessage("Are you sure?");
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Session.LogOff(getApplicationContext());
+                            Intent intent = new Intent(HomeActivity.this,LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+            AlertDialog Alert = builder.create();
+            Alert.show();
             return true;
         }
         if (id == R.id.action_Binary) {
 
             Intent intent = new Intent(HomeActivity.this, BinaryIncomeActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_Tree) {
+
+            Intent intent = new Intent(HomeActivity.this, TreeViewActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_Users) {
+
+            Intent intent = new Intent(HomeActivity.this, UserListActivity.class);
             startActivity(intent);
             return true;
         }
@@ -239,7 +276,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void run() {
                 handler.post(update);
             }
-        },4000,4000);
+        },6000,6000);
     }
     public class MyAdapter extends PagerAdapter
     {
@@ -283,7 +320,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
     private void SetFlippers(){
         mobilePostpaid =  findViewById(R.id.mobilePostpaid);
         mobilePostpaid.setOnClickListener(new clicker());
@@ -319,6 +355,34 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         oyo.setOnClickListener(new clicker());
         makemytrip =  findViewById(R.id.makemytrip);
         makemytrip.setOnClickListener(new clicker());
+        iconfirstCry =  findViewById(R.id.iconfirstCry);
+        iconfirstCry.setOnClickListener(new clicker());
+        iconJockey =  findViewById(R.id.iconJockey);
+        iconJockey.setOnClickListener(new clicker());
+        iconGiftAlove =  findViewById(R.id.iconGiftAlove);
+        iconGiftAlove.setOnClickListener(new clicker());
+        iconSukhhi =  findViewById(R.id.iconSukhhi);
+        iconSukhhi.setOnClickListener(new clicker());
+        iconPaperFry =  findViewById(R.id.iconPaperFry);
+        iconPaperFry.setOnClickListener(new clicker());
+        icongud2 =  findViewById(R.id.icongud2);
+        icongud2.setOnClickListener(new clicker());
+        iconFabHotels =  findViewById(R.id.iconFabHotels);
+        iconFabHotels.setOnClickListener(new clicker());
+        cleartrip =  findViewById(R.id.cleartrip);
+        cleartrip.setOnClickListener(new clicker());
+        iconBookmyFlaours =  findViewById(R.id.iconBookmyFlaours);
+        iconBookmyFlaours.setOnClickListener(new clicker());
+        iconMedLife =  findViewById(R.id.iconMedLife);
+        iconMedLife.setOnClickListener(new clicker());
+        iconPizzaHut =  findViewById(R.id.iconPizzaHut);
+        iconPizzaHut.setOnClickListener(new clicker());
+        iconNaturefy =  findViewById(R.id.iconNaturefy);
+        iconNaturefy.setOnClickListener(new clicker());
+        iconZee5 =  findViewById(R.id.iconZee5);
+        iconZee5.setOnClickListener(new clicker());
+        iconReebok =  findViewById(R.id.iconReebok);
+        iconReebok.setOnClickListener(new clicker());;
 
     }
 
@@ -411,8 +475,102 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(electric);
                     break;
                 }
+                case R.id.iconfirstCry :{
+                    Intent electric = new Intent(HomeActivity.this, FirstCryActivity.class);
+                    startActivity(electric);
+                    break;
+                }
+                case R.id.iconJockey :{
+                    Intent electric = new Intent(HomeActivity.this, JockeyActivity.class);
+                    startActivity(electric);
+                    break;
+                }
+                case R.id.iconGiftAlove :{
+                    Intent electric = new Intent(HomeActivity.this, GiftActivity.class);
+                    startActivity(electric);
+                    break;
+                }
+                case R.id.iconSukhhi :{
+                    Intent dth = new Intent(HomeActivity.this, SukhhiActivity.class);
+                    startActivity(dth);
+                    break;
+                }
+                case R.id.iconPaperFry :{
+                    Intent electric = new Intent(HomeActivity.this, PaperFryActivity.class);
+                    startActivity(electric);
+                    break;
+                }
+                case R.id.icongud2 :{
+                    Intent electric = new Intent(HomeActivity.this, Gud2Activity.class);
+                    startActivity(electric);
+                    break;
+                }
+                case R.id.iconFabHotels :{
+                    Intent electric = new Intent(HomeActivity.this, FabHotelsActivity.class);
+                    startActivity(electric);
+                    break;
+                }
+                case R.id.cleartrip :{
+                    Intent electric = new Intent(HomeActivity.this, CleartripActivity.class);
+                    startActivity(electric);
+                    break;
+                }
+                case R.id.iconBookmyFlaours :{
+                    Intent electric = new Intent(HomeActivity.this, BookMyFlavoursActivity.class);
+                    startActivity(electric);
+                    break;
+                }
+                case R.id.iconMedLife :{
+                    Intent electric = new Intent(HomeActivity.this, MedLifeActivity.class);
+                    startActivity(electric);
+                    break;
+                }
+                case R.id.iconPizzaHut :{
+                    Intent electric = new Intent(HomeActivity.this, PizzaHutActivity.class);
+                    startActivity(electric);
+                    break;
+                }
+                case R.id.iconNaturefy :{
+                    Intent electric = new Intent(HomeActivity.this, NutrafyActivity.class);
+                    startActivity(electric);
+                    break;
+                }
+                case R.id.iconZee5 :{
+                    Intent dth = new Intent(HomeActivity.this, Zee5Activity.class);
+                    startActivity(dth);
+                    break;
+                }
+                case R.id.iconReebok :{
+                    Intent electric = new Intent(HomeActivity.this, ReebokActivity.class);
+                    startActivity(electric);
+                    break;
+                }
             }
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
+        builder.setMessage("Are you sure to Exit ?");
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                HomeActivity.this.finish();
+            }
+        });
+        AlertDialog Alert = builder.create();
+        Alert.show();
+
+      /*  if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }   */
+    }
 }

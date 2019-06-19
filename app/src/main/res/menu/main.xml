@@ -47,5 +47,12 @@
         android:id="@+id/action_Binary"
         android:orderInCategory="50"
         android:title="Binary Inc"/>
-
+    <item
+        android:id="@+id/action_Tree"
+        android:orderInCategory="50"
+        android:title="Tree View"/>
+    <item
+        android:id="@+id/action_Users"
+        android:orderInCategory="50"
+        android:title="UserList"/>
 </menu>

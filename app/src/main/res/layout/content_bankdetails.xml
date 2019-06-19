@@ -86,7 +86,7 @@
             android:textColor="@color/colorGray"
             />
         <TextView
-            android:id="@+id/txtbankName"
+            android:id="@+id/txtBankName"
             android:layout_width="0dp"
             android:layout_weight="1.4"
             android:layout_height="wrap_content"

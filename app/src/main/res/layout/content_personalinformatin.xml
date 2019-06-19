@@ -42,7 +42,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="First Name"
+        android:text="Name"
         android:padding="2dp"
         android:textColor="@color/colorGray"
         />
@@ -69,11 +69,11 @@
         android:orientation="horizontal"
         >
         <TextView
-            android:id="@+id/LastName"
+            android:id="@+id/mobile"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Last Name"
+            android:text="Mobile No."
             android:padding="2dp"
             android:textColor="@color/colorGray"
             />
@@ -86,7 +86,7 @@
             android:textColor="@color/colorGray"
             />
         <TextView
-            android:id="@+id/txtLastName"
+            android:id="@+id/txtMobileNumber"
             android:layout_width="0dp"
             android:layout_weight="1.4"
             android:layout_height="wrap_content"
@@ -224,6 +224,66 @@
         android:orientation="horizontal"
         >
         <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Father's Name"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" :"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtFatherName"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Mother's Name"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtMotherName"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
             android:id="@+id/Nominee"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -241,7 +301,7 @@
             android:textColor="@color/colorGray"
             />
         <TextView
-            android:id="@+id/txtNOminee"
+            android:id="@+id/txtNominee"
             android:layout_width="0dp"
             android:layout_weight="1.4"
             android:layout_height="wrap_content"
@@ -273,6 +333,456 @@
             />
         <TextView
             android:id="@+id/txtNomineeRelation"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="UserId"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtUserId"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Sponser"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtSponser"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Activation date"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtActivation"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Pan Number"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtPan"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Occupation"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtOccupation"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="District"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtDistrict"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="State"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtState"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Pincode"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtPincode"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Passport"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtPassport"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Commission paid"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtCommission"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Left User"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtLeftUser"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Right User"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtRightUser"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Left Business"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtleftBusiness"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Right Business"
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:padding="2dp"
+            android:textColor="@color/colorGray"
+            />
+        <TextView
+            android:id="@+id/txtRightBusiness"
             android:layout_width="0dp"
             android:layout_weight="1.4"
             android:layout_height="wrap_content"
