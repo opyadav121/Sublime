@@ -6,11 +6,17 @@
     android:layout_height="match_parent"
     android:background="#fff"
     tools:context=".TreeViewActivity">
+    <WebView
+        android:id="@+id/webTree"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </WebView>
 
     <de.blox.treeview.TreeView
         android:id="@+id/treeview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:layout_centerInParent="true">
     </de.blox.treeview.TreeView>
 

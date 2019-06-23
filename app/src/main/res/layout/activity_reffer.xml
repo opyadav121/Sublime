@@ -23,5 +23,67 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/refer1"
+            />
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/btnRefer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:elevation="5dp"
+        android:background="@drawable/backgraund_btn"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="8"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="SHARE REFERRAL CODE"
+            android:textColor="@color/colorWhite"
+            />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_share_black_24dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:layout_margin="10dp"
+    android:elevation="5dp"
+    android:background="@drawable/border2"
+    >
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="6"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="Copy Referral code:"
+        />
+    <TextView
+        android:id="@+id/txtReferalCode"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="ABCDEFGHI"
+        android:textColor="@color/colorBlack"
+        />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_content_copy"
+        />
+</LinearLayout>
 </LinearLayout>

@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-    private void Login(){
+    public void Login(){
         progressDialog = progressDialog.show(LoginActivity.this, "", "Please wait...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Login_url, new Response.Listener<String>()  {
             @Override

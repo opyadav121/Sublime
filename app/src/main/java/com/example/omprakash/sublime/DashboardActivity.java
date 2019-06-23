@@ -59,6 +59,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         txtName.setText(myProfile.UserName);
         txtMobile.setText(myProfile.MobileNumber);
+        userId.setText(myProfile.UserID);
     }
     public void Slider1(){
         for (int i=0; i<pic.length; i++)

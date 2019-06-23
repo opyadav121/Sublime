@@ -50,7 +50,6 @@ public class CouponActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
     Profile myProfile;
-
     String url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/user/CouponpinList";
 
     @Override

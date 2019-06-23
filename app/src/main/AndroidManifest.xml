@@ -24,8 +24,22 @@
         android:icon="@drawable/logomain"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:networkSecurityConfig="@layout/network_security_config"
+        android:hardwareAccelerated="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Recharge.Zee5Activity"></activity>
+        <activity android:name=".NotificationActivity"
+            android:parentActivityName=".HomeActivity"></activity>
+        <activity
+            android:name=".Recharge.BagActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.GiftBuyActivity"
+            android:parentActivityName=".Recharge.GiftActivity" />
+        <activity
+            android:name=".Recharge.RechargeHistoryActivity"
+            android:parentActivityName=".Recharge.MobilePostpaidActivity" />
+        <activity android:name=".Recharge.Zee5Activity" />
         <activity android:name=".Recharge.ReebokActivity" />
         <activity android:name=".Recharge.SukhhiActivity" />
         <activity android:name=".Recharge.MedLifeActivity" />
@@ -140,7 +154,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

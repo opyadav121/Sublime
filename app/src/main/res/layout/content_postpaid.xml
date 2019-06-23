@@ -32,6 +32,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Prepaid"
+                    android:checked="true"
 
                     />
                 <RadioButton
@@ -40,7 +41,6 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Postpaid"
-                    android:checked="true"
                     />
                 <RadioButton
                     android:id="@+id/rbDatacard"
@@ -103,6 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:hint="select Operator"
+                android:cursorVisible="false"
                 android:layout_below="@id/mobile"
                 android:textColorHint="@color/colorOrangeDark"
                 />
@@ -114,7 +115,6 @@
                 android:layout_marginRight="20dp"
                 android:elevation="8dp"
                 android:background="#f9f9f9"
-                android:layout_below="@id/Operator"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="0dp"
                 android:padding="5dp"

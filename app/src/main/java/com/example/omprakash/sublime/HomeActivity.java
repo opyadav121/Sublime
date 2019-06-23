@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
+import com.example.omprakash.sublime.Recharge.BagActivity;
 import com.example.omprakash.sublime.Recharge.BigrockActivity;
 import com.example.omprakash.sublime.Recharge.BinaryIncomeActivity;
 import com.example.omprakash.sublime.Recharge.BookMyFlavoursActivity;
@@ -40,6 +41,7 @@ import com.example.omprakash.sublime.Recharge.FabHotelsActivity;
 import com.example.omprakash.sublime.Recharge.FirstCryActivity;
 import com.example.omprakash.sublime.Recharge.GasBillActivity;
 import com.example.omprakash.sublime.Recharge.GiftActivity;
+import com.example.omprakash.sublime.Recharge.GiftAloveActivity;
 import com.example.omprakash.sublime.Recharge.Gud2Activity;
 import com.example.omprakash.sublime.Recharge.InsuranceRenualActivity;
 import com.example.omprakash.sublime.Recharge.JockeyActivity;
@@ -53,6 +55,7 @@ import com.example.omprakash.sublime.Recharge.OyoActivity;
 import com.example.omprakash.sublime.Recharge.PaperFryActivity;
 import com.example.omprakash.sublime.Recharge.PizzaHutActivity;
 import com.example.omprakash.sublime.Recharge.ReebokActivity;
+import com.example.omprakash.sublime.Recharge.RydonActivity;
 import com.example.omprakash.sublime.Recharge.SWalletHistoryActivity;
 import com.example.omprakash.sublime.Recharge.SukhhiActivity;
 import com.example.omprakash.sublime.Recharge.ThemeParkActivity;
@@ -74,13 +77,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private static ViewPager mPager;
     private static int currentPager = 0;
     ArrayList<Integer> picArray = new ArrayList<Integer>();
-    private static final Integer [] pic = {R.drawable.ban1, R.drawable.ban2,R.drawable.ban3, R.drawable.ban4};
+    private static final Integer [] pic = {R.drawable.ban6,R.drawable.ban4, R.drawable.ban2,R.drawable.ban3, R.drawable.ban1};
     private MenuItem item;
     private ImageView mobilePostpaid,mobilePrepaid,electricity,iconGas,iconWater,iconInsurance,
             iconBroadband,iconDth,iconGift,IconTheme;
     CircleImageView iconEthic,iconRydon,bigrock,netmeds,nnnow,oyo,makemytrip,iconfirstCry,iconJockey,
             iconGiftAlove,iconSukhhi,iconPaperFry,icongud2,iconFabHotels,cleartrip,iconBookmyFlaours,
-            iconMedLife,iconPizzaHut,iconNaturefy,iconZee5,iconReebok;
+            iconMedLife,iconPizzaHut,iconNaturefy,iconZee5,iconReebok,
+            addMoney,iconMoneyTransfer,iconRefer,iconAeps;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -95,7 +99,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                    startActivity(dasboard);
                     return true;
                 case R.id.navigation_bank:
-                    // mTextMessage.setText(R.string.title_notifications);
+                    Intent bag = new Intent(getApplicationContext(), BagActivity.class);
+                    startActivity(bag);
                     return true;
                 case R.id.navigation_cart:
                     Intent shopping = new Intent(getApplicationContext(),OrdersActivity.class);
@@ -147,19 +152,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-
-        if (id == R.id.action_profile) {
-
-            Intent profileIntent = new Intent(HomeActivity.this, ProfileActivity.class);
+        if (id == R.id.action_notification) {
+            Intent profileIntent = new Intent(HomeActivity.this, NotificationActivity.class);
             startActivity(profileIntent);
             return true;
         }
-        if (id == R.id.action_Login) {
 
-            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-             startActivity(intent);
-            return true;
-        }
         if (id == R.id.action_LogOut) {
             AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
             builder.setTitle("Log Out");
@@ -181,7 +179,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
         if (id == R.id.action_Binary) {
-
             Intent intent = new Intent(HomeActivity.this, BinaryIncomeActivity.class);
             startActivity(intent);
             return true;
@@ -236,7 +233,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_tools) {
 
         } else if (id == R.id.nav_share) {
-            String InviteMessage = "Try the Lets Catch app to Locate and track your friend  https://play.google.com/store/apps/details?id=net.anvisys.letscatch";
+            String InviteMessage = "Try the  https://play.google.com/store/apps/details";
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_TEXT,InviteMessage);
@@ -249,7 +246,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     public void Slider1(){
         for (int i=0; i<pic.length; i++)
             picArray.add(pic[i]);
@@ -321,6 +317,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void SetFlippers(){
+        addMoney =  findViewById(R.id.addMoney);
+        addMoney.setOnClickListener(new clicker());
+        iconMoneyTransfer =  findViewById(R.id.iconMoneyTransfer);
+        iconMoneyTransfer.setOnClickListener(new clicker());
+        iconRefer =  findViewById(R.id.iconRefer);
+        iconRefer.setOnClickListener(new clicker());
+        iconAeps =  findViewById(R.id.iconAeps);
+        iconAeps.setOnClickListener(new clicker());
         mobilePostpaid =  findViewById(R.id.mobilePostpaid);
         mobilePostpaid.setOnClickListener(new clicker());
         mobilePrepaid =  findViewById(R.id.mobilePrepaid);
@@ -383,13 +387,32 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         iconZee5.setOnClickListener(new clicker());
         iconReebok =  findViewById(R.id.iconReebok);
         iconReebok.setOnClickListener(new clicker());;
-
     }
-
     class clicker implements View.OnClickListener{
         @Override
         public void onClick(View v) {
             switch (v.getId()){
+                case R.id.addMoney :{
+                  //  Intent postpaid = new Intent(HomeActivity.this, MobilePostpaidActivity.class);
+                  //  startActivity(postpaid);
+                    break;
+                }
+                case R.id.iconMoneyTransfer :{
+                  //  Intent prepaid = new Intent(HomeActivity.this, MobilePostpaidActivity.class);
+                   // startActivity(prepaid);
+                    break;
+                }
+                case R.id.iconRefer :{
+                    Intent electric = new Intent(HomeActivity.this, RefferActivity.class);
+                    startActivity(electric);
+                    break;
+                }
+                case R.id.iconAeps :{
+                  //  Intent gas = new Intent(HomeActivity.this, GasBillActivity.class);
+                  //  startActivity(gas);
+                    break;
+                }
+
                 case R.id.mobilePostpaid :{
                     Intent postpaid = new Intent(HomeActivity.this, MobilePostpaidActivity.class);
                     startActivity(postpaid);
@@ -471,7 +494,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     break;
                 }
                 case R.id.iconRydon :{
-                    Intent electric = new Intent(HomeActivity.this, ThemeParkActivity.class);
+                    Intent electric = new Intent(HomeActivity.this, RydonActivity.class);
                     startActivity(electric);
                     break;
                 }
@@ -486,7 +509,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     break;
                 }
                 case R.id.iconGiftAlove :{
-                    Intent electric = new Intent(HomeActivity.this, GiftActivity.class);
+                    Intent electric = new Intent(HomeActivity.this, GiftAloveActivity.class);
                     startActivity(electric);
                     break;
                 }

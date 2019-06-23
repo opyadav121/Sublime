@@ -18,10 +18,32 @@
             android:layout_height="56dp"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
     </android.support.design.widget.AppBarLayout>
-    <ListView
-        android:id="@+id/listViewGift"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </ListView>
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/txtSub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:text="get Offers"
+            android:padding="5dp"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            />
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:numColumns="2"
+            android:horizontalSpacing="20dp"
+            android:verticalSpacing="20dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="#f3f3f3"
+            >
+        </GridView>
+    </LinearLayout>
 </LinearLayout>

@@ -8,11 +8,23 @@
         android:orderInCategory="50"
         app:showAsAction="always"
         />
+    <item
+        android:id="@+id/action_LogOut"
+        android:orderInCategory="50"
+        android:title="Log Out"/>
 
     <item
-        android:id="@+id/action_profile"
+        android:id="@+id/action_Tree"
         android:orderInCategory="50"
-        android:title="Profile"/>
+        android:title="Tree View"/>
+    <item
+        android:id="@+id/action_Users"
+        android:orderInCategory="50"
+        android:title="UserList"/>
+    <item
+        android:id="@+id/action_couponReq"
+        android:orderInCategory="50"
+        android:title="RequestCoupons"/>
     <item
         android:orderInCategory="50"
         android:title="More">
@@ -26,33 +38,14 @@
                 android:orderInCategory="50"
                 android:title="S Wallet"/>
             <item
+                android:id="@+id/action_Binary"
+                android:orderInCategory="50"
+                android:title="Binary Inc"/>
+            <item
                 android:id="@+id/action_coupon"
                 android:orderInCategory="50"
                 android:title="Coupons"/>
-            <item
-                android:id="@+id/action_couponReq"
-                android:orderInCategory="50"
-                android:title="RequestCoupons"/>
+
         </menu>
     </item>
-    <item
-        android:id="@+id/action_Login"
-        android:orderInCategory="50"
-        android:title="Login"/>
-    <item
-        android:id="@+id/action_LogOut"
-        android:orderInCategory="50"
-        android:title="Log Out"/>
-    <item
-        android:id="@+id/action_Binary"
-        android:orderInCategory="50"
-        android:title="Binary Inc"/>
-    <item
-        android:id="@+id/action_Tree"
-        android:orderInCategory="50"
-        android:title="Tree View"/>
-    <item
-        android:id="@+id/action_Users"
-        android:orderInCategory="50"
-        android:title="UserList"/>
 </menu>

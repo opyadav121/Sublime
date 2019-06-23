@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#f58634</color>    //008577
     <color name="colorPrimaryDark">#f58634</color> //00574B
-    <color name="colorAccent">#828386</color>  //D81b60
+    <color name="colorAccent">#80f58634</color>  //D81b60
 
     <color name="color_white_semitransparent">#50ffffff</color>
     <color name="colorNavIcon">#dae9f6</color>

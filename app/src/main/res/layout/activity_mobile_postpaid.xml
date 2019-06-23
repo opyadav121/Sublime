@@ -19,12 +19,12 @@
             android:layout_height="56dp"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
     </android.support.design.widget.AppBarLayout>
-
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_below="@id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:nestedScrollingEnabled="true"
+            android:layout_below="@id/appBar"
         >
        <LinearLayout
             android:layout_width="match_parent"
@@ -77,6 +77,7 @@
       <include layout="@layout/content_postpaid"/>
 
         <TextView
+            android:id="@+id/txtrecentRecharge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Recent Recharges:"
@@ -86,16 +87,17 @@
             android:background="#FCF1DD"
             />
             <ListView
-            android:id="@+id/ListRecharges"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_margin="5dp"
-            android:elevation="5dp"
-            android:scrollbars="none"
-            android:dividerHeight="3dp"
-            android:background="@color/colorWhite"
-            >
+                android:id="@+id/ListRecharges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_margin="5dp"
+                android:elevation="5dp"
+                android:nestedScrollingEnabled="true"
+                android:scrollbars="none"
+                android:dividerHeight="3dp"
+                android:background="@color/colorWhite"
+                >
         </ListView>
     </LinearLayout>
     <include layout="@layout/content_transfer_e_to_swallet"

@@ -1,21 +1,14 @@
 package com.example.omprakash.sublime;
-
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
-import android.provider.Settings;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -34,7 +27,6 @@ import Common.Session;
 import Common.VolleyMultipartRequest;
 import Model.Profile;
 import de.hdodenhof.circleimageview.CircleImageView;
-
 public class ProfileActivity extends AppCompatActivity {
     CircleImageView imageProfile;
     Button editProfile;
@@ -50,6 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        imageProfile = findViewById(R.id.imageProfile);
         txtFirstName = findViewById(R.id.txtFirstName);
         txtMobileNumber = findViewById(R.id.txtMobileNumber);
         txtEmailID = findViewById(R.id.txtEmailID);
@@ -75,7 +68,6 @@ public class ProfileActivity extends AppCompatActivity {
         txtRightUser = findViewById(R.id.txtRightUser);
         txtleftBusiness = findViewById(R.id.txtleftBusiness);
         txtRightBusiness = findViewById(R.id.txtRightBusiness);
-
         editProfile = findViewById(R.id.editProfile);
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,9 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         myProfile = Session.GetProfile(this);
-
         txtEmailID.setText(myProfile.UserLogin);
         txtMobileNumber.setText(myProfile.MobileNumber);
         txtFirstName.setText(myProfile.UserName);
@@ -113,9 +103,7 @@ public class ProfileActivity extends AppCompatActivity {
         txtleftBusiness.setText(myProfile.left_business);
         txtRightBusiness.setText(myProfile.right_business);
 
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+     /*   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getPackageName()));
             finish();
             startActivity(intent);
@@ -126,15 +114,11 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //if everything is ok we will open image chooser
                 Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, 100);
             }
-        });
+        });  */
     }
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -144,7 +128,6 @@ public class ProfileActivity extends AppCompatActivity {
             Uri imageUri = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-
                 imageProfile.setImageBitmap(bitmap);
                 //calling the method uploadBitmap to upload image
                 uploadBitmap(bitmap);
@@ -153,16 +136,13 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
     }
-
     public byte[] getFileDataFromDrawable(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
-
     private void uploadBitmap(final Bitmap bitmap) {
 
-      //  final String tags = editTextTags.getText().toString().trim();
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST,url , new Response.Listener<NetworkResponse>() {
             @Override
             public void onResponse(NetworkResponse response) {
@@ -179,13 +159,11 @@ public class ProfileActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }) {
-            String name;
             @Override
             protected Map<String, DataPart> getByteData() {
                 Map<String, DataPart> params = new HashMap<>();
                 long imagename = System.currentTimeMillis();
                 params.put("image", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
-                name= Long.toString(imagename);
                 return params;
             }
             @Override

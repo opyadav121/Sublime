@@ -1,5 +1,6 @@
 package com.example.omprakash.sublime.Recharge;
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,7 +12,6 @@ import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -22,23 +22,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.omprakash.sublime.HomeActivity;
 import com.example.omprakash.sublime.PaymentHistoryActivity;
 import com.example.omprakash.sublime.R;
 import com.squareup.picasso.Picasso;
@@ -56,20 +52,22 @@ import java.util.List;
 import java.util.Map;
 
 import Common.Session;
+import Model.Oparater;
 import Model.Profile;
 import Model.Recharge_History;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MobilePostpaidActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     RadioGroup RadioBtnGroup;
     EditText txtMobileNumber,txtOperator,txtAmount,transferAmount;
-    TextView myContact,txtSWallet,txtEWallet,btnTransfer;
+    TextView myContact,txtSWallet,txtEWallet,btnTransfer,txtrecentRecharge;
     ListView listViewOperator,ListRecharges;
     Button btnPayment,transfer;
-    List<String> OperatorList= new ArrayList<>();
     HashMap<String,String> OperatorHashMap = new HashMap<>();
-    ArrayAdapter<String> adapterOperator;
+    List<String> OperatorList1= new ArrayList<>();
+    ArrayAdapter<String> adapterOperatorHash;
     String OPType;
     String RandomChildCode="";
     ProgressDialog progressDialog;
@@ -77,6 +75,8 @@ public class MobilePostpaidActivity extends AppCompatActivity {
     LinearLayout transfer_E_to_S;
     ArrayList<Recharge_History> rechargeList = new ArrayList<>();
     AdapterRecharge adapterRecharge;
+   // List<Oparater> OperatorList= new ArrayList<>();
+   // AdapterOperator adapterOperator;
     Profile myProfile;
     String SWallet_Balance,Ewalet_Balance,OperatorCode;
 
@@ -99,11 +99,20 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         transfer_E_to_S = findViewById(R.id.transfer_E_to_S);
         transferAmount = findViewById(R.id.transferAmount);
         transfer = findViewById(R.id.transfer);
+        txtrecentRecharge = findViewById(R.id.txtrecentRecharge);
+        txtrecentRecharge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MobilePostpaidActivity.this,RechargeHistoryActivity.class);
+                startActivity(intent);
+            }
+        });
         btnTransfer = findViewById(R.id.btnTransfer);
         btnTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 transfer_E_to_S.setVisibility(View.VISIBLE);
+
             }
         });
         transfer.setOnClickListener(new View.OnClickListener() {
@@ -156,83 +165,9 @@ public class MobilePostpaidActivity extends AppCompatActivity {
             return;
         }
 
-        setOperatorSpinner();
+       // Operators();
+        SetOperators();
 
-    }
-
-    public void setOperatorSpinner()
-    {
-        String url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/Recharge/moblie_recharge";
-        try{
-            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-            JsonArrayRequest jsArrayRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
-                @Override
-                public void onResponse(JSONArray response) {
-                    try {
-                        int x = response.length();
-                        for (int i = 0; i <x; i++) {
-
-                            JSONObject jObj = response.getJSONObject(i);
-
-                            String OperatorName = jObj.getString("operator_name");
-                            String OperatorID = jObj.getString("operator_code");
-                            String optype = jObj.getString("OPType");
-                          /*  OperatorListPostpaid.add(OperatorName);
-                            if (optype.equalsIgnoreCase("PrePaid")) {
-                                OperatorHashMap.put(OperatorName,OperatorID );
-                                OperatorListPostpaid.add(OperatorName);
-                            }else {
-                                OperatorHashMap.put(OperatorName,OperatorID );
-                                OperatorList.add(OperatorName);
-                            } */
-                            OperatorHashMap.put(OperatorName,OperatorID );
-                            OperatorList.add(OperatorName);
-                        }
-                        adapterOperator.notifyDataSetChanged();
-
-                    } catch (JSONException e) {
-                        int a=1;
-                    }
-                    catch (Exception ex)
-                    {
-                        int a=1;
-                    }
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                   // progressBar.setVisibility(View.GONE);
-                }
-            });
-            RetryPolicy rPolicy = new DefaultRetryPolicy(0, -1, 0);
-            jsArrayRequest.setRetryPolicy(rPolicy);
-            queue.add(jsArrayRequest);
-        }catch (Exception ex){
-            int a=1;
-        }
-
-        adapterOperator = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, OperatorList);
-        adapterOperator.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        listViewOperator.setAdapter(adapterOperator);
-        txtOperator.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                listViewOperator.setVisibility(View.VISIBLE);
-
-            }
-        });
-
-        listViewOperator.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String Operator = (String) listViewOperator.getItemAtPosition(position);
-                txtOperator.setText(Operator);
-                OperatorCode = OperatorHashMap.get(Operator);
-                listViewOperator.setVisibility(View.GONE);
-            }
-        });
     }
 
   public String ChildCode(){
@@ -268,7 +203,6 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                           String RandomChildCode= jObj.getString("Yourrchid");
                           String Error = jObj.getString("Errormsg");
                           String Remaining = jObj.getString("Remain");
-                         // String RandomChildCode = jObj.getString("Yourrchid");
                           String RechargeID = jObj.getString("RechargeID");
 
                           Intent confirmation = new Intent(MobilePostpaidActivity.this, PaymentHistoryActivity.class);
@@ -326,10 +260,9 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                   JSONObject jObj = new JSONObject(response);
                   Ewalet_Balance = jObj.getString("E-Wallet");
                   SWallet_Balance = jObj.getString("S-Wallet");
-                  txtEWallet.setText(Ewalet_Balance);
-                  txtSWallet.setText(SWallet_Balance);
-                  //txtEWallet.setText(currFormat.format(EWallet));
-                  //txtSWallet.setText(currFormat.format(SWallet));
+
+                  txtEWallet.setText(" \u20B9"+Ewalet_Balance);
+                  txtSWallet.setText(" \u20B9"+SWallet_Balance);
 
               } catch (JSONException e) {
                   e.printStackTrace();
@@ -498,21 +431,21 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                     holder.histDate = convertView.findViewById(R.id.histDate);
                     holder.histStatus = convertView.findViewById(R.id.histStatus);
                     holder.hisTransId = convertView.findViewById(R.id.hisTransId);
-                    holder.OperatorIcon = convertView.findViewById(R.id.OperatorIcon);
+                    //holder.OperatorIcon = convertView.findViewById(R.id.OperatorIcon);
                     convertView.setTag(holder);
                 }
                 holder = (ViewHolder) convertView.getTag();
                 Recharge_History history= getItem(position);
                 holder.histMobile.setText(history.MobileNO);
                 holder.histOperator.setText(history.Operator);
-                holder.histAmount.setText(history.Amount );
+                holder.histAmount.setText(" \u20B9"+history.Amount );
                 holder.histOrderId.setText(history.OrderId);
                 holder.histDate.setText(history.Date);
                 holder.histStatus.setText(history.Status );
                 holder.hisTransId.setText(history.TransId);
-                holder.OperatorIcon.setVisibility(View.VISIBLE);
-                String url1 = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/opt/idea.jpg";
-                Picasso.with(getApplicationContext()).load(url1).into(holder.OperatorIcon);
+               // holder.OperatorIcon.setVisibility(View.VISIBLE);
+               // String url1 = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/opt/idea.jpg";
+               // Picasso.with(getApplicationContext()).load(url1).into(holder.OperatorIcon);
                 return convertView;
             }
             catch (Exception ex)
@@ -526,8 +459,180 @@ public class MobilePostpaidActivity extends AppCompatActivity {
 
     private class ViewHolder
     {
-        TextView histMobile,histOperator,histAmount,histOrderId,histDate,histStatus,hisTransId;
-        ImageView OperatorIcon;
+        TextView histMobile,histOperator,histAmount,histOrderId,histDate,histStatus,hisTransId,txtOperatorName;
+        CircleImageView iconOperator;
     }
+
+    public void SetOperators()
+    {
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        String RechargeHitory_url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/Recharge/moblie_recharge";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, RechargeHitory_url, new Response.Listener<String>()  {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        Oparater opt = new Oparater();
+                        JSONObject jObj = jsonArray.getJSONObject(i);
+                        String OperatorName = jObj.getString("operator_name");
+                        String OptID = jObj.getString("operator_code");
+                        opt.opType = jObj.getString("OPType");
+                        OperatorHashMap.put(OperatorName, OptID);
+                        OperatorList1.add(OperatorName);
+                    }
+                    adapterOperatorHash.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MobilePostpaidActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", myProfile.UserLogin);
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+        adapterOperatorHash = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,OperatorList1);
+        adapterOperatorHash.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        listViewOperator.setAdapter(adapterOperatorHash);
+        txtOperator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listViewOperator.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        listViewOperator.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String opt = (String) listViewOperator.getItemAtPosition(position);
+                txtOperator.setText(opt);
+                listViewOperator.setVisibility(View.GONE);
+            }
+        });
+    }
+
+
+
+
+
+
+  /*  public void Operators()
+    {
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        String RechargeHitory_url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/Recharge/moblie_recharge";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, RechargeHitory_url, new Response.Listener<String>()  {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        Oparater opt = new Oparater();
+                        JSONObject jObj = jsonArray.getJSONObject(i);
+                        opt.OperatorName = jObj.getString("operator_name");
+                        opt.optImageName = jObj.getString("image");
+                        opt.OptID = jObj.getString("operator_code");
+                        opt.opType = jObj.getString("OPType");
+                       // OperatorHashMap.put(opt.OperatorName, opt.OptID);
+                        OperatorList.add(opt);
+                    }
+                    adapterOperator.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MobilePostpaidActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", myProfile.UserLogin);
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+        adapterOperator = new AdapterOperator(this, android.R.layout.simple_spinner_dropdown_item,OperatorList);
+        adapterOperator.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        listViewOperator.setAdapter(adapterOperator);
+        txtOperator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listViewOperator.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        listViewOperator.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String opt = (String) listViewOperator.getItemAtPosition(position);
+                txtOperator.setText(opt);
+                listViewOperator.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    class AdapterOperator extends ArrayAdapter{
+        LayoutInflater inflat;
+        ViewHolder holder;
+        public AdapterOperator(Context context, int resource, List<Oparater> objects) {
+
+            super(context, resource,objects);
+            // TODO Auto-generated constructor stub
+            inflat= LayoutInflater.from(context);
+        }
+        @Override
+        public int getCount() {
+            return OperatorList.size();
+        }
+
+        @Nullable
+        @Override
+        public Oparater getItem(int position) {
+            return OperatorList.get(position);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            try {
+                if (convertView == null) {
+                    convertView = inflat.inflate(R.layout.row_item_operator, null);
+                    holder = new ViewHolder();
+                  //  holder.iconOperator = convertView.findViewById(R.id.iconOperator);
+                    holder.txtOperatorName = convertView.findViewById(R.id.txtOperatorName);
+                    convertView.setTag(holder);
+                }
+                holder = (ViewHolder) convertView.getTag();
+                Oparater history= getItem(position);
+                holder.txtOperatorName.setText(history.OperatorName);
+              //  String url1 = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/opt/" + history.optImageName;
+              //  Picasso.with(getApplicationContext()).load(url1).into(holder.iconOperator);
+                return convertView;
+            }
+            catch (Exception ex)
+            {
+                int a=1;
+                Toast.makeText(getApplicationContext(),"Could not Load RentData", Toast.LENGTH_LONG).show();
+                return null;
+            }
+        }
+    }    */
 
 }
