@@ -82,9 +82,9 @@
             android:layout_height="wrap_content"
             android:text="Recent Recharges:"
             android:padding="10dp"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:textSize="14sp"
-            android:background="#FCF1DD"
+            android:background="#B1FF602E"
             />
             <ListView
                 android:id="@+id/ListRecharges"

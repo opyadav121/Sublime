@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.omprakash.sublime.R;
+import com.rapliot.omprakash.sublime.R;
 
 
 public class IIAshopingFragment extends Fragment {

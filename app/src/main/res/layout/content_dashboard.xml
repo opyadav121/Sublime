@@ -48,6 +48,7 @@
                   android:text="Last login:07/06/2019 11:10 AM"
                   android:textColor="@color/colorWhite"
                   android:textSize="12sp"
+                  android:visibility="invisible"
                   />
               <LinearLayout
                   android:layout_width="match_parent"

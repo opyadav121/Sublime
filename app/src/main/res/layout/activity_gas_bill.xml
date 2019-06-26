@@ -55,14 +55,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/Board">
-
             <EditText
                 android:id="@+id/txtService"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:baselineAligned="false"
-                android:text="verify"
-                android:textAlignment="textEnd"
                 android:paddingRight="20dp"
                 android:textColor="@color/colorOrangeDark"
                 android:hint="Service Number/Account Number" />

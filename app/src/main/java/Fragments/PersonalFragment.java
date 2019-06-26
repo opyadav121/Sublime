@@ -1,9 +1,6 @@
 package Fragments;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,9 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.omprakash.sublime.LoginActivity;
-import com.example.omprakash.sublime.R;
-import com.example.omprakash.sublime.RegisterActivity;
+import com.rapliot.omprakash.sublime.R;
 
 import org.json.JSONObject;
 
