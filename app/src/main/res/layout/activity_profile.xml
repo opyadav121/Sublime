@@ -71,7 +71,6 @@
         android:id="@+id/bank"
         layout="@layout/content_bankdetails"
         />
-
 </LinearLayout>
     </ScrollView>
     <Button

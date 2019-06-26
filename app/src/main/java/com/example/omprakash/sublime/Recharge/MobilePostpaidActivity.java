@@ -61,7 +61,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MobilePostpaidActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     RadioGroup RadioBtnGroup;
-    EditText txtMobileNumber,txtOperator,txtAmount,transferAmount;
+    EditText txtMobileNumber,txtOperator,txtAmount;
     TextView myContact,txtSWallet,txtEWallet,btnTransfer,txtrecentRecharge;
     ListView listViewOperator,ListRecharges;
     Button btnPayment,transfer;
@@ -97,7 +97,6 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         txtEWallet = findViewById(R.id.txtEWallet);
         txtSWallet = findViewById(R.id.txtSWallet);
         transfer_E_to_S = findViewById(R.id.transfer_E_to_S);
-        transferAmount = findViewById(R.id.transferAmount);
         transfer = findViewById(R.id.transfer);
         txtrecentRecharge = findViewById(R.id.txtrecentRecharge);
         txtrecentRecharge.setOnClickListener(new View.OnClickListener() {
@@ -111,18 +110,11 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         btnTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                transfer_E_to_S.setVisibility(View.VISIBLE);
-
-            }
-        });
-        transfer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TransferAmount();
+                showChangeLangDialog();
             }
         });
         ListRecharges = findViewById(R.id.ListRecharges);
-        adapterRecharge =new AdapterRecharge(MobilePostpaidActivity.this,0,rechargeList);
+        adapterRecharge = new AdapterRecharge(MobilePostpaidActivity.this,0,rechargeList);
         ListRecharges.setAdapter(adapterRecharge);
         RechargeHistory();
         ChildCode();
@@ -204,7 +196,6 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                           String Error = jObj.getString("Errormsg");
                           String Remaining = jObj.getString("Remain");
                           String RechargeID = jObj.getString("RechargeID");
-
                           Intent confirmation = new Intent(MobilePostpaidActivity.this, PaymentHistoryActivity.class);
                           confirmation.putExtra("Yourrchid", RandomChildCode);
                           confirmation.putExtra("Errormsg",Error);
@@ -213,7 +204,6 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                           confirmation.putExtra("RechargeID",RechargeID);
                           startActivity(confirmation);
                       MobilePostpaidActivity.this.finish();
-
               } catch (JSONException e) {
                   e.printStackTrace();
                   progressDialog.dismiss();
@@ -223,7 +213,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
           @Override
           public void onErrorResponse(VolleyError error) {
               progressDialog.dismiss();
-              Toast.makeText(MobilePostpaidActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+              Toast.makeText(MobilePostpaidActivity.this, "Please Contact to Admin ", Toast.LENGTH_SHORT).show();
           }
       })
       {
@@ -234,7 +224,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
               params.put("Customernumber", txtMobileNumber.getText().toString());
               params.put("Yourrchid",RandomChildCode);
               params.put("Optname",txtOperator.getText().toString());
-              params.put("Optcode","A");
+              params.put("Optcode",OperatorCode);
               params.put("operatorname",txtOperator.getText().toString());
               params.put("wallet_bal",SWallet_Balance);
               params.put("remaining_bal",Integer.toString(Remain));
@@ -245,7 +235,6 @@ public class MobilePostpaidActivity extends AppCompatActivity {
       };
       requestQueue.add(stringRequest);
   }
-
   public void WalletBalance(){
       RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
       String Wallet_url= "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/Recharge/wallet";
@@ -273,7 +262,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
           @Override
           public void onErrorResponse(VolleyError error) {
               progressDialog.dismiss();
-              Toast.makeText(MobilePostpaidActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+              Toast.makeText(MobilePostpaidActivity.this, "Please Contact Admin", Toast.LENGTH_SHORT).show();
           }
       })
       {
@@ -286,46 +275,6 @@ public class MobilePostpaidActivity extends AppCompatActivity {
       };
       queue.add(stringRequest);
   }
-
-    public void TransferAmount(){
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String Transfer_url= "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/Recharge/add_money_s_wallet";
-        progressDialog = progressDialog.show(MobilePostpaidActivity.this, "", "Please wait...", false, false);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Transfer_url, new Response.Listener<String>()  {
-            @Override
-            public void onResponse(String response) {
-                progressDialog.dismiss();
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    String Status = jObj.getString("status");
-                    String MSG = jObj.getString("msg");
-                    Toast.makeText(MobilePostpaidActivity.this, ""+Status, Toast.LENGTH_SHORT).show();
-                    transfer_E_to_S.setVisibility(View.GONE);
-                    WalletBalance();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    progressDialog.dismiss();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(MobilePostpaidActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
-            }
-        })
-        {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", myProfile.UserLogin);
-                params.put("amount",transferAmount.getText().toString());
-                return params;
-            }
-        };
-        queue.add(stringRequest);
-    }
-
     public void RechargeHistory()
     {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
@@ -356,7 +305,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MobilePostpaidActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MobilePostpaidActivity.this, "Please Contact Admin", Toast.LENGTH_SHORT).show();
             }
         })
         {
@@ -401,7 +350,6 @@ public class MobilePostpaidActivity extends AppCompatActivity {
             // TODO Auto-generated constructor stub
             inflat= LayoutInflater.from(context);
         }
-
 
         @Override
         public int getCount() {
@@ -451,7 +399,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
             catch (Exception ex)
             {
                 int a=1;
-                Toast.makeText(getApplicationContext(),"Could not Load RentData", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Could not Load Data", Toast.LENGTH_LONG).show();
                 return null;
             }
         }
@@ -511,18 +459,72 @@ public class MobilePostpaidActivity extends AppCompatActivity {
 
             }
         });
-
         listViewOperator.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 String opt = (String) listViewOperator.getItemAtPosition(position);
                 txtOperator.setText(opt);
+                OperatorCode = OperatorHashMap.get(opt);
                 listViewOperator.setVisibility(View.GONE);
             }
         });
     }
+    public void showChangeLangDialog() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialog_transfer, null);
+        dialogBuilder.setView(dialogView);
+        final EditText editAmount = dialogView.findViewById(R.id.editAmount);
+        dialogBuilder.setMessage("Enter Amount");
+        dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                String Transfer_url= "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/Recharge/add_money_s_wallet";
+                progressDialog = progressDialog.show(MobilePostpaidActivity.this, "", "Please wait...", false, false);
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, Transfer_url, new Response.Listener<String>()  {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject jObj = new JSONObject(response);
+                            String Status = jObj.getString("status");
+                            String MSG = jObj.getString("msg");
+                            Toast.makeText(MobilePostpaidActivity.this, ""+Status, Toast.LENGTH_SHORT).show();
+                            transfer_E_to_S.setVisibility(View.GONE);
+                            WalletBalance();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progressDialog.dismiss();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(MobilePostpaidActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                {
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("email", myProfile.UserLogin);
+                        params.put("amount",editAmount.getText().toString());
+                        return params;
+                    }
+                };
+                queue.add(stringRequest);
 
+            }
+        });
+        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+    }
 
 
 

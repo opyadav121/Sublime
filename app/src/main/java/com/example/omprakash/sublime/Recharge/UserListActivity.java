@@ -154,7 +154,7 @@ public class UserListActivity extends AppCompatActivity {
                 holder.txtEmail.setText(history.Email);
                 holder.txtMobile.setText(history.Mobile);
                 holder.txtAddress.setText(history.Address );
-                holder.txtPlan.setText(history.CouponName+", "+history.Amount);
+                holder.txtPlan.setText(history.CouponName+", "+" \u20B9"+history.Amount);
                 holder.txtDate.setText(history.Date);
                 holder.txtSide.setText(history.Side);
                 holder.txtReferId.setText(history.ReferId);

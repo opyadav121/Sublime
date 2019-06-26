@@ -56,6 +56,16 @@
             android:layout_marginTop="5dp"
             android:text="This Gift Card is valid for a period of 1 year from the date of issue. This Gift Card can be redeemed against purchase of any product available at Croma stores."
             />
+        <TextView
+            android:id="@+id/txtTC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="T and C"
+            android:gravity="right"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

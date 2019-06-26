@@ -140,7 +140,7 @@ public class SWalletHistoryActivity extends AppCompatActivity {
                 }
                 holder = (ViewHolder) convertView.getTag();
                 SWallet history= getItem(position);
-                holder.EwAmount.setText(history.Amount);
+                holder.EwAmount.setText(" \u20B9"+history.Amount);
                 holder.EwDate.setText(history.Date);
                 holder.EwType.setText(history.Type );
                 holder.EwCredit.setText(history.Credit);
@@ -150,7 +150,7 @@ public class SWalletHistoryActivity extends AppCompatActivity {
             catch (Exception ex)
             {
                 int a=1;
-                Toast.makeText(getApplicationContext(),"Could not Load RentData", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Could not Load Data", Toast.LENGTH_LONG).show();
                 return null;
             }
         }

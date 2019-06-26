@@ -29,7 +29,6 @@ public class DashboardActivity extends AppCompatActivity {
     private static int currentPager = 0;
     ArrayList<Integer> picArray=new ArrayList<Integer>();
     private static final Integer [] pic = {R.drawable.poster1, R.drawable.poster2,R.drawable.poster3, R.drawable.poster4};
-
     Profile myProfile;
     CircleImageView imageProfile;
     TextView txtName,lastLoginTime,userId,doj,txtUnclearBalance,txtMobile,txtSelfIncome,txtTeamSize;

@@ -78,12 +78,7 @@ public class CouponRequestActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     String url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/Assets/uploads/abc";
     String RequestCoupon_url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/Home/request_activation";
-    static final int REQUEST_IMAGE_GET = 1;
-    static final int REQUEST_IMAGE_CROP = 2;
-    String filePath;
-    Image image;
     Profile myProfile;
-   // String receipt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

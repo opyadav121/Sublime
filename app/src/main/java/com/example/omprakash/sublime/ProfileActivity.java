@@ -14,6 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -97,11 +98,14 @@ public class ProfileActivity extends AppCompatActivity {
         txtState.setText(myProfile.State);
         txtPincode.setText(myProfile.PinCode);
         txtPassport.setText(myProfile.Passport);
-        txtCommission.setText(myProfile.commission_paid);
+        txtCommission.setText(" \u20B9"+myProfile.commission_paid);
         txtLeftUser.setText(myProfile.total_left_user);
         txtRightUser.setText(myProfile.total_right_user);
-        txtleftBusiness.setText(myProfile.left_business);
-        txtRightBusiness.setText(myProfile.right_business);
+        txtleftBusiness.setText(" \u20B9"+myProfile.left_business);
+        txtRightBusiness.setText(" \u20B9"+myProfile.right_business);
+
+         // String url1 = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/opt/" + history.optImageName;
+        //  Picasso.with(getApplicationContext()).load(url1).into(imageProfile);
 
      /*   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getPackageName()));

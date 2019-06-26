@@ -149,7 +149,7 @@ public class EWalletHistoryActivity extends AppCompatActivity {
                 }
                 holder = (ViewHolder) convertView.getTag();
                 EWallet history= getItem(position);
-                holder.EwAmount.setText(history.Amount);
+                holder.EwAmount.setText(" \u20B9"+history.Amount);
                 holder.EwDate.setText(history.Date);
                 holder.EwType.setText(history.Type );
                 holder.EwCredit.setText(history.Credit);

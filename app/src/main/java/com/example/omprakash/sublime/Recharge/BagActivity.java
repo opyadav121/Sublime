@@ -43,8 +43,8 @@ public class BagActivity extends AppCompatActivity {
         currFormat = NumberFormat.getCurrencyInstance();
         currFormat.setCurrency(Currency.getInstance("INR"));
 
-        txtTotalAmount.setText("Total  "+myProfile.account);
-        txtWalletAmount.setText("Wallet Amount\n"+myProfile.account);
-        txtCommission.setText("Commission\n"+myProfile.commission_paid);
+        txtTotalAmount.setText("Total  "+" \u20B9"+myProfile.account);
+        txtWalletAmount.setText("Wallet Amount\n"+" \u20B9"+myProfile.account);
+        txtCommission.setText("Commission\n"+" \u20B9"+myProfile.commission_paid);
     }
 }

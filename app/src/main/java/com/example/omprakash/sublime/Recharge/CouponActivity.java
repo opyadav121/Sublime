@@ -101,7 +101,7 @@ public class CouponActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(CouponActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CouponActivity.this, "Please Contact Admin", Toast.LENGTH_SHORT).show();
             }
         })
         {
@@ -155,7 +155,7 @@ public class CouponActivity extends AppCompatActivity {
                 holder = (ViewHolder) convertView.getTag();
                 final Coupons history= getItem(position);
                 holder.txtPin.setText(history.PinNo);
-                holder.txtCouponAmount.setText(history.couponAmount);
+                holder.txtCouponAmount.setText(" \u20B9"+history.couponAmount);
                 holder.txtCouponName.setText(history.CouponName );
                 holder.txtTransferDate.setText(history.Date);
                 holder.btn_register.setOnClickListener(new View.OnClickListener() {

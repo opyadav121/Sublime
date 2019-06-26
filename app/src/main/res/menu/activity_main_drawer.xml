@@ -5,10 +5,6 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
-        <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_gallery" />
@@ -16,23 +12,42 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_slideshow" />
-        <item
-            android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_tools" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
-
+                android:id="@+id/action_Tree"
+                android:orderInCategory="50"
+                android:title="Tree View"/>
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_send" />
+                android:id="@+id/action_Users"
+                android:orderInCategory="10"
+                android:title="UserList"/>
+            <item
+                android:id="@+id/action_couponReq"
+                android:orderInCategory="50"
+                android:title="RequestCoupons"/>
+            <item
+                android:id="@+id/action_EWallet"
+                android:orderInCategory="50"
+                android:title="E Cash"/>
+            <item
+                android:id="@+id/action_SWallet"
+                android:orderInCategory="50"
+                android:title="S Cash"/>
+            <item
+                android:id="@+id/action_Binary"
+                android:orderInCategory="50"
+                android:title="Binary Inc"/>
+            <item
+                android:id="@+id/action_coupon"
+                android:orderInCategory="50"
+                android:title="Coupons"/>
+            <item
+                android:id="@+id/action_LogOut"
+                android:orderInCategory="50"
+                android:title="Log Out"/>
         </menu>
     </item>
 </menu>

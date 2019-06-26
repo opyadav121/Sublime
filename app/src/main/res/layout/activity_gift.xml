@@ -32,6 +32,7 @@
             android:padding="5dp"
             android:textSize="18sp"
             android:layout_marginLeft="10dp"
+            android:visibility="gone"
             />
         <GridView
             android:id="@+id/gridView"

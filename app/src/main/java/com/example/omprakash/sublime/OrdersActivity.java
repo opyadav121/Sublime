@@ -42,7 +42,7 @@ public class OrdersActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.pager);
         tabs.addTab(tabs.newTab().setText("ALL"));
         tabs.addTab(tabs.newTab().setText("Recharge & Bills"));
-        tabs.addTab(tabs.newTab().setText("IIAShoping"));
+        tabs.addTab(tabs.newTab().setText("Shoping"));
         tabs.addTab(tabs.newTab().setText("Amazon"));
         tabs.addTab(tabs.newTab().setText("Flipkart"));
         tabs.addTab(tabs.newTab().setText("Swiggy"));
@@ -170,7 +170,7 @@ public class OrdersActivity extends AppCompatActivity {
             }
             else if (position==2)
             {
-                return "IIAShopping";
+                return "Shopping";
             }
             else if (position==3)
             {

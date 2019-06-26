@@ -139,10 +139,10 @@ public class BinaryIncomeActivity extends AppCompatActivity {
                 }
                 holder = (ViewHolder) convertView.getTag();
                 BinaryInc history= getItem(position);
-                holder.txtBinaryAmount.setText(history.BinaryAmount);
+                holder.txtBinaryAmount.setText(" \u20B9"+history.BinaryAmount);
                 holder.txtAmountType.setText(history.AmountType);
                 holder.txtReferUser.setText(history.referUser );
-                holder.txtReferAmount.setText(history.referUserAmount);
+                holder.txtReferAmount.setText(" \u20B9"+history.referUserAmount);
                 holder.txtDate.setText(history.Date );
                 holder.txtStatus.setText(history.Status);
                 return convertView;

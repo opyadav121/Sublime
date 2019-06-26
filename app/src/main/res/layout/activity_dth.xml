@@ -25,6 +25,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:padding="5dp"
+        android:visibility="gone"
         >
         <TextView
             android:id="@+id/bookDth"

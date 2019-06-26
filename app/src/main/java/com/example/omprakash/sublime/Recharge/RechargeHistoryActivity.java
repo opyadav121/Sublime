@@ -167,7 +167,7 @@ public class RechargeHistoryActivity extends AppCompatActivity {
                 Recharge_History history= getItem(position);
                 holder.histMobile.setText(history.MobileNO);
                 holder.histOperator.setText(history.Operator);
-                holder.histAmount.setText(history.Amount );
+                holder.histAmount.setText(" \u20B9"+history.Amount );
                 holder.histOrderId.setText(history.OrderId);
                 holder.histDate.setText(history.Date);
                 holder.histStatus.setText(history.Status );

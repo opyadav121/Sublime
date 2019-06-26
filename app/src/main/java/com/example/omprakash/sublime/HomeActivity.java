@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
+import com.example.omprakash.sublime.Recharge.AddMoneyActivity;
 import com.example.omprakash.sublime.Recharge.BagActivity;
 import com.example.omprakash.sublime.Recharge.BigrockActivity;
 import com.example.omprakash.sublime.Recharge.BinaryIncomeActivity;
@@ -45,9 +46,11 @@ import com.example.omprakash.sublime.Recharge.GiftAloveActivity;
 import com.example.omprakash.sublime.Recharge.Gud2Activity;
 import com.example.omprakash.sublime.Recharge.InsuranceRenualActivity;
 import com.example.omprakash.sublime.Recharge.JockeyActivity;
+import com.example.omprakash.sublime.Recharge.LandlineActivity;
 import com.example.omprakash.sublime.Recharge.MakemyTripActivity;
 import com.example.omprakash.sublime.Recharge.MedLifeActivity;
 import com.example.omprakash.sublime.Recharge.MobilePostpaidActivity;
+import com.example.omprakash.sublime.Recharge.MoneyTransferActivity;
 import com.example.omprakash.sublime.Recharge.NNNOActivity;
 import com.example.omprakash.sublime.Recharge.NetMaedsActivity;
 import com.example.omprakash.sublime.Recharge.NutrafyActivity;
@@ -80,7 +83,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private static final Integer [] pic = {R.drawable.ban6,R.drawable.ban4, R.drawable.ban2,R.drawable.ban3, R.drawable.ban1};
     private MenuItem item;
     private ImageView mobilePostpaid,mobilePrepaid,electricity,iconGas,iconWater,iconInsurance,
-            iconBroadband,iconDth,iconGift,IconTheme;
+            iconBroadband,iconDth,iconGift,IconTheme,iconLandline;
     CircleImageView iconEthic,iconRydon,bigrock,netmeds,nnnow,oyo,makemytrip,iconfirstCry,iconJockey,
             iconGiftAlove,iconSukhhi,iconPaperFry,icongud2,iconFabHotels,cleartrip,iconBookmyFlaours,
             iconMedLife,iconPizzaHut,iconNaturefy,iconZee5,iconReebok,
@@ -130,9 +133,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         webAdd = findViewById(R.id.webAdd);
-        webAdd.loadUrl("https://tracking.vcommission.com/aff_c?offer_id=9296&aff_id=7820&file_id=185040" );
         webAdd.loadUrl("https://media.vcommission.com/brand/files/vcm/9296/Zee5_CPA_Skyfire_320x50.jpg" );
-
+        webAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, AddsActivity.class);
+                startActivity(intent);
+            }
+        });
         BottomNavigationView navigView = findViewById(R.id.navig_view);
         //mTextMessage = findViewById(R.id.message);
         navigView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -157,90 +165,58 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(profileIntent);
             return true;
         }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        this.item = item;
+        int id = item.getItemId();
+        if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.action_Tree) {
+            Intent intent = new Intent(HomeActivity.this, TreeViewActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.action_Users) {
 
-        if (id == R.id.action_LogOut) {
+            Intent intent = new Intent(HomeActivity.this, UserListActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.action_couponReq) {
+            Intent intent = new Intent(HomeActivity.this, CouponRequestActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.action_SWallet) {
+            Intent intent = new Intent(HomeActivity.this, SWalletHistoryActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.action_EWallet) {
+            Intent intent = new Intent(HomeActivity.this, EWalletHistoryActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.action_coupon) {
+            Intent intent = new Intent(HomeActivity.this, CouponActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.action_Binary) {
+            Intent intent = new Intent(HomeActivity.this, BinaryIncomeActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.action_LogOut) {
             AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
             builder.setTitle("Log Out");
             builder.setMessage("Are you sure?");
             builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Session.LogOff(getApplicationContext());
-                            Intent intent = new Intent(HomeActivity.this,LoginActivity.class);
-                            startActivity(intent);
-                        }
-                    });
+                public void onClick(DialogInterface dialog, int which) {
+                    Session.LogOff(getApplicationContext());
+                    Intent intent = new Intent(HomeActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
             AlertDialog Alert = builder.create();
             Alert.show();
             return true;
-        }
-        if (id == R.id.action_Binary) {
-            Intent intent = new Intent(HomeActivity.this, BinaryIncomeActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        if (id == R.id.action_Tree) {
-
-            Intent intent = new Intent(HomeActivity.this, TreeViewActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        if (id == R.id.action_Users) {
-
-            Intent intent = new Intent(HomeActivity.this, UserListActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        if (id == R.id.action_coupon) {
-            Intent intent = new Intent(HomeActivity.this, CouponActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        if (id == R.id.action_couponReq) {
-            Intent intent = new Intent(HomeActivity.this, CouponRequestActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        if (id == R.id.action_SWallet) {
-            Intent intent = new Intent(HomeActivity.this, SWalletHistoryActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        if (id == R.id.action_EWallet) {
-            Intent intent = new Intent(HomeActivity.this, EWalletHistoryActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        this.item = item;
-
-        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-            String InviteMessage = "Try the  https://play.google.com/store/apps/details";
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT,InviteMessage);
-            sendIntent.setType("text/plain");
-            startActivity(Intent.createChooser(sendIntent,"SEND"));
-        } else if (id == R.id.nav_send) {
-
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -273,6 +249,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 handler.post(update);
             }
         },6000,6000);
+
     }
     public class MyAdapter extends PagerAdapter
     {
@@ -285,7 +262,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             inflater = LayoutInflater.from(context);
             this.context = context;
         }
-
         @Override
         public int getCount() {
             return images.size();
@@ -294,10 +270,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public boolean isViewFromObject(@NonNull View view, @NonNull Object object)
         {
-
             return view.equals(object);
         }
-
         @Override
         public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object)
         {
@@ -345,6 +319,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         iconGift.setOnClickListener(new clicker());
         IconTheme =  findViewById(R.id.IconTheme);
         IconTheme.setOnClickListener(new clicker());
+        iconLandline = findViewById(R.id.iconLandline);
+        iconLandline.setOnClickListener(new clicker());
         iconEthic =  findViewById(R.id.iconEthic);
         iconEthic.setOnClickListener(new clicker());
         iconRydon =  findViewById(R.id.iconRydon);
@@ -393,13 +369,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.addMoney :{
-                  //  Intent postpaid = new Intent(HomeActivity.this, MobilePostpaidActivity.class);
-                  //  startActivity(postpaid);
+                    Intent postpaid = new Intent(HomeActivity.this, AddMoneyActivity.class);
+                    startActivity(postpaid);
                     break;
                 }
                 case R.id.iconMoneyTransfer :{
-                  //  Intent prepaid = new Intent(HomeActivity.this, MobilePostpaidActivity.class);
-                   // startActivity(prepaid);
+                    Intent prepaid = new Intent(HomeActivity.this, MoneyTransferActivity.class);
+                    startActivity(prepaid);
                     break;
                 }
                 case R.id.iconRefer :{
@@ -408,8 +384,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     break;
                 }
                 case R.id.iconAeps :{
-                  //  Intent gas = new Intent(HomeActivity.this, GasBillActivity.class);
-                  //  startActivity(gas);
+                    Intent gas = new Intent(HomeActivity.this, AEPSActivity.class);
+                    startActivity(gas);
                     break;
                 }
 
@@ -450,6 +426,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }
                 case R.id.iconDth :{
                     Intent dth = new Intent(HomeActivity.this, DTHActivity.class);
+                    startActivity(dth);
+                    break;
+                }
+                case R.id.iconLandline :{
+                    Intent dth = new Intent(HomeActivity.this, LandlineActivity.class);
                     startActivity(dth);
                     break;
                 }
