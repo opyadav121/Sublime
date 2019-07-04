@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.rapliot.omprakash.sublime.R;
+import com.sublime.sublimecash.sublime.R;
 
 public class SwiggyFragment extends Fragment {
 

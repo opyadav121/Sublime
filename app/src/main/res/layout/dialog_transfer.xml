@@ -13,5 +13,4 @@
         android:layout_margin="20dp"
         android:inputType="numberDecimal"
         />
-
 </LinearLayout>

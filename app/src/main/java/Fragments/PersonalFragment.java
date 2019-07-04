@@ -16,12 +16,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.rapliot.omprakash.sublime.R;
+import com.sublime.sublimecash.sublime.R;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import Common.Constants;
 
 
 public class PersonalFragment extends Fragment {
@@ -30,7 +32,7 @@ public class PersonalFragment extends Fragment {
             txtNomineeRelation,txtOccupation,txtPan,txtAadhar,txtAddress,txtPincode,txtState,txtDistrict;
     Button btnSubmit;
     ProgressDialog progressDialog;
-    String Edit_url="http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/user/updateprofile";
+    String Edit_url= Constants.Application_URL+"/users/index.php/user/updateprofile";
 
     public PersonalFragment() {
 

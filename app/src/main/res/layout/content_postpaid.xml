@@ -109,7 +109,20 @@
                 />
             </android.support.design.widget.TextInputLayout>
             <ListView
-                android:id="@+id/listViewOperator"
+                android:id="@+id/listViewPostpaid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:elevation="8dp"
+                android:background="#f9f9f9"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="0dp"
+                android:padding="5dp"
+                android:visibility="gone"
+                >
+            </ListView>
+            <ListView
+                android:id="@+id/listViewPrepaid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Recharge.ThemeParkActivity">
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
@@ -17,5 +18,12 @@
             android:layout_height="56dp"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
     </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Updating soon......"
+        android:textSize="20sp"
+        />
 
 </LinearLayout>

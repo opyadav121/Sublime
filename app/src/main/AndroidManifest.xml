@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rapliot.omprakash.sublime">
-
+    package="com.sublime.sublimecash.sublime">
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="net.anvisys.NestIn.gcm.permission.C2D_MESSAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -28,152 +20,151 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.rapliot.omprakash.sublime.AddsActivity"></activity>
+        <activity android:name="com.sublime.sublimecash.sublime.AddsActivity"></activity>
         <activity
-            android:name="com.rapliot.omprakash.sublime.AEPSActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.AEPSActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.MoneyTransferActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
-
+            android:name="com.sublime.sublimecash.sublime.Recharge.MoneyTransferActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.AddMoneyActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.AddMoneyActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.PayLandlineBillActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.Recharge.LandlineActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.PayLandlineBillActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.Recharge.LandlineActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.LandlineActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.LandlineActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.NotificationActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.NotificationActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.BagActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.BagActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.GiftBuyActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.Recharge.GiftActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.GiftBuyActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.Recharge.GiftActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.RechargeHistoryActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.Recharge.MobilePostpaidActivity" />
-        <activity android:name="com.rapliot.omprakash.sublime.Recharge.Zee5Activity" />
-        <activity android:name="com.rapliot.omprakash.sublime.Recharge.ReebokActivity" />
-        <activity android:name="com.rapliot.omprakash.sublime.Recharge.SukhhiActivity" />
-        <activity android:name="com.rapliot.omprakash.sublime.Recharge.MedLifeActivity" />
-        <activity android:name="com.rapliot.omprakash.sublime.Recharge.FabHotelsActivity" />
-        <activity android:name="com.rapliot.omprakash.sublime.Recharge.BookMyFlavoursActivity" />
-        <activity android:name="com.rapliot.omprakash.sublime.Recharge.GiftAloveActivity" />
-        <activity android:name="com.rapliot.omprakash.sublime.Recharge.PaperFryActivity" />
-        <activity android:name="com.rapliot.omprakash.sublime.Recharge.PizzaHutActivity" />
-        <activity android:name="com.rapliot.omprakash.sublime.Recharge.CleartripActivity" />
-        <activity android:name="com.rapliot.omprakash.sublime.Recharge.NutrafyActivity" />
-        <activity android:name="com.rapliot.omprakash.sublime.Recharge.Gud2Activity" />
-        <activity android:name="com.rapliot.omprakash.sublime.Recharge.FirstCryActivity" />
-        <activity android:name="com.rapliot.omprakash.sublime.Recharge.JockeyActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.RechargeHistoryActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.Recharge.MobilePostpaidActivity" />
+        <activity android:name="com.sublime.sublimecash.sublime.Recharge.Zee5Activity" />
+        <activity android:name="com.sublime.sublimecash.sublime.Recharge.ReebokActivity" />
+        <activity android:name="com.sublime.sublimecash.sublime.Recharge.SukhhiActivity" />
+        <activity android:name="com.sublime.sublimecash.sublime.Recharge.MedLifeActivity" />
+        <activity android:name="com.sublime.sublimecash.sublime.Recharge.FabHotelsActivity" />
+        <activity android:name="com.sublime.sublimecash.sublime.Recharge.BookMyFlavoursActivity" />
+        <activity android:name="com.sublime.sublimecash.sublime.Recharge.GiftAloveActivity" />
+        <activity android:name="com.sublime.sublimecash.sublime.Recharge.PaperFryActivity" />
+        <activity android:name="com.sublime.sublimecash.sublime.Recharge.PizzaHutActivity" />
+        <activity android:name="com.sublime.sublimecash.sublime.Recharge.CleartripActivity" />
+        <activity android:name="com.sublime.sublimecash.sublime.Recharge.NutrafyActivity" />
+        <activity android:name="com.sublime.sublimecash.sublime.Recharge.Gud2Activity" />
+        <activity android:name="com.sublime.sublimecash.sublime.Recharge.FirstCryActivity" />
+        <activity android:name="com.sublime.sublimecash.sublime.Recharge.JockeyActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.RegisterPaidActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.RegisterPaidActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.UserListActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.UserListActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.TreeViewActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.TreeViewActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.GoibiboActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.GoibiboActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.CouponRequestActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.CouponRequestActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.CouponActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.CouponActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.BinaryIncomeActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.BinaryIncomeActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.SWalletHistoryActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.SWalletHistoryActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.EWalletHistoryActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.EWalletHistoryActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.RefferActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.RefferActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.PaymentHistoryActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.PaymentHistoryActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.OrdersActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.OrdersActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.NNNOActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.NNNOActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.NetMaedsActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.NetMaedsActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.MakemyTripActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.MakemyTripActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.OyoActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.OyoActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.BigrockActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.BigrockActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.RydonActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.RydonActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.EthicActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.EthicActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.EditProfileActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.ProfileActivity" />
+            android:name="com.sublime.sublimecash.sublime.EditProfileActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.ProfileActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.ThemeParkActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.ThemeParkActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.GiftActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.GiftActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.DashboardActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.DashboardActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.DTHActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.DTHActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.BroadbandActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.BroadbandActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.InsuranceRenualActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.InsuranceRenualActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.WaterActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.WaterActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.GasBillActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.GasBillActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.ElectricityBillActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.ElectricityBillActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.Recharge.MobilePostpaidActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
+            android:name="com.sublime.sublimecash.sublime.Recharge.MobilePostpaidActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.ProfileActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.HomeActivity" />
-        <activity android:name="com.rapliot.omprakash.sublime.LoginActivity" />
+            android:name="com.sublime.sublimecash.sublime.ProfileActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.HomeActivity" />
+        <activity android:name="com.sublime.sublimecash.sublime.LoginActivity" />
         <activity
-            android:name="com.rapliot.omprakash.sublime.RegisterActivity"
-            android:parentActivityName="com.rapliot.omprakash.sublime.LoginActivity" />
-        <activity android:name="com.rapliot.omprakash.sublime.HomeActivity" />
-        <activity android:name="com.rapliot.omprakash.sublime.MainActivity">
+            android:name="com.sublime.sublimecash.sublime.RegisterActivity"
+            android:parentActivityName="com.sublime.sublimecash.sublime.LoginActivity" />
+        <activity android:name="com.sublime.sublimecash.sublime.HomeActivity" />
+        <activity android:name="com.sublime.sublimecash.sublime.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

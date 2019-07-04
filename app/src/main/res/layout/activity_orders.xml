@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".OrdersActivity">
-
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
@@ -26,8 +25,7 @@
         android:background="@color/colorOrangeTrans"
         app:tabMode="scrollable"
         app:tabGravity="fill"
-        style="@style/TabLayoutStyle"
-        />
+        style="@style/TabLayoutStyle" />
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"

@@ -12,7 +12,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.util.Base64;
 import android.util.Log;
 
-import com.rapliot.omprakash.sublime.R;
+import com.sublime.sublimecash.sublime.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
