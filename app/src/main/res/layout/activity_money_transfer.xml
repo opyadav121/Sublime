@@ -28,22 +28,21 @@
         >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:orientation="horizontal"
             android:background="@color/colorWhite"
             >
             <ImageView
                 android:layout_width="0dp"
-                android:layout_weight="2"
+                android:layout_weight="3"
                 android:layout_height="35dp"
-                android:src="@drawable/upi"
-                android:layout_marginLeft="5dp"
+                android:src="@drawable/mtrans"
                 />
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="8"
+                android:layout_weight="7"
                 android:layout_height="wrap_content"
-                android:text="      Money Transfer"
+                android:text=" Money Transfer"
                 android:textColor="@color/colorBlack"
                 android:textSize="20dp"
                 android:layout_marginTop="5dp"
@@ -91,7 +90,6 @@
                 android:layout_height="wrap_content"
                 android:hint="Enter Mobile No./ Name"
                 android:inputType="number"
-                android:focusable="false"
                 android:textColorHint="@color/colorOrangeDark"
                 />
         </android.support.design.widget.TextInputLayout>
@@ -103,28 +101,20 @@
             android:layout_marginLeft="5dp"
             android:textColor="@color/blue"
             />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:layout_marginTop="16dp"
-            >
-           <TextView
-               android:layout_width="0dp"
-               android:layout_weight="8"
-               android:layout_height="wrap_content"
-               android:text="TRANSFER TO YOUR OWN ACCOUNT"
-               android:textSize="13sp"
-               />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_height="wrap_content"
-                android:text="Add New"
-                android:textColor="@color/blue"
-                />
-        </LinearLayout>
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Continue"
+            android:layout_gravity="end"
+            android:background="@drawable/backgraund_btn"
+            android:textColor="@color/colorWhite"
+            android:layout_marginRight="10dp"
+            />
+
+        <include
+            android:id="@+id/listBenific"
+            layout="@layout/moneytransferlist"/>
     </LinearLayout>
 
 </LinearLayout>

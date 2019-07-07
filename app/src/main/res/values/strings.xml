@@ -41,6 +41,11 @@
         <item>Rs 11200</item>
         <item>Rs 22400</item>
     </string-array>
+    <string-array name="TransferType">
+        <item>IMPS</item>
+        <item>NEFT</item>
+
+    </string-array>
     <string-array name="states">
         <item>Andaman and Nicobar</item>
         <item>Andhra Pradesh</item>

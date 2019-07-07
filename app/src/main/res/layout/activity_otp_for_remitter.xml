@@ -4,14 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     >
     <EditText
-        android:id="@+id/editAmount"
+        android:id="@+id/editOTP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:hint="Enter OTP"
         android:background="@drawable/border1"
         android:inputType="numberDecimal"
         android:padding="12dp"
+        />
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/backgraund_btn"
+        android:text="Validate"
+        android:layout_gravity="center"
+        android:textColor="@color/colorWhite"
         />
 </LinearLayout>

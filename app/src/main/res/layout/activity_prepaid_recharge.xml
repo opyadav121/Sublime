@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Recharge.PrepaidRechargeActivity">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </android.support.design.widget.AppBarLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:nestedScrollingEnabled="true"
+        android:layout_below="@id/appBar"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:gravity="right"
+            >
+            <TextView
+                android:id="@+id/AmountE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E-Wallet:"
+                />
+            <TextView
+                android:id="@+id/txtEWallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs 0.00"
+                android:textColor="@color/colorBlack"
+                android:layout_marginRight="20dp"
+                />
+            <TextView
+                android:id="@+id/Amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="S-Wallet:"
+                android:gravity="right"
+                />
+            <TextView
+                android:id="@+id/txtSWallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs 0.00"
+                android:gravity="right"
+                android:textColor="@color/colorBlack"
+                android:layout_marginRight="20dp"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/btnTransfer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Transfer E to S Wallet"
+            android:textColor="@color/blue"
+            android:gravity="right"
+            android:layout_marginRight="30dp"
+            android:padding="10dp"
+            />
+        <include layout="@layout/content_prepaid"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

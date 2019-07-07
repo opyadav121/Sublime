@@ -71,7 +71,6 @@ public class EWalletHistoryActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, EWalletHistory_url, new Response.Listener<String>()  {
             @Override
             public void onResponse(String response) {
-
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0; i < jsonArray.length(); i++) {
