@@ -74,8 +74,7 @@
             android:layout_marginRight="30dp"
             android:padding="10dp"
             />
-      <include layout="@layout/content_postpaid"/>
-
+            <include layout="@layout/content_prepaid"/>
         <TextView
             android:id="@+id/txtrecentRecharge"
             android:layout_width="match_parent"
@@ -96,8 +95,7 @@
                 android:nestedScrollingEnabled="true"
                 android:scrollbars="none"
                 android:dividerHeight="3dp"
-                android:background="@color/colorWhite"
-                >
+                android:background="@color/colorWhite">
         </ListView>
     </LinearLayout>
     <include layout="@layout/content_transfer_e_to_swallet"

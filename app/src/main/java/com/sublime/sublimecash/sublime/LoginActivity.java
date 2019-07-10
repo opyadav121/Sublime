@@ -24,6 +24,7 @@ import java.util.Map;
 
 import Common.Constants;
 import Common.Session;
+import Model.PrefManager;
 import Model.Profile;
 
 public class LoginActivity extends AppCompatActivity {
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
 
         Toolbar toolbar =  findViewById(R.id.toolbar);
@@ -149,4 +151,6 @@ public class LoginActivity extends AppCompatActivity {
         };
         requestQueue.add(stringRequest);
     }
+
+
 }

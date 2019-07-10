@@ -1,15 +1,21 @@
 package com.sublime.sublimecash.sublime.Recharge;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,36 +25,51 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 import com.sublime.sublimecash.sublime.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import Common.Constants;
+import Common.Session;
 import Model.Oparater;
-import de.hdodenhof.circleimageview.CircleImageView;
+import Model.Profile;
 
 public class PrepaidActivity extends AppCompatActivity {
 
     GridView gridViewPrepaid;
+    List<Oparater> OperatorList=new ArrayList<>();
+    AdapterOperator adapterOperator;
+    Profile myProfile;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prepaid);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Select Operator");
+        actionBar.show();
+        myProfile = Session.GetProfile(getApplicationContext());
+        gridViewPrepaid = findViewById(R.id.gridViewPrepaid);
+        adapterOperator=new AdapterOperator(PrepaidActivity.this, R.layout.gridview_prepaid, OperatorList);
+        gridViewPrepaid.setAdapter(adapterOperator);
+        Operators();
     }
-
-
-    public void Operators()
-    {
-     /*   RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String RechargeHitory_url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/Recharge/moblie_recharge";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, RechargeHitory_url, new Response.Listener<String>()  {
+    public void Operators() {
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        String url = Constants.Application_URL+"/users/index.php/Recharge/moblie_recharge";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>()  {
             @Override
             public void onResponse(String response) {
                 try {
@@ -60,8 +81,11 @@ public class PrepaidActivity extends AppCompatActivity {
                         opt.optImageName = jObj.getString("image");
                         opt.OptID = jObj.getString("operator_code");
                         opt.opType = jObj.getString("OPType");
-                        // OperatorHashMap.put(opt.OperatorName, opt.OptID);
-                        OperatorList.add(opt);
+                        if (opt.opType.equalsIgnoreCase("PrePaid")) {
+                            OperatorList.add(opt);
+                        }else {
+
+                        }
                     }
                     adapterOperator.notifyDataSetChanged();
                 } catch (JSONException e) {
@@ -83,26 +107,24 @@ public class PrepaidActivity extends AppCompatActivity {
             }
         };
         queue.add(stringRequest);
-        adapterOperator = new AdapterOperator(this, android.R.layout.simple_spinner_dropdown_item,OperatorList);
-        adapterOperator.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        listViewOperator.setAdapter(adapterOperator);
-        txtOperator.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listViewOperator.setVisibility(View.VISIBLE);
 
-            }
-        });
-
-        listViewOperator.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridViewPrepaid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                String opt = (String) listViewOperator.getItemAtPosition(position);
-                txtOperator.setText(opt);
-                listViewOperator.setVisibility(View.GONE);
+                Oparater optname  = (Oparater) adapterOperator.getItem(position);
+                String optImageName = optname.optImageName;
+                String optName = optname.OperatorName;
+                String optId = optname.OptID;
+                String optType = optname.opType;
+                Intent intent = new Intent(PrepaidActivity.this, PrepaidRechargeActivity.class);
+                intent.putExtra("Image", optImageName);
+                intent.putExtra("optName", optName);
+                intent.putExtra("OptId", optId);
+                intent.putExtra("optType", optType);
+                startActivity(intent);
             }
         });
+
     }
 
     class AdapterOperator extends ArrayAdapter {
@@ -129,26 +151,30 @@ public class PrepaidActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             try {
                 if (convertView == null) {
-                    convertView = inflat.inflate(R.layout.row_item_operator, null);
+                    convertView = inflat.inflate(R.layout.gridview_prepaid, null);
                     holder = new ViewHolder();
-                    //  holder.iconOperator = convertView.findViewById(R.id.iconOperator);
-                    holder.txtOperatorName = convertView.findViewById(R.id.txtOperatorName);
+                    holder.image = convertView.findViewById(R.id.image);
+                    holder.txtOperatorName = convertView.findViewById(R.id.optName);
                     convertView.setTag(holder);
                 }
                 holder = (ViewHolder) convertView.getTag();
-                Oparater history= getItem(position);
-                holder.txtOperatorName.setText(history.OperatorName);
-                //  String url1 = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/opt/" + history.optImageName;
-                //  Picasso.with(getApplicationContext()).load(url1).into(holder.iconOperator);
+                Oparater opt = getItem(position);
+                holder.txtOperatorName.setText(opt.OperatorName);
+                  String url1 = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/opt/" + opt.optImageName;
+                  Picasso.with(getApplicationContext()).load(url1).into(holder.image);
                 return convertView;
             }
             catch (Exception ex)
             {
                 int a=1;
-                Toast.makeText(getApplicationContext(),"Could not Load RentData", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Could not Load Data", Toast.LENGTH_LONG).show();
                 return null;
             }
-        }*/
+        }
     }
-
+    private class ViewHolder
+    {
+        TextView txtOperatorName;
+        ImageView image;
+    }
 }

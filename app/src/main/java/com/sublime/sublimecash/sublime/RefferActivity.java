@@ -46,4 +46,5 @@ public class RefferActivity extends AppCompatActivity {
         myProfile = Session.GetProfile(getApplicationContext());
         txtReferalCode.setText(myProfile.UserID);
     }
+
 }

@@ -7,31 +7,36 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import Common.Session;
+import Model.PrefManager;
 import Model.Profile;
 
 public class MainActivity extends AppCompatActivity {
     ImageView splash;
     Profile myProfile;
-
+    private PrefManager prefManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        prefManager = new PrefManager(this);
+        if (prefManager.isFirstTimeLaunch()) {
+            Register();
+            finish();
+        }else {
+            CheckLogin();
+        }
         setContentView(R.layout.activity_main);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-                CheckLogin();
                // Intent i = new Intent(MainActivity.this, HomeActivity.class);
                // startActivity(i);
                 //finish();
             }
         },1000);
     }
-
     private void CheckLogin() {
         myProfile = Session.GetProfile(this);
         if (myProfile == null || myProfile.UserLogin.matches("")) {
@@ -43,5 +48,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(expenseIntent);
             MainActivity.this.finish();
         }
+    }
+    public void Register(){
+        prefManager.setFirstTimeLaunch(false);
+        startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+        finish();
     }
 }

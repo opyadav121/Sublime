@@ -109,5 +109,4 @@ public class Session {
         editor.clear();
         editor.commit();
     }
-
 }

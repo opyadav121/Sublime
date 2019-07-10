@@ -56,6 +56,8 @@ import com.sublime.sublimecash.sublime.Recharge.NutrafyActivity;
 import com.sublime.sublimecash.sublime.Recharge.OyoActivity;
 import com.sublime.sublimecash.sublime.Recharge.PaperFryActivity;
 import com.sublime.sublimecash.sublime.Recharge.PizzaHutActivity;
+import com.sublime.sublimecash.sublime.Recharge.PostpaidActivity;
+import com.sublime.sublimecash.sublime.Recharge.PrepaidActivity;
 import com.sublime.sublimecash.sublime.Recharge.ReebokActivity;
 import com.sublime.sublimecash.sublime.Recharge.RydonActivity;
 import com.sublime.sublimecash.sublime.Recharge.SWalletHistoryActivity;
@@ -389,12 +391,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 case R.id.mobilePostpaid :{
-                    Intent postpaid = new Intent(HomeActivity.this, MobilePostpaidActivity.class);
+                    Intent postpaid = new Intent(HomeActivity.this, PostpaidActivity.class);
                     startActivity(postpaid);
                     break;
                 }
                 case R.id.mobilePrepaid :{
-                    Intent prepaid = new Intent(HomeActivity.this, MobilePostpaidActivity.class);
+                    Intent prepaid = new Intent(HomeActivity.this, PrepaidActivity.class);
                     startActivity(prepaid);
                     break;
                 }

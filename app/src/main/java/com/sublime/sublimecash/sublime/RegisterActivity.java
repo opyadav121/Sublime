@@ -35,7 +35,6 @@ public class RegisterActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     String  Register_url = Constants.Application_URL+"/users/index.php/home/register/1";
 
-
     EditText txtUseName,txtMobile,txtPassword,txtReferalCode,txtName;
     RadioGroup radioGroup;
     RadioButton radioLeft,radioRight;
