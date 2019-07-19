@@ -36,7 +36,7 @@ public class GiftBuyActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Gift Card");
         actionBar.show();
-        imagebuy = findViewById(R.id.imagebuy);
+    /*    imagebuy = findViewById(R.id.imagebuy);
         txtDescription = findViewById(R.id.txtDescription);
         txtAmount = findViewById(R.id.txtAmount);
         txtSenderName = findViewById(R.id.txtSenderName);
@@ -70,7 +70,7 @@ public class GiftBuyActivity extends AppCompatActivity {
         });
         byte[] byteArray = getIntent().getByteArrayExtra("image");
         bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-        Glide.with(this).load(bmp).into(imagebuy);
+        Glide.with(this).load(bmp).into(imagebuy);  */
     }
 
 }

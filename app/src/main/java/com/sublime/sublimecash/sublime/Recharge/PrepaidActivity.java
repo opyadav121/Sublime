@@ -41,12 +41,10 @@ import Model.Oparater;
 import Model.Profile;
 
 public class PrepaidActivity extends AppCompatActivity {
-
     GridView gridViewPrepaid;
     List<Oparater> OperatorList=new ArrayList<>();
     AdapterOperator adapterOperator;
     Profile myProfile;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

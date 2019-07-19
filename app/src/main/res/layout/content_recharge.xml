@@ -6,8 +6,7 @@ android:layout_height="wrap_content"
 android:orientation="vertical"
 android:background="#ffffff"
 android:padding="10dp"
-android:elevation="3dp"
-    >
+android:elevation="3dp">
 <TextView
     android:id="@+id/recharge"
     android:layout_width="match_parent"
@@ -26,30 +25,6 @@ android:elevation="3dp"
     android:background="#ffffff"
     android:layout_marginTop="10dp"
     >
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        >
-        <ImageView
-            android:id="@+id/mobilePostpaid"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/mobilepostpaid"
-            android:contentDescription="Button"
-            android:layout_gravity="center"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="postpaid"
-            android:textSize="12sp"
-            android:textAlignment="center"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            />
-    </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -76,6 +51,31 @@ android:elevation="3dp"
             />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:id="@+id/mobilePostpaid"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/mobilepostpaid"
+            android:contentDescription="Button"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="postpaid"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -109,21 +109,23 @@ android:elevation="3dp"
         android:orientation="vertical"
         >
         <ImageView
-            android:id="@+id/iconGas"
+            android:id="@+id/iconDth"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/gas"
+            android:src="@drawable/dth"
             android:contentDescription="Button"
             android:layout_gravity="center"
+            android:clickable="true"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gas"
+            android:text="DTH"
             android:textSize="12sp"
             android:textAlignment="center"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
+            android:clickable="true"
             />
     </LinearLayout>
 </LinearLayout>
@@ -169,17 +171,16 @@ android:elevation="3dp"
         android:orientation="vertical"
         >
         <ImageView
-            android:id="@+id/iconInsurance"
+            android:id="@+id/iconLandline"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/insurance"
-            android:contentDescription="Button"
             android:layout_gravity="center"
+            android:src="@drawable/broadband"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Insurance"
+            android:text="Broadband"
             android:textSize="12sp"
             android:textAlignment="center"
             android:layout_gravity="center"
@@ -219,23 +220,21 @@ android:elevation="3dp"
         android:orientation="vertical"
         >
         <ImageView
-            android:id="@+id/iconDth"
+            android:id="@+id/iconGas"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/dth"
+            android:src="@drawable/gas"
             android:contentDescription="Button"
             android:layout_gravity="center"
-            android:clickable="true"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DTH"
+            android:text="Gas"
             android:textSize="12sp"
             android:textAlignment="center"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
-            android:clickable="true"
             />
     </LinearLayout>
 </LinearLayout>
@@ -306,16 +305,17 @@ android:elevation="3dp"
         android:orientation="vertical"
         >
         <ImageView
-            android:id="@+id/iconLandline"
+            android:id="@+id/iconInsurance"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:src="@drawable/insurance"
+            android:contentDescription="Button"
             android:layout_gravity="center"
-            android:src="@drawable/broadband"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Broadband"
+            android:text="Insurance"
             android:textSize="12sp"
             android:textAlignment="center"
             android:layout_gravity="center"

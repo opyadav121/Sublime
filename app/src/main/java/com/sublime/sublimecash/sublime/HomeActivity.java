@@ -1,9 +1,12 @@
 package com.sublime.sublimecash.sublime;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -22,8 +25,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.MediaController;
+import android.widget.Toast;
+import android.widget.VideoView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.sublime.sublimecash.sublime.E_Commerce.MensActivity;
+import com.sublime.sublimecash.sublime.E_Commerce.SareesActivity;
+import com.sublime.sublimecash.sublime.E_Commerce.WomensActivity;
+import com.sublime.sublimecash.sublime.History.DailyIncomeActivity;
+import com.sublime.sublimecash.sublime.History.DirectBonazaActivity;
+import com.sublime.sublimecash.sublime.History.ROIIncomeActivity;
+import com.sublime.sublimecash.sublime.History.RewardsActivity;
 import com.sublime.sublimecash.sublime.Recharge.AddMoneyActivity;
 import com.sublime.sublimecash.sublime.Recharge.BagActivity;
 import com.sublime.sublimecash.sublime.Recharge.BigrockActivity;
@@ -67,24 +87,37 @@ import com.sublime.sublimecash.sublime.Recharge.UserListActivity;
 import com.sublime.sublimecash.sublime.Recharge.WaterActivity;
 import com.sublime.sublimecash.sublime.Recharge.Zee5Activity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import Common.Constants;
 import Common.Session;
+import Model.Profile;
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.relex.circleindicator.CircleIndicator;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    ProgressDialog progressDialog;
+    Profile myProfile;
+    String Status;
+    RequestQueue requestQueue;
+    VideoView videoView;
     private WebView webAdd;
     private static ViewPager mPager;
     private static int currentPager = 0;
     ArrayList<Integer> picArray = new ArrayList<Integer>();
-    private static final Integer [] pic = {R.drawable.ban6,R.drawable.ban4, R.drawable.ban2,R.drawable.ban3, R.drawable.ban1};
+    private static final Integer [] pic = {R.drawable.ban6, R.drawable.ban4,R.drawable.ban1new, R.drawable.ban2new,R.drawable.ban3new};
     private MenuItem item;
     private ImageView mobilePostpaid,mobilePrepaid,electricity,iconGas,iconWater,iconInsurance,
-            iconBroadband,iconDth,iconGift,IconTheme,iconLandline;
+            iconBroadband,iconDth,iconGift,IconTheme,iconLandline,imgWomen,imgMen,
+            iconSarees,iconLehenga,iconWestern,iconSuits,iconEthinic,iconCasual,iconFormal,iconSports;
     CircleImageView iconEthic,iconRydon,bigrock,netmeds,nnnow,oyo,makemytrip,iconfirstCry,iconJockey,
             iconGiftAlove,iconSukhhi,iconPaperFry,icongud2,iconFabHotels,cleartrip,iconBookmyFlaours,
             iconMedLife,iconPizzaHut,iconNaturefy,iconZee5,iconReebok,
@@ -132,7 +165,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        myProfile = Session.GetProfile(getApplicationContext());
+        videoView=findViewById(R.id.videoView);
+        videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vid));
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                mediaPlayer.setLooping(true);
+            }// to repeat the video
+        });
 
+        videoView.setMediaController(new MediaController(this));
+        videoView.start();
         webAdd = findViewById(R.id.webAdd);
         webAdd.loadUrl("https://media.vcommission.com/brand/files/vcm/9296/Zee5_CPA_Skyfire_320x50.jpg" );
         webAdd.setOnClickListener(new View.OnClickListener() {
@@ -143,11 +187,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         BottomNavigationView navigView = findViewById(R.id.navig_view);
+        requestQueue = Volley.newRequestQueue(this);
         //mTextMessage = findViewById(R.id.message);
         navigView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         Slider1();
         SetFlippers();
+        StatusActive();
     }
 
     @Override
@@ -174,7 +220,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         if (id == R.id.nav_gallery) {
         } else if (id == R.id.nav_slideshow) {
-        } else if (id == R.id.action_Tree) {
+        }else if (id == R.id.action_Pan) {
+            Intent intent = new Intent(HomeActivity.this, KYCActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.action_Tree) {
             Intent intent = new Intent(HomeActivity.this, TreeViewActivity.class);
             startActivity(intent);
         }
@@ -187,6 +237,79 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(HomeActivity.this, CouponRequestActivity.class);
             startActivity(intent);
         }
+        else if (id == R.id.action_Reward) {
+            if (!Status.equalsIgnoreCase("Active")){
+
+                AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
+                builder.setMessage("You Need to Become a Partner First!");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog Alert = builder.create();
+                Alert.show();
+            }else {
+                Intent intent = new Intent(HomeActivity.this, RewardsActivity.class);
+                startActivity(intent);
+            }
+
+        }
+        else if (id == R.id.action_EtoS) {
+            showChangeLangDialog();
+
+        }
+        else if (id == R.id.action_roi) {
+            if (!Status.equalsIgnoreCase("Active")){
+
+                AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
+                builder.setMessage("You Need to Become a Partner First!");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog Alert = builder.create();
+                Alert.show();
+            }else {
+            Intent intent = new Intent(HomeActivity.this, ROIIncomeActivity.class);
+            startActivity(intent);
+            }
+        }
+        else if (id == R.id.action_daily) {
+            if (!Status.equalsIgnoreCase("Active")){
+
+                AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
+                builder.setMessage("You Need to Become a Partner First!");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog Alert = builder.create();
+                Alert.show();
+            }else {
+                Intent intent = new Intent(HomeActivity.this, DailyIncomeActivity.class);
+                startActivity(intent);
+            }
+
+        }
+        else if (id == R.id.action_Bonaza) {
+            if (!Status.equalsIgnoreCase("Active")){
+                AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
+                builder.setMessage("You Need to Become a Partner First!");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog Alert = builder.create();
+                Alert.show();
+            }else {
+                Intent intent = new Intent(HomeActivity.this, DirectBonazaActivity.class);
+                startActivity(intent);
+            }
+        }
         else if (id == R.id.action_SWallet) {
             Intent intent = new Intent(HomeActivity.this, SWalletHistoryActivity.class);
             startActivity(intent);
@@ -197,8 +320,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(HomeActivity.this, CouponActivity.class);
             startActivity(intent);
         }else if (id == R.id.action_Binary) {
-            Intent intent = new Intent(HomeActivity.this, BinaryIncomeActivity.class);
-            startActivity(intent);
+            if (!Status.equalsIgnoreCase("Active")){
+                AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
+                builder.setMessage("You Need to Become a Partner First!");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog Alert = builder.create();
+                Alert.show();
+            }else {
+                Intent intent = new Intent(HomeActivity.this, BinaryIncomeActivity.class);
+                startActivity(intent);
+            }
         }else if (id == R.id.action_LogOut) {
             AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
             builder.setTitle("Log Out");
@@ -249,7 +384,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void run() {
                 handler.post(update);
             }
-        },6000,6000);
+        },10000,10000);
 
     }
     public class MyAdapter extends PagerAdapter
@@ -363,7 +498,28 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         iconZee5 =  findViewById(R.id.iconZee5);
         iconZee5.setOnClickListener(new clicker());
         iconReebok =  findViewById(R.id.iconReebok);
-        iconReebok.setOnClickListener(new clicker());;
+        iconReebok.setOnClickListener(new clicker());
+        imgWomen =  findViewById(R.id.imgWomen);
+        imgWomen.setOnClickListener(new clicker());
+        imgMen =  findViewById(R.id.imgMen);
+        imgMen.setOnClickListener(new clicker());
+
+        iconSarees =  findViewById(R.id.iconSarees);
+        iconSarees.setOnClickListener(new clicker());
+        iconLehenga =  findViewById(R.id.iconLehenga);
+        iconLehenga.setOnClickListener(new clicker());
+        iconWestern =  findViewById(R.id.iconWestern);
+        iconWestern.setOnClickListener(new clicker());
+        iconSuits =  findViewById(R.id.iconSuits);
+        iconSuits.setOnClickListener(new clicker());
+        iconEthinic =  findViewById(R.id.iconEthinic);
+        iconEthinic.setOnClickListener(new clicker());
+        iconCasual =  findViewById(R.id.iconCasual);
+        iconCasual.setOnClickListener(new clicker());
+        iconFormal =  findViewById(R.id.iconFormal);
+        iconFormal.setOnClickListener(new clicker());
+        iconSports =  findViewById(R.id.iconSports);
+        iconSports.setOnClickListener(new clicker());
     }
     class clicker implements View.OnClickListener{
         @Override
@@ -389,7 +545,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(gas);
                     break;
                 }
-
                 case R.id.mobilePostpaid :{
                     Intent postpaid = new Intent(HomeActivity.this, PostpaidActivity.class);
                     startActivity(postpaid);
@@ -550,8 +705,147 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(electric);
                     break;
                 }
+                case R.id.imgMen :{
+                    Intent dth = new Intent(HomeActivity.this, MensActivity.class);
+                    startActivity(dth);
+                    break;
+                }
+                case R.id.imgWomen :{
+                    Intent electric = new Intent(HomeActivity.this, WomensActivity.class);
+                    startActivity(electric);
+                    break;
+                }
+
+                case R.id.iconSarees :{
+                    Intent electric = new Intent(HomeActivity.this, SareesActivity.class);
+                    startActivity(electric);
+                    break;
+                }
+                case R.id.iconLehenga :{
+                  //  Intent electric = new Intent(HomeActivity.this, MedLifeActivity.class);
+                  //  startActivity(electric);
+                    break;
+                }
+                case R.id.iconWestern :{
+                  //  Intent electric = new Intent(HomeActivity.this, PizzaHutActivity.class);
+                   // startActivity(electric);
+                    break;
+                }
+                case R.id.iconSuits :{
+                  //  Intent electric = new Intent(HomeActivity.this, NutrafyActivity.class);
+                  //  startActivity(electric);
+                    break;
+                }
+                case R.id.iconEthinic :{
+                    //Intent dth = new Intent(HomeActivity.this, Zee5Activity.class);
+                   // startActivity(dth);
+                    break;
+                }
+                case R.id.iconCasual :{
+                   // Intent electric = new Intent(HomeActivity.this, ReebokActivity.class);
+                   // startActivity(electric);
+                    break;
+                }
+                case R.id.iconFormal :{
+                   // Intent dth = new Intent(HomeActivity.this, MensActivity.class);
+                  //  startActivity(dth);
+                    break;
+                }
+                case R.id.iconSports :{
+                  //  Intent electric = new Intent(HomeActivity.this, WomensActivity.class);
+                  //  startActivity(electric);
+                    break;
+                }
             }
         }
+    }
+    public void showChangeLangDialog() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialog_transfer, null);
+        dialogBuilder.setView(dialogView);
+        final EditText editAmount = dialogView.findViewById(R.id.editAmount);
+        dialogBuilder.setMessage("Enter Amount");
+        dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                String Transfer_url= Constants.Application_URL+"/users/index.php/Recharge/add_money_s_wallet";
+                progressDialog = progressDialog.show(HomeActivity.this, "", "Please wait...", false, false);
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, Transfer_url, new Response.Listener<String>()  {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject jObj = new JSONObject(response);
+                            String Status = jObj.getString("status");
+                            String MSG = jObj.getString("msg");
+                            Toast.makeText(HomeActivity.this, ""+Status, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progressDialog.dismiss();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(HomeActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                {
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("email", myProfile.UserLogin);
+                        params.put("amount",editAmount.getText().toString());
+                        return params;
+                    }
+                };
+                queue.add(stringRequest);
+
+            }
+        });
+        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+    }
+
+    public void StatusActive(){
+        String url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/Recharge/status";
+        progressDialog = progressDialog.show(HomeActivity.this, "", "Please wait...", false, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>()  {
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+                try {
+                        JSONObject jObj = new JSONObject(response);
+                        Status = jObj.getString("status");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                progressDialog.dismiss();
+                Toast.makeText(HomeActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", myProfile.UserLogin);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 
     @Override

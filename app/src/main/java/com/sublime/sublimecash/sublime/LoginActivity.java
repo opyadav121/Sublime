@@ -40,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
 
         Toolbar toolbar =  findViewById(R.id.toolbar);
@@ -92,9 +91,9 @@ public class LoginActivity extends AppCompatActivity {
                             myProfile.UserLogin = jObj.getString("email");
                             myProfile.MobileNumber = jObj.getString("mobile");
                             myProfile.Address = jObj.getString("address");
+                            myProfile.original_email = jObj.getString("original_email");
                             myProfile.joiningAmount = jObj.getString("joining_amount");
                             myProfile.ActivationDate = jObj.getString("activation_date");
-                            // myProfile.Sponsor = jObj.getString("sponsor");
                             myProfile.PanNumber = jObj.getString("pan_no");
                             myProfile.SponserId = jObj.getString("sponsor_id");
                             myProfile.UnderUserId = jObj.getString("under_userid");

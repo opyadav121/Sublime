@@ -36,10 +36,10 @@
     </string-array>
 
     <string-array name="CouponRequest">
-        <item>Rs 2240</item>
-        <item>RS 6720</item>
-        <item>Rs 11200</item>
-        <item>Rs 22400</item>
+        <item>2240</item>
+        <item>6720</item>
+        <item>11200</item>
+        <item>22400</item>
     </string-array>
     <string-array name="TransferType">
         <item>IMPS</item>

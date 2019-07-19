@@ -1,11 +1,14 @@
 package com.sublime.sublimecash.sublime.Recharge;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,10 +47,10 @@ public class DTHRechargeActivity extends AppCompatActivity {
     String optImage,optName,OptId,optType;
     CircleImageView imageOperator;
     RadioGroup radioGroup;
-    TextView txtEWallet,txtSWallet,btnTransfer,txtOperator,btnPay;
+    TextView txtBWallet,txtEWallet,txtSWallet,btnTransfer,txtOperator,btnPay;
     EditText txtMobileNumber,txtAmount;
     Button browsePlan,Offer;
-    String SWallet_Balance,Ewalet_Balance,OperatorCode;
+    String SWallet_Balance,Ewalet_Balance,Pending_Balance;
     ProgressDialog progressDialog;
     Profile myProfile;
     String RandomChildCode="";
@@ -68,6 +71,7 @@ public class DTHRechargeActivity extends AppCompatActivity {
 
         imageOperator = findViewById(R.id.imageOperator);
         radioGroup = findViewById(R.id.radioGroup);
+        txtBWallet = findViewById(R.id.txtBWallet);
         txtEWallet = findViewById(R.id.txtEWallet);
         txtSWallet = findViewById(R.id.txtSWallet);
         btnTransfer = findViewById(R.id.btnTransfer);
@@ -76,6 +80,13 @@ public class DTHRechargeActivity extends AppCompatActivity {
         txtAmount = findViewById(R.id.txtAmount);
         browsePlan = findViewById(R.id.browsePlan);
         Offer = findViewById(R.id.Offer);
+        btnTransfer = findViewById(R.id.btnTransfer);
+        btnTransfer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showChangeLangDialog();
+            }
+        });
         btnPay = findViewById(R.id.btnPay);
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +100,6 @@ public class DTHRechargeActivity extends AppCompatActivity {
         txtOperator.setText(optName);
         WalletBalance();
     }
-
     public void WalletBalance(){
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         String Wallet_url= Constants.Application_URL+"/users/index.php/Recharge/wallet";
@@ -103,7 +113,8 @@ public class DTHRechargeActivity extends AppCompatActivity {
                     JSONObject jObj = new JSONObject(response);
                     Ewalet_Balance = jObj.getString("E-Wallet");
                     SWallet_Balance = jObj.getString("S-Wallet");
-
+                    Pending_Balance = jObj.getString("Pending_balance");
+                    txtBWallet.setText(" \u20B9"+Pending_Balance);
                     txtEWallet.setText(" \u20B9"+Ewalet_Balance);
                     txtSWallet.setText(" \u20B9"+SWallet_Balance);
 
@@ -235,5 +246,60 @@ public class DTHRechargeActivity extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
+    }
+    public void showChangeLangDialog() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialog_transfer, null);
+        dialogBuilder.setView(dialogView);
+        final EditText editAmount = dialogView.findViewById(R.id.editAmount);
+        dialogBuilder.setMessage("Enter Amount");
+        dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                String Transfer_url= Constants.Application_URL+"/users/index.php/Recharge/add_money_s_wallet";
+                progressDialog = progressDialog.show(DTHRechargeActivity.this, "", "Please wait...", false, false);
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, Transfer_url, new Response.Listener<String>()  {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject jObj = new JSONObject(response);
+                            String Status = jObj.getString("status");
+                            String MSG = jObj.getString("msg");
+                            Toast.makeText(DTHRechargeActivity.this, ""+Status, Toast.LENGTH_SHORT).show();
+                            WalletBalance();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progressDialog.dismiss();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(DTHRechargeActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                {
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("email", myProfile.UserLogin);
+                        params.put("amount",editAmount.getText().toString());
+                        return params;
+                    }
+                };
+                queue.add(stringRequest);
+
+            }
+        });
+        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
     }
 }

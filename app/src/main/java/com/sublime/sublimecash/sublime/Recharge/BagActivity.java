@@ -15,9 +15,8 @@ import Common.Session;
 import Model.Profile;
 
 public class BagActivity extends AppCompatActivity {
-    TextView txtTotalAmount,txtWalletAmount,txtCommission,txtHold,txtUnclear;
+    TextView txtTotalAmount,txtWalletAmount,txtCommission;
     Profile myProfile;
-    NumberFormat currFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +35,10 @@ public class BagActivity extends AppCompatActivity {
         txtTotalAmount = findViewById(R.id.txtTotalAmount);
         txtWalletAmount  = findViewById(R.id.txtWalletAmount);
         txtCommission = findViewById(R.id.txtCommission);
-        txtHold = findViewById(R.id.txtHold);
-        txtUnclear = findViewById(R.id.txtUnclear);
-
-        currFormat = NumberFormat.getCurrencyInstance();
-        currFormat.setCurrency(Currency.getInstance("INR"));
-
-        txtTotalAmount.setText("Total  "+" \u20B9"+myProfile.account);
-        txtWalletAmount.setText("Wallet Amount\n"+" \u20B9"+myProfile.account);
+        final int Remain = Integer.parseInt(myProfile.EWallet) + Integer.parseInt(myProfile.SWallet);
+        
+        txtTotalAmount.setText("Total  "+" \u20B9"+Remain);
+        txtWalletAmount.setText("Wallet Amount\n"+"E-Wallet: \u20B9"+myProfile.EWallet +"\nS-Wallet \u20B9"+myProfile.SWallet );
         txtCommission.setText("Commission\n"+" \u20B9"+myProfile.commission_paid);
     }
 }

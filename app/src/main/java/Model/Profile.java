@@ -16,7 +16,7 @@ public class Profile {
     public String FatherName="";
     public String MotherName= "";
     public String gender="";
-    public String phoneres="";
+    public String original_email="";
     public String occupation="";
     public String district = "";
     public String State = "";
@@ -36,4 +36,8 @@ public class Profile {
     public String account ="";
     public String side = "";
     public String status = "";
+
+    public String EWallet = "";
+    public String SWallet = "";
+    public String PendingWallet = "";
 }

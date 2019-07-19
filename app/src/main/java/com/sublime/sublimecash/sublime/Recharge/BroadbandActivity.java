@@ -2,6 +2,7 @@ package com.sublime.sublimecash.sublime.Recharge;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 import com.sublime.sublimecash.sublime.R;
 
 import org.json.JSONArray;
@@ -38,14 +40,16 @@ import java.util.Map;
 
 import Common.Constants;
 import Common.Session;
+import Model.Broadband;
 import Model.LandlineOperater;
 import Model.Oparater;
 import Model.Profile;
 
 public class BroadbandActivity extends AppCompatActivity {
-    GridView gridViewLandline;
-    ArrayList optList=new ArrayList<>();
-    AdapterBroadband adapterBroadband;
+    GridView gridViewBroadband;
+    List<Broadband> OperatorList=new ArrayList<>();
+    AdapterOperator adapterOperator;
+    Profile myProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,64 +61,125 @@ public class BroadbandActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Operator");
+        actionBar.setTitle("Select Operator");
         actionBar.show();
 
-        gridViewLandline = findViewById(R.id.gridViewLandline);
-        optList.add(new LandlineOperater("AIRTEL", R.drawable.airtelicon));
-        optList.add(new LandlineOperater("BSNL", R.drawable.bsnl));
-        optList.add(new LandlineOperater("ACT Broadband", R.drawable.act));
-        optList.add(new LandlineOperater("ANI Network", R.drawable.ani));
-        optList.add(new LandlineOperater("Allince ", R.drawable.alliance));
-        optList.add(new LandlineOperater("Asianet Broadband", R.drawable.asianet));
-        optList.add(new LandlineOperater("Hathway Broadband", R.drawable.hathway));
-        optList.add(new LandlineOperater("MTNL Delhi", R.drawable.mtnl));
-        optList.add(new LandlineOperater("Tikona ", R.drawable.tikona));
-        adapterBroadband=new AdapterBroadband(this, R.layout.gridview_gift, optList) {
+        gridViewBroadband = findViewById(R.id.gridViewBroadband);
+        myProfile = Session.GetProfile(getApplicationContext());
+        adapterOperator=new AdapterOperator(BroadbandActivity.this, R.layout.gridview_prepaid, OperatorList);
+        gridViewBroadband.setAdapter(adapterOperator);
+        Operators();
+
+    }
+    public void Operators() {
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        String url = Constants.Application_URL+"/users/index.php/Recharge/moblie_recharge";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>()  {
             @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                return super.getView(position, convertView, parent);
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        Broadband opt = new Broadband();
+                        JSONObject jObj = jsonArray.getJSONObject(i);
+                        opt.OperatorName = jObj.getString("operator_name");
+                        opt.optImageName = jObj.getString("image");
+                        opt.OptID = jObj.getString("operator_code");
+                        opt.opType = jObj.getString("OPType");
+                        if (opt.opType.equalsIgnoreCase("Landline")) {
+                            OperatorList.add(opt);
+                        }else {
+
+                        }
+                    }
+                    adapterOperator.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(BroadbandActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", myProfile.UserLogin);
+                return params;
             }
         };
-        gridViewLandline.setAdapter(adapterBroadband);
+        queue.add(stringRequest);
 
-        gridViewLandline.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridViewBroadband.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //  String operator = (String) optList.get(position);
-                Intent intent = new Intent(BroadbandActivity.this,PayLandlineBillActivity.class);
-                // intent.putExtra("Operator", operator);
+                Broadband optname  = (Broadband) adapterOperator.getItem(position);
+                String optImageName = optname.optImageName;
+                String optName = optname.OperatorName;
+                String optId = optname.OptID;
+                String optType = optname.opType;
+                Intent intent = new Intent(BroadbandActivity.this, BroadbandBillActivity.class);
+                intent.putExtra("Image", optImageName);
+                intent.putExtra("optName", optName);
+                intent.putExtra("OptId", optId);
+                intent.putExtra("optType", optType);
                 startActivity(intent);
-                // LandlineActivity.this.finish();
             }
         });
 
     }
-    public class AdapterBroadband extends ArrayAdapter {
 
-        ArrayList optList = new ArrayList<>();
+    class AdapterOperator extends ArrayAdapter {
+        LayoutInflater inflat;
+        ViewHolder holder;
+        public AdapterOperator(Context context, int resource, List<Broadband> objects) {
 
-        public AdapterBroadband(Context context, int textViewResourceId, ArrayList objects) {
-            super(context, textViewResourceId, objects);
-            optList = objects;
+            super(context, resource,objects);
+            // TODO Auto-generated constructor stub
+            inflat= LayoutInflater.from(context);
         }
-
         @Override
         public int getCount() {
-            return super.getCount();
+            return OperatorList.size();
+        }
+
+        @Nullable
+        @Override
+        public Broadband getItem(int position) {
+            return OperatorList.get(position);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-
-            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.gridview_operater, null);
-            TextView textView = convertView.findViewById(R.id.testName);
-            ImageView imageView = convertView.findViewById(R.id.image);
-            LandlineOperater tempOpt = (LandlineOperater) optList.get(position);
-            textView.setText(tempOpt.getoptName());
-            imageView.setImageResource(tempOpt.getoptImage());
-            return convertView;
+            try {
+                if (convertView == null) {
+                    convertView = inflat.inflate(R.layout.gridview_prepaid, null);
+                    holder = new ViewHolder();
+                    holder.image = convertView.findViewById(R.id.image);
+                    holder.txtOperatorName = convertView.findViewById(R.id.optName);
+                    convertView.setTag(holder);
+                }
+                holder = (ViewHolder) convertView.getTag();
+                Broadband opt = getItem(position);
+                holder.txtOperatorName.setText(opt.OperatorName);
+                String url1 = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/opt/" + opt.optImageName;
+                Picasso.with(getApplicationContext()).load(url1).into(holder.image);
+                return convertView;
+            }
+            catch (Exception ex)
+            {
+                int a=1;
+                Toast.makeText(getApplicationContext(),"Could not Load Data", Toast.LENGTH_LONG).show();
+                return null;
+            }
         }
+    }
+    private class ViewHolder
+    {
+        TextView txtOperatorName;
+        ImageView image;
     }
 }

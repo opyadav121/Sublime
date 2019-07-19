@@ -13,21 +13,44 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_slideshow" />
     </group>
-
     <item android:title="Communicate">
         <menu>
+            <item
+                android:id="@+id/action_Pan"
+                android:orderInCategory="50"
+                android:title="KYC Update"/>
             <item
                 android:id="@+id/action_Tree"
                 android:orderInCategory="50"
                 android:title="Tree View"/>
             <item
+                android:id="@+id/action_EtoS"
+                android:orderInCategory="50"
+                android:title="E to S-Wallet"/>
+            <item
+                android:id="@+id/action_daily"
+                android:orderInCategory="50"
+                android:title="Daily Income"/>
+            <item
+                android:id="@+id/action_Reward"
+                android:orderInCategory="50"
+                android:title="Rewards"/>
+            <item
+                android:id="@+id/action_roi"
+                android:orderInCategory="50"
+                android:title="ROI Income "/>
+            <item
+                android:id="@+id/action_Bonaza"
+                android:orderInCategory="50"
+                android:title="Direct Bonaza"/>
+            <item
                 android:id="@+id/action_Users"
                 android:orderInCategory="10"
-                android:title="UserList"/>
+                android:title="My Partener Status"/>
             <item
                 android:id="@+id/action_couponReq"
                 android:orderInCategory="50"
-                android:title="RequestCoupons"/>
+                android:title="Become A Partner"/>
             <item
                 android:id="@+id/action_EWallet"
                 android:orderInCategory="50"

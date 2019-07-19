@@ -46,11 +46,6 @@
                 android:src="@drawable/unclear"
                 />
         </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Available Balance Rs0.00"
-            />
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,6 +61,7 @@
                 android:textColorHint="@color/colorOrangeDark"
                 />
         </android.support.design.widget.TextInputLayout>
+
         <Button
             android:id="@+id/btnAdd"
             android:layout_width="match_parent"
@@ -76,11 +72,4 @@
             android:textColor="@color/colorWhite"
             />
   </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Apply Promocode"
-        android:padding="10dp"
-        android:layout_marginLeft="10dp"
-        />
 </LinearLayout>

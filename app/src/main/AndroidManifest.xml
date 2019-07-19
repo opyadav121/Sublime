@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.sublime.sublimecash.sublime">
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -22,26 +23,73 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Recharge.LandlineBillActivity"
-            android:parentActivityName=".HomeActivity"></activity>
-        <activity android:name=".Recharge.BroadbandBillActivity"
+        <activity android:name=".E_Commerce.ProductDetailsActivity"
+           android:parentActivityName=".HomeActivity" ></activity>
+        <activity android:name=".AddressProofActivity"
             android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.DTHRechargeActivity"
+        <activity android:name=".KYCActivity"
             android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.PostpaidActivity"
+        <activity android:name=".E_Commerce.SareesActivity"
             android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.PrepaidRechargeActivity"
+        <activity android:name=".PayMentGateWay"
             android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.PrepaidActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.MoneyTransferlistActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.AddBenefisiaryActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.OtpForRemitterActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".MoneyTransferAddActivity"
-            android:parentActivityName=".HomeActivity"/>
+        <activity
+            android:name=".History.DirectBonazaActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".History.ROIIncomeActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".History.RewardsActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".History.DailyIncomeActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".E_Commerce.WomensActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".E_Commerce.MensActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.ElectricityBillPayActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.GasBillPayActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".PaymentStatusActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.LandlineBillActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.BroadbandBillActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.DTHRechargeActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.PostpaidActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.PrepaidRechargeActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.PrepaidActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.MoneyTransferlistActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.AddBenefisiaryActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.OtpForRemitterActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".MoneyTransferAddActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity android:name=".AddsActivity" />
         <activity
             android:name=".AEPSActivity"
@@ -58,9 +106,6 @@
             android:name=".Recharge.AddMoneyActivity"
             android:parentActivityName=".HomeActivity" />
         <activity
-            android:name=".Recharge.PayLandlineBillActivity"
-            android:parentActivityName=".Recharge.LandlineActivity" />
-        <activity
             android:name=".Recharge.LandlineActivity"
             android:parentActivityName=".HomeActivity" />
         <activity
@@ -75,34 +120,46 @@
         <activity
             android:name=".Recharge.RechargeHistoryActivity"
             android:parentActivityName=".Recharge.MobilePostpaidActivity" />
-        <activity android:name=".Recharge.Zee5Activity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.ReebokActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.SukhhiActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.MedLifeActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.FabHotelsActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.BookMyFlavoursActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.GiftAloveActivity"
-            />
-        <activity android:name=".Recharge.PaperFryActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.PizzaHutActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.CleartripActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.NutrafyActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.Gud2Activity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.FirstCryActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.JockeyActivity"
-            android:parentActivityName=".HomeActivity"/>
+        <activity
+            android:name=".Recharge.Zee5Activity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.ReebokActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.SukhhiActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.MedLifeActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.FabHotelsActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.BookMyFlavoursActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity android:name=".Recharge.GiftAloveActivity" />
+        <activity
+            android:name=".Recharge.PaperFryActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.PizzaHutActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.CleartripActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.NutrafyActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.Gud2Activity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.FirstCryActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.JockeyActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".RegisterPaidActivity"
             android:parentActivityName=".HomeActivity" />
@@ -204,8 +261,18 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name="com.appvirality.android.AppviralityInstallReferrerReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
     </application>
+
 </manifest>

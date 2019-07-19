@@ -27,6 +27,7 @@ public class Session {
            // editor.putString("sponsor_id",UserProfile.SponserId);
             editor.putString("under_userid",UserProfile.UnderUserId);
             editor.putString("dob",UserProfile.Dob);
+            editor.putString("original_email",UserProfile.original_email);
             editor.putString("father_name",UserProfile.FatherName);
             editor.putString("mother_name",UserProfile.MotherName);
             editor.putString("gender",UserProfile.gender);
@@ -47,6 +48,9 @@ public class Session {
             editor.putString("occupation",UserProfile.occupation);
             editor.putString("joining_amount",UserProfile.joiningAmount);
             editor.putString("side",UserProfile.side);
+            editor.putString("E-Wallet",UserProfile.EWallet);
+            editor.putString("S-Wallet",UserProfile.SWallet);
+            editor.putString("Pending_balance",UserProfile.PendingWallet);
             editor.commit();
             return true;
         }
@@ -70,7 +74,7 @@ public class Session {
             mProfile.ActivationDate= prefs.getString("activation_date","");
             mProfile.joiningAmount = prefs.getString("joining_amount","");
             mProfile.UserID = prefs.getString("user_id","");
-           // mProfile.SponserId=prefs.getString("sponsor_id","");
+            mProfile.original_email=prefs.getString("original_email","");
             mProfile.UnderUserId = prefs.getString("under_userid","");
             mProfile.Dob = prefs.getString("dob","");
             mProfile.FatherName=prefs.getString("father_name","");
@@ -93,6 +97,9 @@ public class Session {
             mProfile.occupation = prefs.getString("occupation","");
             mProfile.joiningAmount = prefs.getString("joining_amount","");
             mProfile.side=prefs.getString("side","");
+            mProfile.EWallet = prefs.getString("E-Wallet","");
+            mProfile.SWallet = prefs.getString("S-Wallet","");
+            mProfile.PendingWallet=prefs.getString("Pending_balance","");
             return mProfile;
         }
         catch (Exception ex)

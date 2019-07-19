@@ -12,5 +12,6 @@ public class Users {
     public String ReferId;
     public String Date;
     public String UnderUser;
+    public String Referby;
 
 }

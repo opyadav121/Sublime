@@ -53,7 +53,7 @@ public class UserListActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("UserList ");
+        actionBar.setTitle("My Partner Status ");
         actionBar.show();
         myProfile = Session.GetProfile(this);
 
@@ -75,16 +75,17 @@ public class UserListActivity extends AppCompatActivity {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         Users recharge = new Users();
                         JSONObject jObj = jsonArray.getJSONObject(i);
-                        recharge.Email = jObj.getString("email");
+                        recharge.Email = jObj.getString("ori_email");
                         recharge.Mobile = jObj.getString("mobile");
                         recharge.Address = jObj.getString("address");
-                        recharge.Date = jObj.getString("activation_date");
+                        recharge.Date = jObj.getString("joining_date");
                         recharge.CouponName = jObj.getString("coupon_name");
                         recharge.Amount = jObj.getString("account");
                         recharge.ReferId = jObj.getString("refer_id");
                         recharge.UnderUser = jObj.getString("under_userid");
                         recharge.Status = jObj.getString("status");
                         recharge.Side = jObj.getString("side");
+                        recharge.Referby = jObj.getString("refer_by");
                         UserHistory.add(recharge);
                     }
                     adapterUsers.notifyDataSetChanged();
@@ -141,8 +142,6 @@ public class UserListActivity extends AppCompatActivity {
                     convertView = inflat.inflate(R.layout.row_item_users, null);
                     holder = new ViewHolder();
                     holder.txtEmail = convertView.findViewById(R.id.txtEmail);
-                    holder.txtMobile = convertView.findViewById(R.id.txtMobile);
-                    holder.txtAddress = convertView.findViewById(R.id.txtAddress);
                     holder.txtPlan = convertView.findViewById(R.id.txtPlan);
                     holder.txtDate = convertView.findViewById(R.id.txtDate);
                     holder.txtSide = convertView.findViewById(R.id.txtSide);
@@ -151,13 +150,11 @@ public class UserListActivity extends AppCompatActivity {
                 }
                 holder = (ViewHolder) convertView.getTag();
                 Users history= getItem(position);
-                holder.txtEmail.setText(history.Email);
-                holder.txtMobile.setText(history.Mobile);
-                holder.txtAddress.setText(history.Address );
-                holder.txtPlan.setText(history.CouponName+", "+" \u20B9"+history.Amount);
+                holder.txtEmail.setText(history.ReferId);
+                holder.txtPlan.setText("\u20B9"+history.Amount);
                 holder.txtDate.setText(history.Date);
                 holder.txtSide.setText(history.Side);
-                holder.txtReferId.setText(history.ReferId);
+                holder.txtReferId.setText(history.Referby);
                 return convertView;
             }
             catch (Exception ex)
@@ -171,6 +168,6 @@ public class UserListActivity extends AppCompatActivity {
 
     private class ViewHolder
     {
-        TextView txtEmail,txtMobile,txtAddress,txtPlan,txtDate,txtSide,txtReferId;
+        TextView txtEmail,txtPlan,txtDate,txtSide,txtReferId;
     }
 }

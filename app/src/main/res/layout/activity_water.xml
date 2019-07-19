@@ -26,6 +26,7 @@
         android:layout_margin="5dp"
         android:padding="10dp"
         android:elevation="5dp"
+        android:visibility="gone"
         >
         <android.support.design.widget.TextInputLayout
             android:id="@+id/Board"
@@ -85,20 +86,11 @@
             android:padding="5dp"
             />
     </RelativeLayout>
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FCF1DD"
-        >
-        <TextView
-            android:id="@+id/recent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Recent Bill Payment"
-            android:padding="5dp"
-            android:textSize="14sp"
-            android:textColor="@color/colorBlack"
-            />
-    </LinearLayout>
-
+        android:layout_height="match_parent"
+        android:text="Updating Soon....."
+        android:textSize="18sp"
+        android:gravity="center"
+        />
 </LinearLayout>

@@ -46,6 +46,7 @@ public class CouponActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
     Profile myProfile;
+    Button btn_registerFree;
     String url = Constants.Application_URL+ "/users/index.php/user/CouponpinList";
 
     @Override
@@ -60,6 +61,14 @@ public class CouponActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Coupons ");
         actionBar.show();
+        btn_registerFree = findViewById(R.id.btn_registerFree);
+        btn_registerFree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent register = new Intent(CouponActivity.this, RegisterPaidActivity.class);
+                startActivity(register);
+            }
+        });
         requestQueue = Volley.newRequestQueue(this);
         myProfile = Session.GetProfile(this);
         listView_Coupon = findViewById(R.id.listView_Coupon);

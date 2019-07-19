@@ -18,10 +18,12 @@
             android:layout_height="56dp"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
     </android.support.design.widget.AppBarLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:visibility="gone"
         >
         <ImageView
             android:layout_width="match_parent"
@@ -38,6 +40,7 @@
         android:layout_margin="10dp"
         android:elevation="5dp"
         android:background="@drawable/backgraund_btn"
+        android:visibility="gone"
         >
         <TextView
             android:layout_width="0dp"
@@ -62,6 +65,7 @@
     android:layout_margin="10dp"
     android:elevation="5dp"
     android:background="@drawable/border2"
+        android:visibility="gone"
     >
     <TextView
         android:layout_width="0dp"
@@ -86,4 +90,12 @@
         android:src="@drawable/ic_content_copy"
         />
 </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Updating soon....."
+        android:textSize="18sp"
+        android:gravity="center"
+        />
+
 </LinearLayout>

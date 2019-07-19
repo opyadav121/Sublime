@@ -106,13 +106,7 @@ public class GiftActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Bitmap img = (Bitmap) subList.get(position);
-                ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-                img.compress(Bitmap.CompressFormat.PNG, 100, bStream);
-                byte[] byteArray = bStream.toByteArray();
-
                 Intent intent = new Intent(GiftActivity.this,GiftBuyActivity.class);
-                intent.putExtra("image", byteArray);
                 startActivity(intent);
                 finish();
             }

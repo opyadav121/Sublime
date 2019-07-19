@@ -24,15 +24,27 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:nestedScrollingEnabled="true"
-            android:layout_below="@id/appBar"
-        >
+            android:layout_below="@id/appBar">
        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="10dp"
-            android:gravity="right"
             >
+           <TextView
+               android:id="@+id/AmountB"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Pending:"
+               />
+           <TextView
+               android:id="@+id/txtBWallet"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Rs 0.00"
+               android:textColor="@color/colorBlack"
+               android:layout_marginRight="20dp"
+               />
     <TextView
         android:id="@+id/AmountE"
         android:layout_width="wrap_content"

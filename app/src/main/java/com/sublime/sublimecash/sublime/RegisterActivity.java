@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.appvirality.android.AppviralityAPI;
 
 import org.json.JSONObject;
 
@@ -48,7 +49,6 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         requestQueue = Volley.newRequestQueue(this);
-
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -57,11 +57,16 @@ public class RegisterActivity extends AppCompatActivity {
         actionBar.setTitle(" Register ");
         actionBar.show();
 
+        AppviralityAPI.init(getApplicationContext());
+        Intent intent = getIntent();
+        String referer = intent.getStringExtra("Reffral");
+        String userkey = intent.getStringExtra("userkey");
         txtName = findViewById(R.id.txtName);
         txtUseName = findViewById(R.id.txtUseName);
         txtMobile = findViewById(R.id.txtMobile);
         txtPassword = findViewById(R.id.txtPassword);
         txtReferalCode = findViewById(R.id.txtReferalCode);
+        txtReferalCode.setText(referer);
         radioGroup = findViewById(R.id.radioGroup);
         radioLeft = findViewById(R.id.radioLeft);
         radioRight = findViewById(R.id.radioLeft);
@@ -83,7 +88,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
     public void UserRegister(){
      try {
         progressDialog = progressDialog.show(RegisterActivity.this, "", "Please wait...", false, false);

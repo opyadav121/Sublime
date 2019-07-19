@@ -78,7 +78,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         myProfile = Session.GetProfile(this);
-        txtEmailID.setText(myProfile.UserLogin);
+        txtEmailID.setText(myProfile.original_email);
         txtMobileNumber.setText(myProfile.MobileNumber);
         txtFirstName.setText(myProfile.UserName);
         txtDob.setText(myProfile.Dob);

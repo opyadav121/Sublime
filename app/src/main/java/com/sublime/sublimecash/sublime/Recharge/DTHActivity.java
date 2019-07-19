@@ -37,13 +37,14 @@ import java.util.Map;
 
 import Common.Constants;
 import Common.Session;
+import Model.DTHopt;
 import Model.Oparater;
 import Model.Profile;
 
 public class DTHActivity extends AppCompatActivity {
 
     GridView gridViewDTH;
-    List<Oparater> OperatorList=new ArrayList<>();
+    List<DTHopt> DTHList=new ArrayList<>();
     AdapterDTH adapterOperator;
     Profile myProfile;
 
@@ -62,9 +63,9 @@ public class DTHActivity extends AppCompatActivity {
 
         myProfile = Session.GetProfile(getApplicationContext());
         gridViewDTH = findViewById(R.id.gridViewDTH);
-        adapterOperator=new AdapterDTH(DTHActivity.this, R.layout.gridview_dth, OperatorList);
+        adapterOperator=new AdapterDTH(DTHActivity.this, R.layout.gridview_dth, DTHList);
         gridViewDTH.setAdapter(adapterOperator);
-      //  Operators();
+        Operators();
     }
     public void Operators() {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
@@ -75,14 +76,14 @@ public class DTHActivity extends AppCompatActivity {
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        Oparater opt = new Oparater();
+                        DTHopt opt = new DTHopt();
                         JSONObject jObj = jsonArray.getJSONObject(i);
                         opt.OperatorName = jObj.getString("operator_name");
                         opt.optImageName = jObj.getString("image");
                         opt.OptID = jObj.getString("operator_code");
                         opt.opType = jObj.getString("OPType");
-                        if (opt.opType.equalsIgnoreCase("PrePaid")) {
-                            OperatorList.add(opt);
+                        if (opt.opType.equalsIgnoreCase("DTH")) {
+                            DTHList.add(opt);
                         }else {
 
                         }
@@ -111,7 +112,7 @@ public class DTHActivity extends AppCompatActivity {
         gridViewDTH.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Oparater optname  = (Oparater) adapterOperator.getItem(position);
+                DTHopt optname  = (DTHopt) adapterOperator.getItem(position);
                 String optImageName = optname.optImageName;
                 String optName = optname.OperatorName;
                 String optId = optname.OptID;
@@ -129,7 +130,7 @@ public class DTHActivity extends AppCompatActivity {
     class AdapterDTH extends ArrayAdapter {
         LayoutInflater inflat;
         ViewHolder holder;
-        public AdapterDTH(Context context, int resource, List<Oparater> objects) {
+        public AdapterDTH(Context context, int resource, List<DTHopt> objects) {
 
             super(context, resource,objects);
             // TODO Auto-generated constructor stub
@@ -137,13 +138,13 @@ public class DTHActivity extends AppCompatActivity {
         }
         @Override
         public int getCount() {
-            return OperatorList.size();
+            return DTHList.size();
         }
 
         @Nullable
         @Override
-        public Oparater getItem(int position) {
-            return OperatorList.get(position);
+        public DTHopt getItem(int position) {
+            return DTHList.get(position);
         }
 
         @Override
@@ -157,7 +158,7 @@ public class DTHActivity extends AppCompatActivity {
                     convertView.setTag(holder);
                 }
                 holder = (ViewHolder) convertView.getTag();
-                Oparater opt = getItem(position);
+                DTHopt opt = getItem(position);
                 holder.txtOperatorName.setText(opt.OperatorName);
                 String url1 = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/opt/" + opt.optImageName;
                 Picasso.with(getApplicationContext()).load(url1).into(holder.image);

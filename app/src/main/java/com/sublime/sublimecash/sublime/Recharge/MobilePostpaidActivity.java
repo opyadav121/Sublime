@@ -64,7 +64,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MobilePostpaidActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     EditText txtMobileNumber,txtAmount;
-    TextView myContact,txtSWallet,txtEWallet,btnTransfer,txtrecentRecharge,btnPay,txtOperator;
+    TextView myContact,txtSWallet,txtEWallet,btnTransfer,txtrecentRecharge,btnPay,txtOperator,txtBWallet;
     ListView listViewPostpaid,listViewPrepaid,ListRecharges;
     CircleImageView imageOperator;
     Button transfer;
@@ -75,7 +75,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
     AdapterRecharge adapterRecharge;
     final Context context = this;
     Profile myProfile;
-    String SWallet_Balance,Ewalet_Balance,OperatorCode,optImage,optName,OptId,optType;
+    String SWallet_Balance,Ewalet_Balance,Pending_Balance,optImage,optName,OptId,optType;
     Button browsePlan,Offer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +95,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         optName = intent.getStringExtra("optName");
         OptId = intent.getStringExtra("OptId");
         optType = intent.getStringExtra("optType");
-
+        txtBWallet = findViewById(R.id.txtBWallet);
         myProfile = Session.GetProfile(getApplicationContext());
         imageOperator = findViewById(R.id.imageOperator);
         browsePlan = findViewById(R.id.browsePlan);
@@ -274,7 +274,8 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                     JSONObject jObj = new JSONObject(response);
                     Ewalet_Balance = jObj.getString("E-Wallet");
                     SWallet_Balance = jObj.getString("S-Wallet");
-
+                    Pending_Balance = jObj.getString("Pending_balance");
+                    txtBWallet.setText(" \u20B9"+Pending_Balance);
                     txtEWallet.setText(" \u20B9"+Ewalet_Balance);
                     txtSWallet.setText(" \u20B9"+SWallet_Balance);
 

@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,13 +52,14 @@ public class CouponRequestActivity extends AppCompatActivity {
     EditText txtQuantity, txtHolderName, txtBankName, txtBranch, txtState, txtDistrict, editTextTags;
     TextView txtUpload;
     Button btnSubmit, btnImageUpdate;
-    Bitmap newBitmap;
     ImageView fileImage;
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
     String url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/Assets/uploads/abc";
     String RequestCoupon_url = Constants.Application_URL+ "/users/index.php/Home/request_activation";
     Profile myProfile;
+    Bitmap bitmap;
+    String splan,CoupanName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +87,12 @@ public class CouponRequestActivity extends AppCompatActivity {
         fileImage = findViewById(R.id.fileImage);
         btnImageUpdate = findViewById(R.id.btnImageUpdate);
         editTextTags = findViewById(R.id.editTextTags);
+        txtUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadBitmap();
+            }
+        });
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,14 +104,27 @@ public class CouponRequestActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.CouponRequest, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spPlans.setAdapter(adapter);
+        spPlans.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                splan = parent.getItemAtPosition(position).toString();//this is your selected item
 
+                if (splan.equalsIgnoreCase("2240")){
+                    CoupanName="Plan1";
+                }else if (splan.equalsIgnoreCase("6720")){
+                    CoupanName="Plan2";
+                }else if (splan.equalsIgnoreCase("11200")){
+                    CoupanName="Plan3";
+                }else {
+                    CoupanName="Plan4";
+                }
+            }
+            public void onNothingSelected(AdapterView<?> parent)
+            {
 
-       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getPackageName()));
-            finish();
-            startActivity(intent);
-            return;
-        }   */
+            }
+        });
+
         //adding click listener to button
         findViewById(R.id.btnImageUpdate).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,41 +144,6 @@ public class CouponRequestActivity extends AppCompatActivity {
 
     }
 
-    public void RequestForCoupon() {
-
-        progressDialog = progressDialog.show(CouponRequestActivity.this, "", "Please wait...", false, false);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, RequestCoupon_url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(CouponRequestActivity.this, "" + response, Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(CouponRequestActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("email",myProfile.UserLogin);
-                params.put("coupon_name", "plan1");
-                params.put("district", "null");
-                params.put("amount", "1020");
-                params.put("bank_holder_name", txtHolderName.getText().toString());
-                params.put("bank_name", txtBankName.getText().toString());
-                params.put("state", "null");
-                params.put("imagepath", "cvgshdFUYRF");
-                params.put("quantity", txtQuantity.getText().toString());
-                params.put("date", "");
-                return params;
-            }
-        };
-        requestQueue.add(stringRequest);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -166,29 +152,31 @@ public class CouponRequestActivity extends AppCompatActivity {
             //getting the image Uri
             Uri imageUri = data.getData();
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
 
                 fileImage.setImageBitmap(bitmap);
                 //calling the method uploadBitmap to upload image
-                uploadBitmap(bitmap);
+                txtUpload.setVisibility(View.VISIBLE);
+               // uploadBitmap();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public byte[] getFileDataFromDrawable(Bitmap bitmap) {
+    public byte[] getFileDataFromDrawable(Bitmap bit) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
+        bit.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
 
-    private void uploadBitmap(final Bitmap bitmap) {
+    private void uploadBitmap() {
 
        // final String tags = editTextTags.getText().toString().trim();
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST,RequestCoupon_url , new Response.Listener<NetworkResponse>() {
             @Override
             public void onResponse(NetworkResponse response) {
+                Toast.makeText(CouponRequestActivity.this, "file Uploaded Successfully", Toast.LENGTH_SHORT).show();
                 try {
                     JSONObject obj = new JSONObject(new String(response.data));
                     Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
@@ -216,13 +204,13 @@ public class CouponRequestActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 long name1 = System.currentTimeMillis();
                 params.put("email",myProfile.UserLogin);
-                params.put("coupon_name", "plan1");
+                params.put("coupon_name", CoupanName);
                 params.put("district", "null");
-                params.put("amount", "1020");
+                params.put("amount", splan);
                 params.put("bank_holder_name", txtHolderName.getText().toString());
                 params.put("bank_name", txtBankName.getText().toString());
                 params.put("state", "null");
-                params.put("imagepath", "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/Assets/uploads/"+name1+".png");
+              //  params.put("imagepath", "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/Assets/uploads/"+name1+".png");
                 params.put("quantity", txtQuantity.getText().toString());
                 params.put("date", "");
                 return params;
