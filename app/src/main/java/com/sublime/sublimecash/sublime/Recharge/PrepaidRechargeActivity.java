@@ -131,9 +131,6 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
                     myProfile.SWallet = jObj.getString("S-Wallet");
                     myProfile.PendingWallet = jObj.getString("Pending_balance");
                     Session.AddProfile(getApplicationContext(), myProfile);
-                   // Ewalet_Balance = jObj.getString("E-Wallet");
-                   // SWallet_Balance = jObj.getString("S-Wallet");
-                   // Pending_Balance = jObj.getString("Pending_balance");
                     txtBWallet.setText(" \u20B9"+myProfile.EWallet);
                     txtEWallet.setText(" \u20B9"+myProfile.SWallet);
                     txtSWallet.setText(" \u20B9"+myProfile.PendingWallet);

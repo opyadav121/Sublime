@@ -113,14 +113,6 @@ public class SareesActivity extends AppCompatActivity {
                 Toast.makeText(SareesActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
             }
         });
-       /* {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", myProfile.UserLogin);
-                return params;
-            }
-        };  */
         queue.add(stringRequest);
 
         gridViewSarees.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -177,7 +169,7 @@ public class SareesActivity extends AppCompatActivity {
                 holder.sellingPrice.setText("\u20B9"+opt.selling_price);
                 holder.printPrice.setText("\u20B9"+opt.mrp);
                 holder.printPrice.setPaintFlags(holder.printPrice.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
-                String url1 = "http://sublimecash.com/ws2/upload/product/" + opt.prod_img;
+                String url1 = "http://sublimecash.com/upload/product/" + opt.prod_img;
                 Picasso.with(getApplicationContext()).load(url1).into(holder.image);
                 return convertView;
             }

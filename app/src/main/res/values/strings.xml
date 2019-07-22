@@ -28,6 +28,15 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
+    <string name="send_failed">Sending invitations failed</string>
+
+    <string name="invitation_title">Send App Invitation</string>
+    <string name="invitation_message">Special season for this app is starting now, try it and get special offer</string>
+    <string name="invitation_deep_link">http://example.com/offer/100_baht</string>
+    <string name="invitation_cta">Check it out here!</string>
+    <string name="invitation_subject">I want to give you 100 baht</string>
+    <string name="invitation_no_id">No invitation id: %s \n\n</string>
+
 
     <string-array name="AddressProof">
         <item>Aadhar Card</item>

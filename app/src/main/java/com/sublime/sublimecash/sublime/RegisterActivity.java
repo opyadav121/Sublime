@@ -1,7 +1,8 @@
 package com.sublime.sublimecash.sublime;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
@@ -22,7 +23,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.appvirality.android.AppviralityAPI;
 
 import org.json.JSONObject;
 
@@ -35,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
     String  Register_url = Constants.Application_URL+"/users/index.php/home/register/1";
-
+    String referrer;
     EditText txtUseName,txtMobile,txtPassword,txtReferalCode,txtName;
     RadioGroup radioGroup;
     RadioButton radioLeft,radioRight;
@@ -57,16 +57,15 @@ public class RegisterActivity extends AppCompatActivity {
         actionBar.setTitle(" Register ");
         actionBar.show();
 
-        AppviralityAPI.init(getApplicationContext());
         Intent intent = getIntent();
-        String referer = intent.getStringExtra("Reffral");
-        String userkey = intent.getStringExtra("userkey");
+        String Refer = intent.getStringExtra("Reffer");
+
         txtName = findViewById(R.id.txtName);
         txtUseName = findViewById(R.id.txtUseName);
         txtMobile = findViewById(R.id.txtMobile);
         txtPassword = findViewById(R.id.txtPassword);
         txtReferalCode = findViewById(R.id.txtReferalCode);
-        txtReferalCode.setText(referer);
+        txtReferalCode.setText(Refer);
         radioGroup = findViewById(R.id.radioGroup);
         radioLeft = findViewById(R.id.radioLeft);
         radioRight = findViewById(R.id.radioLeft);
@@ -150,4 +149,5 @@ public class RegisterActivity extends AppCompatActivity {
          int a = 1;
      }
     }
+
 }

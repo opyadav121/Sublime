@@ -1,26 +1,28 @@
 package com.sublime.sublimecash.sublime;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Handler;
+import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-
-import com.appvirality.android.AppviralityAPI;
 
 import Common.Session;
 import Model.PrefManager;
 import Model.Profile;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
     private static final int MY_REQUEST_CODE = 123;
+    private static final String TAG = "test";
     ImageView splash;
     Profile myProfile;
+    String referrer;
     private PrefManager prefManager;
-    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
                 //finish();
             }
         },1000);
+
     }
+
     private void CheckLogin() {
         myProfile = Session.GetProfile(this);
         if (myProfile == null || myProfile.UserLogin.matches("")) {
@@ -58,57 +62,18 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.finish();
         }
     }
-    public void Register(){
-        AppviralityAPI.init(getApplicationContext());
+    public void Register() {
         prefManager.setFirstTimeLaunch(false);
-
-        //startActivity(new Intent(MainActivity.this, RegisterActivity.class));
-        AppviralityAPI.getInstance(getApplicationContext(), new AppviralityAPI.UserInstance() {
+         class InstallReferrerReceiver extends BroadcastReceiver {
             @Override
-            public void onInstance(AppviralityAPI instance) {
-                String userkey = instance.getUserKey();
-                boolean hasReferrer = instance.hasReferrer();
-                String referralCode = AppviralityAPI.getFriendReferralCode();
-                // The status of isExistingUser will not be changed until user un-install and re-install the App again
-                boolean isExistingUser = instance.isExistingUser();
-                Log.i("AV isExisting User: ",""+ isExistingUser);
-                Intent intent = new Intent(MainActivity.this,RegisterActivity.class);
-                intent.putExtra("Reffral",referralCode);
-                intent.putExtra("userkey",userkey);
-                startActivity(intent);
-            }
-        });
-        finish();
-    }
+            public void onReceive(Context context, Intent intent) {
+             referrer = intent.getStringExtra("referrer");
 
-  /* public void Update(){
-        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(context);
-        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
-
-        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-                // Request the update.
-
-                try {
-                    appUpdateManager.startUpdateFlowForResult(
-                            appUpdateInfo, AppUpdateType.IMMEDIATE, this,
-
-                            MY_REQUEST_CODE);
-                } catch (IntentSender.SendIntentException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == MY_REQUEST_CODE) {
-            if (resultCode != RESULT_OK) {
-               // log("Update flow failed! Result code: " + resultCode);
-                // If the update is cancelled or fails,
-                // you can request to start the update again.
             }
         }
-    }  */
+
+        Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+         intent.putExtra("Reffer", referrer);
+        startActivity(intent);
+    }
 }

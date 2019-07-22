@@ -35,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView txtEmailID,txtFirstName,txtMobileNumber,txtDob,txtGender,txtMaritalStatus,txtFatherName,txtMotherName,
             txtNominee,txtNomineeRelation,txtUserId,txtAddress,txtSponser,txtActivation,txtPan,txtOccupation,
             txtDistrict,txtState,txtPincode,txtPassport,txtCommission,txtLeftUser,txtRightUser,txtleftBusiness,txtRightBusiness;
-    TextView txtAccountNumber,txtBankName,txtIfsc,txtBranch;
+    TextView btnEditBankDetails,txtBankName,txtIfsc,txtBranch;
     TextView txtInsurance,txtHolderName,txtPremium,txtCompanyName,txtInsuranceType,txtPolicyNumber,txtVehicleNumber,txtPurchagedYear,txtExpiryDate,txtCompName;
     String url = Constants.Application_URL+"/users/index.php/kyc/upload_pic";
     @Override
@@ -69,6 +69,14 @@ public class ProfileActivity extends AppCompatActivity {
         txtRightUser = findViewById(R.id.txtRightUser);
         txtleftBusiness = findViewById(R.id.txtleftBusiness);
         txtRightBusiness = findViewById(R.id.txtRightBusiness);
+        btnEditBankDetails = findViewById(R.id.btnEditBankDetails);
+        btnEditBankDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this,EditBankdetailsActivity.class);
+                startActivity(intent);
+            }
+        });
         editProfile = findViewById(R.id.editProfile);
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override

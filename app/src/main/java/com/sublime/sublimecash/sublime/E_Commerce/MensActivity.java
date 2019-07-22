@@ -1,9 +1,11 @@
 package com.sublime.sublimecash.sublime.E_Commerce;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -65,6 +67,21 @@ public class MensActivity extends AppCompatActivity {
             }
         };
         gridViewMen.setAdapter(myAdapter);
+        gridViewMen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    AlertDialog.Builder builder= new AlertDialog.Builder(MensActivity.this);
+                    builder.setTitle("Sold Out!");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog Alert = builder.create();
+                    Alert.show();
+
+            }
+        });
 
     }
     public class TestSubject extends ArrayAdapter {

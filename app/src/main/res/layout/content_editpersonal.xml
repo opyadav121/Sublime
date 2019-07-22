@@ -9,13 +9,6 @@
     android:paddingLeft="20dp"
     android:elevation="5dp"
     android:paddingRight="20dp">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Personal Details"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,16 +18,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageProfile"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
         android:src="@drawable/user_image"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         app:civ_border_width="2dp"
         app:civ_border_color="@color/colorOrange"
         />
+        <Button
+            android:id="@+id/btnUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@id/imageProfile"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/border2"
+            android:text="Upload"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
     <android.support.design.widget.TextInputLayout
             android:id="@+id/first"
             android:layout_width="match_parent"
@@ -52,23 +60,6 @@
                 />
         </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/mobile"
-        >
-        <EditText
-            android:id="@+id/txtEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:hint="Email Id"
-            android:inputType="textWebEmailAddress"
-            android:layout_below="@id/mobile"
-            android:textColorHint="@color/colorOrangeDark"
-            />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
         android:id="@+id/mobile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,38 +72,6 @@
             android:layout_marginTop="5dp"
             android:hint="Mobile Number"
             android:inputType="number"
-            android:layout_below="@id/mobile"
-            android:textColorHint="@color/colorOrangeDark"
-            />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/gender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/mobile"
-        >
-        <EditText
-            android:id="@+id/txtGender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:hint="Select Gender"
-            android:layout_below="@id/mobile"
-            android:textColorHint="@color/colorOrangeDark"
-            />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/dob"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/mobile"
-        >
-        <EditText
-            android:id="@+id/txtDob"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:hint="Date of Birth"
             android:layout_below="@id/mobile"
             android:textColorHint="@color/colorOrangeDark"
             />
@@ -134,6 +93,22 @@
             />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/dob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mobile"
+        >
+        <EditText
+            android:id="@+id/txtDob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Date of Birth"
+            android:layout_below="@id/mobile"
+            android:textColorHint="@color/colorOrangeDark"
+            />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -142,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:hint="Mother Name"
+            android:hint="Mother's Name"
             android:layout_below="@id/mobile"
             android:textColorHint="@color/colorOrangeDark"
             />
@@ -158,7 +133,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:hint="Father Name"
+            android:hint="Father's Name"
+            android:layout_below="@id/mobile"
+            android:textColorHint="@color/colorOrangeDark"
+            />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/pan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mobile"
+        >
+        <EditText
+            android:id="@+id/txtPan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Pan Number"
             android:layout_below="@id/mobile"
             android:textColorHint="@color/colorOrangeDark"
             />
@@ -197,48 +188,6 @@
             />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/pan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/mobile"
-        >
-        <EditText
-            android:id="@+id/txtPan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:hint="Pan"
-            android:layout_below="@id/mobile"
-            android:textColorHint="@color/colorOrangeDark"
-            />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/aadhar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/mobile"
-        >
-        <EditText
-            android:id="@+id/txtAadhar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:hint="Aadhar"
-            android:layout_below="@id/mobile"
-            android:textColorHint="@color/colorOrangeDark"
-            />
-    </android.support.design.widget.TextInputLayout>
-
-    <TextView
-        android:id="@+id/address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Address Details"
-        android:padding="10dp"
-        />
-
-    <android.support.design.widget.TextInputLayout
         android:id="@+id/address1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -273,23 +222,7 @@
             />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/state"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/mobile"
-        >
-        <EditText
-            android:id="@+id/txtState"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:hint="State"
-            android:layout_below="@id/mobile"
-            android:textColorHint="@color/colorOrangeDark"
-            />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/city"
+        android:id="@+id/dist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/mobile"
@@ -305,23 +238,21 @@
             />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/tahshil"
+        android:id="@+id/state"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/mobile"
-        android:visibility="gone"
         >
         <EditText
-            android:id="@+id/txtTehsil"
+            android:id="@+id/txtState"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:hint="Tehsil"
+            android:hint="State"
             android:layout_below="@id/mobile"
             android:textColorHint="@color/colorOrangeDark"
             />
     </android.support.design.widget.TextInputLayout>
-
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"

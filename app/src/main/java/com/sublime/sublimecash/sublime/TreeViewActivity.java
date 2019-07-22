@@ -25,9 +25,11 @@ public class TreeViewActivity extends AppCompatActivity {
         webTree.loadUrl("http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/Home/Tree2/"+myProfile.UserLogin);
         webTree.getSettings().setJavaScriptEnabled(true);
         webTree.getSettings().setDomStorageEnabled(true);
+        webTree.setWebViewClient(new WebViewClient());
         webTree.getSettings().setSupportZoom(true);
         webTree.getSettings().setBuiltInZoomControls(true);
         webTree.getSettings().setDisplayZoomControls(true);
+        webTree.getSettings().setJavaScriptEnabled(true);
         webTree.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

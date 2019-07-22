@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -14,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,8 +27,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 import com.sublime.sublimecash.sublime.DashboardActivity;
+import com.sublime.sublimecash.sublime.HomeActivity;
 import com.sublime.sublimecash.sublime.R;
+import com.sublime.sublimecash.sublime.Recharge.PrepaidActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,19 +39,25 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import Model.Oparater;
 import Model.Profile;
 import Model.Sarees;
+import Model.SliderImage;
 import me.relex.circleindicator.CircleIndicator;
 
 public class ProductDetailsActivity extends AppCompatActivity {
     private static ViewPager mPager;
     private static int currentPager = 0;
-    ArrayList<Integer> picArray=new ArrayList<Integer>();
-    private static final Integer [] pic = {R.drawable.a, R.drawable.aa,R.drawable.aaa};
+    ArrayList<Integer> picArray =new ArrayList<Integer>();
+   // ArrayList<SliderImage> picArray =new ArrayList<SliderImage>();
+   // AdapterItem adapterItem;
+   // private static final Integer [] pic = {R.drawable.a, R.drawable.aa,R.drawable.aaa};
+  //  SliderImage [] pic;
     Profile myProfile;
     TextView prodName,sellingPrice,printPrice,txtDescription,txtType,txtBrand,txtMaterial,txtWeight,txtColor,txtDetails;
     Button btnBuy;
@@ -90,15 +101,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
         printPrice.setText(" \u20B9"+Mrp);
         printPrice.setPaintFlags(printPrice.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
 
-        Slider1();
 
     }
-    public void Slider1(){
+ /*   public void Slider1(){
+
         for (int i=0; i<pic.length; i++)
             picArray.add(pic[i]);
         mPager=findViewById(R.id.pager);
         mPager.setAdapter(new MyAdapter(picArray,this));
-
         CircleIndicator indicator=findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
         final Handler handler=new Handler();
@@ -121,6 +131,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         },10000,10000);
     }
+
     public class MyAdapter extends PagerAdapter
     {
         private ArrayList<Integer> images;
@@ -160,7 +171,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
             container.addView(v,0);
             return v;
         }
-    }
+    }   */
+
      public void getDetails(){
          RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
          String url = "http://www.sublimecash.com/ws2/index.php/welcome/product_detail/"+prod_id;
@@ -170,27 +182,36 @@ public class ProductDetailsActivity extends AppCompatActivity {
                  try {
                      JSONObject jOb = new JSONObject(response);
                      String Res = jOb.getString("res");
-                     String Image = jOb.getString("img");
-                     JSONArray image = new JSONArray(Image);
-                     for (int a =0; a<image.length(); a++){
-                         JSONObject jObj = image.getJSONObject(a);
-                         type = jObj.getString("prod_name");
-                         material = jObj.getString("materials");
-                         color = jObj.getString("color");
-                         waigth = jObj.getString("weight");
-                         brandName = jObj.getString("brand_name");
-                         details = jObj.getString("include_content");
+                     String img = jOb.getString("img");
+                     String Res2 = jOb.getString("res2");
+                    // JSONObject jObj = new JSONObject(Res);
+                     JSONObject jObj = new JSONObject(img);
+                     String imgName = jObj.getString("prod_img");
+                  //   String [] arrSplit = imgName.split(",");
+                    // pic = new SliderImage[arrSplit.length];
 
-                         txtType.setText(type);
-                         txtBrand.setText(brandName);
-                         txtColor.setText(color);
-                         txtMaterial.setText(material);
-                         txtWeight.setText(waigth);
-                         txtDetails.setText(details);
+                     type = jObj.getString("prod_name");
+                     material = jObj.getString("materials");
+                     color = jObj.getString("color");
+                     waigth = jObj.getString("weight");
+                     JSONArray jsonArray = new JSONArray(Res2);
+                     for (int i = 0; i < jsonArray.length(); i++) {
+                         JSONObject jsonObject = jsonArray.getJSONObject(i);
+                         brandName = jsonObject.getString("brand_name");
+                         details = jsonObject.getString("include_content");
                      }
+                     txtType.setText(type);
+                     txtBrand.setText(brandName);
+                     txtColor.setText(color);
+                     txtMaterial.setText(material);
+                     txtWeight.setText(waigth);
+                     txtDetails.setText(details);
+                    // Slider1();
+
                  } catch (JSONException e) {
                      e.printStackTrace();
                  }
+
              }
          }, new Response.ErrorListener() {
              @Override

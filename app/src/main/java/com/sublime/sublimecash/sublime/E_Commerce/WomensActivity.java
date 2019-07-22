@@ -1,6 +1,8 @@
 package com.sublime.sublimecash.sublime.E_Commerce;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sublime.sublimecash.sublime.HomeActivity;
 import com.sublime.sublimecash.sublime.R;
 
 import java.util.ArrayList;
@@ -61,9 +64,18 @@ public class WomensActivity extends AppCompatActivity {
         gridViewWomen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(WomensActivity.this, WomensActivity.class);
-                startActivity(intent);
-                finish();
+                //Intent intent = new Intent(WomensActivity.this, WomensActivity.class);
+               // startActivity(intent);
+                //finish();
+                    AlertDialog.Builder builder= new AlertDialog.Builder(WomensActivity.this);
+                    builder.setTitle("Sold Out!");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog Alert = builder.create();
+                    Alert.show();
             }
         });
     }

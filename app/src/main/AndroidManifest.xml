@@ -22,17 +22,27 @@
         android:networkSecurityConfig="@layout/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".E_Commerce.ProductDetailsActivity"
-           android:parentActivityName=".HomeActivity" ></activity>
-        <activity android:name=".AddressProofActivity"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".HistoryActivity"
             android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".KYCActivity"
+        <activity android:name=".EditBankdetailsActivity"
             android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".E_Commerce.SareesActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".PayMentGateWay"
-            android:parentActivityName=".HomeActivity"/>
+        <activity
+            android:name=".E_Commerce.ProductDetailsActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".AddressProofActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".KYCActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".E_Commerce.SareesActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".PayMentGateWay"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".History.DirectBonazaActivity"
             android:parentActivityName=".HomeActivity" />
@@ -265,14 +275,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <receiver
-            android:name="com.appvirality.android.AppviralityInstallReferrerReceiver"
-            android:exported="true">
+            android:name="com.sublime.sublimecash.sublime.RegisterActivity$InstallReferrerReceiver"
+            android:exported="true"
+            android:permission="android.permission.INSTALL_PACKAGES">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
-    </application>
 
+    </application>
 </manifest>

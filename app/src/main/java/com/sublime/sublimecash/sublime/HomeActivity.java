@@ -78,6 +78,7 @@ import com.sublime.sublimecash.sublime.Recharge.PaperFryActivity;
 import com.sublime.sublimecash.sublime.Recharge.PizzaHutActivity;
 import com.sublime.sublimecash.sublime.Recharge.PostpaidActivity;
 import com.sublime.sublimecash.sublime.Recharge.PrepaidActivity;
+import com.sublime.sublimecash.sublime.Recharge.PrepaidRechargeActivity;
 import com.sublime.sublimecash.sublime.Recharge.ReebokActivity;
 import com.sublime.sublimecash.sublime.Recharge.RydonActivity;
 import com.sublime.sublimecash.sublime.Recharge.SWalletHistoryActivity;
@@ -98,6 +99,7 @@ import java.util.TimerTask;
 
 import Common.Constants;
 import Common.Session;
+import Model.History;
 import Model.Profile;
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.relex.circleindicator.CircleIndicator;
@@ -132,7 +134,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(home);
                     return true;
                 case R.id.navigation_business:
-                   Intent dasboard = new Intent(getApplicationContext(),DashboardActivity.class);
+                   Intent dasboard = new Intent(getApplicationContext(), HistoryActivity.class);
                    startActivity(dasboard);
                     return true;
                 case R.id.navigation_bank:
@@ -193,7 +195,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         Slider1();
         SetFlippers();
-        StatusActive();
+        WalletBalance();
+
     }
 
     @Override
@@ -224,117 +227,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(HomeActivity.this, KYCActivity.class);
             startActivity(intent);
         }
-        else if (id == R.id.action_Tree) {
-            Intent intent = new Intent(HomeActivity.this, TreeViewActivity.class);
-            startActivity(intent);
-        }
-        else if (id == R.id.action_Users) {
-
-            Intent intent = new Intent(HomeActivity.this, UserListActivity.class);
-            startActivity(intent);
-        }
         else if (id == R.id.action_couponReq) {
             Intent intent = new Intent(HomeActivity.this, CouponRequestActivity.class);
             startActivity(intent);
         }
-        else if (id == R.id.action_Reward) {
-            if (!Status.equalsIgnoreCase("Active")){
-
-                AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
-                builder.setMessage("You Need to Become a Partner First!");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog Alert = builder.create();
-                Alert.show();
-            }else {
-                Intent intent = new Intent(HomeActivity.this, RewardsActivity.class);
-                startActivity(intent);
-            }
-
-        }
-        else if (id == R.id.action_EtoS) {
-            showChangeLangDialog();
-
-        }
-        else if (id == R.id.action_roi) {
-            if (!Status.equalsIgnoreCase("Active")){
-
-                AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
-                builder.setMessage("You Need to Become a Partner First!");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog Alert = builder.create();
-                Alert.show();
-            }else {
-            Intent intent = new Intent(HomeActivity.this, ROIIncomeActivity.class);
-            startActivity(intent);
-            }
-        }
-        else if (id == R.id.action_daily) {
-            if (!Status.equalsIgnoreCase("Active")){
-
-                AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
-                builder.setMessage("You Need to Become a Partner First!");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog Alert = builder.create();
-                Alert.show();
-            }else {
-                Intent intent = new Intent(HomeActivity.this, DailyIncomeActivity.class);
-                startActivity(intent);
-            }
-
-        }
-        else if (id == R.id.action_Bonaza) {
-            if (!Status.equalsIgnoreCase("Active")){
-                AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
-                builder.setMessage("You Need to Become a Partner First!");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog Alert = builder.create();
-                Alert.show();
-            }else {
-                Intent intent = new Intent(HomeActivity.this, DirectBonazaActivity.class);
-                startActivity(intent);
-            }
-        }
-        else if (id == R.id.action_SWallet) {
-            Intent intent = new Intent(HomeActivity.this, SWalletHistoryActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.action_EWallet) {
-            Intent intent = new Intent(HomeActivity.this, EWalletHistoryActivity.class);
-            startActivity(intent);
-        }else if (id == R.id.action_coupon) {
-            Intent intent = new Intent(HomeActivity.this, CouponActivity.class);
-            startActivity(intent);
-        }else if (id == R.id.action_Binary) {
-            if (!Status.equalsIgnoreCase("Active")){
-                AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
-                builder.setMessage("You Need to Become a Partner First!");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog Alert = builder.create();
-                Alert.show();
-            }else {
-                Intent intent = new Intent(HomeActivity.this, BinaryIncomeActivity.class);
-                startActivity(intent);
-            }
-        }else if (id == R.id.action_LogOut) {
+        else if (id == R.id.action_LogOut) {
             AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
             builder.setTitle("Log Out");
             builder.setMessage("Are you sure?");
@@ -724,34 +621,41 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 case R.id.iconLehenga :{
                   //  Intent electric = new Intent(HomeActivity.this, MedLifeActivity.class);
                   //  startActivity(electric);
+                    AlertSoldOut();
                     break;
                 }
                 case R.id.iconWestern :{
                   //  Intent electric = new Intent(HomeActivity.this, PizzaHutActivity.class);
                    // startActivity(electric);
+                    AlertSoldOut();
                     break;
                 }
                 case R.id.iconSuits :{
                   //  Intent electric = new Intent(HomeActivity.this, NutrafyActivity.class);
                   //  startActivity(electric);
+                    AlertSoldOut();
                     break;
                 }
                 case R.id.iconEthinic :{
                     //Intent dth = new Intent(HomeActivity.this, Zee5Activity.class);
                    // startActivity(dth);
+                    AlertSoldOut();
                     break;
                 }
                 case R.id.iconCasual :{
                    // Intent electric = new Intent(HomeActivity.this, ReebokActivity.class);
                    // startActivity(electric);
+                    AlertSoldOut();
                     break;
                 }
                 case R.id.iconFormal :{
                    // Intent dth = new Intent(HomeActivity.this, MensActivity.class);
                   //  startActivity(dth);
+                    AlertSoldOut();
                     break;
                 }
                 case R.id.iconSports :{
+                    AlertSoldOut();
                   //  Intent electric = new Intent(HomeActivity.this, WomensActivity.class);
                   //  startActivity(electric);
                     break;
@@ -759,82 +663,39 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
-    public void showChangeLangDialog() {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = this.getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.dialog_transfer, null);
-        dialogBuilder.setView(dialogView);
-        final EditText editAmount = dialogView.findViewById(R.id.editAmount);
-        dialogBuilder.setMessage("Enter Amount");
-        dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String Transfer_url= Constants.Application_URL+"/users/index.php/Recharge/add_money_s_wallet";
-                progressDialog = progressDialog.show(HomeActivity.this, "", "Please wait...", false, false);
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, Transfer_url, new Response.Listener<String>()  {
-                    @Override
-                    public void onResponse(String response) {
-                        progressDialog.dismiss();
-                        try {
-                            JSONObject jObj = new JSONObject(response);
-                            String Status = jObj.getString("status");
-                            String MSG = jObj.getString("msg");
-                            Toast.makeText(HomeActivity.this, ""+Status, Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            progressDialog.dismiss();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressDialog.dismiss();
-                        Toast.makeText(HomeActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                {
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> params = new HashMap<>();
-                        params.put("email", myProfile.UserLogin);
-                        params.put("amount",editAmount.getText().toString());
-                        return params;
-                    }
-                };
-                queue.add(stringRequest);
-
-            }
-        });
-        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
+    public void AlertSoldOut(){
+        AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
+        builder.setTitle("Sold Out!");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
-        AlertDialog b = dialogBuilder.create();
-        b.show();
+        AlertDialog Alert = builder.create();
+        Alert.show();
     }
-
-    public void StatusActive(){
-        String url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/Recharge/status";
-        progressDialog = progressDialog.show(HomeActivity.this, "", "Please wait...", false, false);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>()  {
+    public void WalletBalance(){
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        String Wallet_url= Constants.Application_URL+"/users/index.php/Recharge/wallet";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Wallet_url, new Response.Listener<String>()  {
             @Override
             public void onResponse(String response) {
-                progressDialog.dismiss();
                 try {
-                        JSONObject jObj = new JSONObject(response);
-                        Status = jObj.getString("status");
+                    JSONObject jObj = new JSONObject(response);
+                    myProfile.EWallet = jObj.getString("E-Wallet");
+                    myProfile.SWallet = jObj.getString("S-Wallet");
+                    myProfile.PendingWallet = jObj.getString("Pending_balance");
+                    Session.AddProfile(getApplicationContext(), myProfile);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    progressDialog.dismiss();
+
                 }
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                progressDialog.dismiss();
-                Toast.makeText(HomeActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(HomeActivity.this, "Please Contact Admin", Toast.LENGTH_SHORT).show();
             }
         })
         {
@@ -845,7 +706,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 return params;
             }
         };
-        requestQueue.add(stringRequest);
+        queue.add(stringRequest);
     }
 
     @Override

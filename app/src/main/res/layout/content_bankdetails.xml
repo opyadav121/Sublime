@@ -24,7 +24,7 @@
             android:padding="3dp"
             />
         <TextView
-            android:id="@+id/btnEditPersonalProfile"
+            android:id="@+id/btnEditBankDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_edit"
