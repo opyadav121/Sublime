@@ -13,8 +13,10 @@
         android:layout_height="wrap_content"
         android:text="Shopping"
         android:gravity="center"
-        android:textSize="18sp"
-        android:textColor="@color/colorOrange"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:padding="5dp"
         />
     <LinearLayout
         android:layout_width="match_parent"

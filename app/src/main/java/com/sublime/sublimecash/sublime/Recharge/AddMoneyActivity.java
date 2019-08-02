@@ -64,57 +64,7 @@ public class AddMoneyActivity extends AppCompatActivity {
                 intent.putExtra("RECHARGE_AMT",txtAmount.getText().toString());
                 intent.putExtra("EMAIL",myProfile.UserLogin);
                 startActivity(intent);
-                //AddMoney();
             }
         });
-
     }
-
-    public void AddMoney(){
-        try {
-            progressDialog = progressDialog.show(AddMoneyActivity.this, "", "Please wait...", false, false);
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>()  {
-                @Override
-                public void onResponse(String response) {
-                    progressDialog.dismiss();
-                    try {
-                        JSONObject jObj = new JSONObject(response);
-                        //Toast.makeText(RegisterActivity.this, ""+jObj.getString("msg"), Toast.LENGTH_SHORT).show();
-                        String UserId = jObj.getString("user_id");
-                        String password = jObj.getString("Password");
-                        String Status = jObj.getString("msg");
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        progressDialog.dismiss();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    progressDialog.dismiss();
-                    Toast.makeText(AddMoneyActivity.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
-                }
-            })
-            {
-                @Override
-                protected Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("amount",txtAmount.getText().toString());
-                    params.put("firstname", myProfile.UserName);
-                    params.put("email", myProfile.UserLogin);
-                    params.put("phone", myProfile.MobileNumber);
-                    params.put("key", "");
-                    params.put("hash", "");
-                    params.put("txnid", "");
-                    params.put("join_user", "on");
-                    return params;
-                }
-            };
-            requestQueue.add(stringRequest);
-        }catch (Exception e){
-            int a = 1;
-        }
-    }
-
 }

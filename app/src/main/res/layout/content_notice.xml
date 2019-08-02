@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/myButton"
+        android:layout_width="60dip"
+        android:layout_height="60dip"
+        android:src="@drawable/ic_notifications" />
+    <TextView
+        android:id="@+id/textOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/myButton"
+        android:layout_alignRight="@id/myButton"
+        android:text="10"
+        android:textColor="#FFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:background="@drawable/notice_count"/>
+</RelativeLayout>

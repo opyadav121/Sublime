@@ -19,11 +19,10 @@
                 android:id="@+id/action_Pan"
                 android:orderInCategory="50"
                 android:title="KYC Update"/>
-
             <item
-                android:id="@+id/action_couponReq"
+                android:id="@+id/action_SWallet"
                 android:orderInCategory="50"
-                android:title="Become A Partner"/>
+                android:title="S-Cash"/>
             <item
                 android:id="@+id/action_LogOut"
                 android:orderInCategory="50"

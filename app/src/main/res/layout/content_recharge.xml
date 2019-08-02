@@ -16,6 +16,7 @@ android:elevation="3dp">
     android:textColor="#000"
     android:textStyle="bold"
     android:textSize="14sp"
+    android:gravity="center"
     />
 <LinearLayout
     android:layout_width="match_parent"

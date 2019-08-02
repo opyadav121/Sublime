@@ -12,8 +12,6 @@ import com.sublime.sublimecash.sublime.R;
 public class InsuranceFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
 
-
-
     public InsuranceFragment() {
         // Required empty public constructor
     }

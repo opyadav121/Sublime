@@ -8,8 +8,6 @@ import Model.Profile;
 public class Session {
 
     private static final String SESSION_NAME = "Sublime";
-
-
     public static boolean AddProfile(Context context, Profile UserProfile)
     {
         try {
@@ -24,7 +22,7 @@ public class Session {
             editor.putString("sponsor", UserProfile.Sponsor);
             editor.putString("pan_no", UserProfile.PanNumber);
             editor.putString("user_id",UserProfile.UserID);
-           // editor.putString("sponsor_id",UserProfile.SponserId);
+            editor.putString("profile",UserProfile.profileImg);
             editor.putString("under_userid",UserProfile.UnderUserId);
             editor.putString("dob",UserProfile.Dob);
             editor.putString("original_email",UserProfile.original_email);
@@ -100,6 +98,7 @@ public class Session {
             mProfile.EWallet = prefs.getString("E-Wallet","");
             mProfile.SWallet = prefs.getString("S-Wallet","");
             mProfile.PendingWallet=prefs.getString("Pending_balance","");
+            mProfile.profileImg= prefs.getString("profile","");
             return mProfile;
         }
         catch (Exception ex)

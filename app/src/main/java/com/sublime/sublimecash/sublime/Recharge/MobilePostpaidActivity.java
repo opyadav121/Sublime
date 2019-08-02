@@ -106,6 +106,11 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         btnPay = findViewById(R.id.btnPay);
         Offer = findViewById(R.id.Offer);
         txtOperator = findViewById(R.id.txtOperator);
+
+        txtBWallet.setText(" \u20B9"+myProfile.PendingWallet);
+        txtEWallet.setText(" \u20B9"+myProfile.EWallet);
+        txtSWallet.setText(" \u20B9"+myProfile.SWallet);
+
         txtrecentRecharge = findViewById(R.id.txtrecentRecharge);
         txtrecentRecharge.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,7 +133,6 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         Picasso.with(getApplicationContext()).load(url1).into(imageOperator);
         txtOperator.setText(optName);
         ChildCode();
-        WalletBalance();
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         myContact = findViewById(R.id.myContact);
         txtMobileNumber = findViewById(R.id.txtMobileNumber);
@@ -203,147 +207,71 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         });
         dialog.show();
     }
-  public void Recharge(){
-      RandomChildCode = ChildCode() + "A";
-      final Date currentTime = Calendar.getInstance().getTime();
-     final int Remain = Integer.parseInt(SWallet_Balance) - Integer.parseInt(txtAmount.getText().toString());
+  public void Recharge() {
+      String Mobile = txtMobileNumber.getText().toString();
+      String Amount = txtAmount.getText().toString();
+      if (Mobile.equals("")) {
+          txtMobileNumber.setError("Enter Mobile no.");
+      } else if (Amount.equals("")) {
+          txtAmount.setError("Enter Amount.");
+      } else {
+          RandomChildCode = ChildCode() + "A";
+          final Date currentTime = Calendar.getInstance().getTime();
+          final int Remain = Integer.parseInt(SWallet_Balance) - Integer.parseInt(txtAmount.getText().toString());
 
-      String Recharge_url= Constants.Application_URL+"/users/index.php/Recharge/API_recharge";
-      progressDialog = progressDialog.show(MobilePostpaidActivity.this, "", "Please wait...", false, false);
-      StringRequest stringRequest = new StringRequest(Request.Method.POST, Recharge_url, new Response.Listener<String>()  {
-          @Override
-          public void onResponse(String response) {
-              progressDialog.dismiss();
-              try {
+          String Recharge_url = Constants.Application_URL + "/users/index.php/Recharge/API_recharge";
+          progressDialog = progressDialog.show(MobilePostpaidActivity.this, "", "Please wait...", false, false);
+          StringRequest stringRequest = new StringRequest(Request.Method.POST, Recharge_url, new Response.Listener<String>() {
+              @Override
+              public void onResponse(String response) {
+                  progressDialog.dismiss();
+                  try {
                       JSONObject jObj = new JSONObject(response);
                       String Status = jObj.getString("Status");
-                      Toast.makeText(MobilePostpaidActivity.this, ""+Status, Toast.LENGTH_SHORT).show();
-                          String RandomChildCode= jObj.getString("Yourrchid");
-                          String Error = jObj.getString("Errormsg");
-                          String Remaining = jObj.getString("Remain");
-                          String RechargeID = jObj.getString("RechargeID");
-                          Intent confirmation = new Intent(MobilePostpaidActivity.this, PaymentHistoryActivity.class);
-                          confirmation.putExtra("Yourrchid", RandomChildCode);
-                          confirmation.putExtra("Errormsg",Error);
-                          confirmation.putExtra("Remain",Remaining);
-                          confirmation.putExtra("Status",Status);
-                          confirmation.putExtra("RechargeID",RechargeID);
-                          startActivity(confirmation);
+                      Toast.makeText(MobilePostpaidActivity.this, "" + Status, Toast.LENGTH_SHORT).show();
+                      String RandomChildCode = jObj.getString("Yourrchid");
+                      String Error = jObj.getString("Errormsg");
+                      String Remaining = jObj.getString("Remain");
+                      String RechargeID = jObj.getString("RechargeID");
+                      Intent confirmation = new Intent(MobilePostpaidActivity.this, PaymentHistoryActivity.class);
+                      confirmation.putExtra("Yourrchid", RandomChildCode);
+                      confirmation.putExtra("Errormsg", Error);
+                      confirmation.putExtra("Remain", Remaining);
+                      confirmation.putExtra("Status", Status);
+                      confirmation.putExtra("RechargeID", RechargeID);
+                      startActivity(confirmation);
                       MobilePostpaidActivity.this.finish();
-              } catch (JSONException e) {
-                  e.printStackTrace();
-                  progressDialog.dismiss();
+                  } catch (JSONException e) {
+                      e.printStackTrace();
+                      progressDialog.dismiss();
+                  }
               }
-          }
-      }, new Response.ErrorListener() {
-          @Override
-          public void onErrorResponse(VolleyError error) {
-              progressDialog.dismiss();
-              Toast.makeText(MobilePostpaidActivity.this, "Please Contact to Admin ", Toast.LENGTH_SHORT).show();
-          }
-      })
-      {
-          @Override
-          protected Map<String, String> getParams() {
-              Map<String, String> params = new HashMap<>();
-              params.put("email", myProfile.UserLogin);
-              params.put("Customernumber", txtMobileNumber.getText().toString());
-              params.put("Yourrchid",RandomChildCode);
-              params.put("Optname",txtOperator.getText().toString());
-              params.put("Optcode",OptId);
-              params.put("operatorname",txtOperator.getText().toString());
-              params.put("wallet_bal",SWallet_Balance);
-              params.put("remaining_bal",Integer.toString(Remain));
-              params.put("Amount",txtAmount.getText().toString());
-              params.put("date", String.valueOf(currentTime));
-              return params;
-          }
-      };
-      requestQueue.add(stringRequest);
+          }, new Response.ErrorListener() {
+              @Override
+              public void onErrorResponse(VolleyError error) {
+                  progressDialog.dismiss();
+                  Toast.makeText(MobilePostpaidActivity.this, "Please Contact to Admin ", Toast.LENGTH_SHORT).show();
+              }
+          }) {
+              @Override
+              protected Map<String, String> getParams() {
+                  Map<String, String> params = new HashMap<>();
+                  params.put("email", myProfile.UserLogin);
+                  params.put("Customernumber", Mobile);
+                  params.put("Yourrchid", RandomChildCode);
+                  params.put("Optname", txtOperator.getText().toString());
+                  params.put("Optcode", OptId);
+                  params.put("operatorname", txtOperator.getText().toString());
+                  params.put("wallet_bal", SWallet_Balance);
+                  params.put("remaining_bal", Integer.toString(Remain));
+                  params.put("Amount", Amount);
+                  params.put("date", String.valueOf(currentTime));
+                  return params;
+              }
+          };
+          requestQueue.add(stringRequest);
+      }
   }
-    public void WalletBalance(){
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String Wallet_url= Constants.Application_URL+"/users/index.php/Recharge/wallet";
-        progressDialog = progressDialog.show(MobilePostpaidActivity.this, "", "Please wait...", false, false);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Wallet_url, new Response.Listener<String>()  {
-            @Override
-            public void onResponse(String response) {
-                progressDialog.dismiss();
-                try {
-
-                    JSONObject jObj = new JSONObject(response);
-                    Ewalet_Balance = jObj.getString("E-Wallet");
-                    SWallet_Balance = jObj.getString("S-Wallet");
-                    Pending_Balance = jObj.getString("Pending_balance");
-                    txtBWallet.setText(" \u20B9"+Pending_Balance);
-                    txtEWallet.setText(" \u20B9"+Ewalet_Balance);
-                    txtSWallet.setText(" \u20B9"+SWallet_Balance);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    progressDialog.dismiss();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(MobilePostpaidActivity.this, "Please Contact Admin", Toast.LENGTH_SHORT).show();
-            }
-        })
-        {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", myProfile.UserLogin);
-                return params;
-            }
-        };
-        queue.add(stringRequest);
-    }
-    public void RechargeHistory()
-    {
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String RechargeHitory_url = Constants.Application_URL+"/users/index.php/Recharge/history";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, RechargeHitory_url, new Response.Listener<String>()  {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        Recharge_History recharge = new Recharge_History();
-                        JSONObject jObj = jsonArray.getJSONObject(i);
-                        recharge.MobileNO = jObj.getString("mob_no");
-                        recharge.Operator = jObj.getString("operator");
-                        recharge.Amount = jObj.getString("amount");
-                        recharge.Date = jObj.getString("date");
-                        recharge.Status = jObj.getString("status");
-                        recharge.TransId = jObj.getString("transaction_id");
-                        recharge.RemainingBal = jObj.getString("remaining_bal");
-                        recharge.WalletBal = jObj.getString("wallet_bal");
-                        rechargeList.add(recharge);
-                    }
-                    adapterRecharge.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MobilePostpaidActivity.this, "Please Contact Admin", Toast.LENGTH_SHORT).show();
-            }
-        })
-        {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", myProfile.UserLogin);
-                return params;
-            }
-        };
-        queue.add(stringRequest);
-    }
 
   //--------------------------------------------------------------------------------------------------
   //  @Override
@@ -458,7 +386,6 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                             String MSG = jObj.getString("msg");
                             Toast.makeText(MobilePostpaidActivity.this, ""+Status, Toast.LENGTH_SHORT).show();
                             transfer_E_to_S.setVisibility(View.GONE);
-                            WalletBalance();
                         } catch (JSONException e) {
                             e.printStackTrace();
                             progressDialog.dismiss();

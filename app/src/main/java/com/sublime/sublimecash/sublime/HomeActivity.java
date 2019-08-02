@@ -28,6 +28,7 @@ import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -37,8 +38,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.sublime.sublimecash.sublime.E_Commerce.LehengaActivity;
 import com.sublime.sublimecash.sublime.E_Commerce.MensActivity;
 import com.sublime.sublimecash.sublime.E_Commerce.SareesActivity;
+import com.sublime.sublimecash.sublime.E_Commerce.SuitsActivity;
 import com.sublime.sublimecash.sublime.E_Commerce.WomensActivity;
 import com.sublime.sublimecash.sublime.History.DailyIncomeActivity;
 import com.sublime.sublimecash.sublime.History.DirectBonazaActivity;
@@ -128,31 +131,60 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
             switch (item.getItemId()) {
                 case R.id.navigation_Home:
-                    Intent home = new Intent(getApplicationContext(),HomeActivity.class);
-                    startActivity(home);
+                    if (myProfile == null || myProfile.UserLogin.matches("")) {
+                        Intent LoginIntent = new Intent(HomeActivity.this, LoginActivity.class);
+                        startActivity(LoginIntent);
+                    } else {
+                        Intent home = new Intent(getApplicationContext(), HomeActivity.class);
+                        startActivity(home);
+                    }
                     return true;
                 case R.id.navigation_business:
-                   Intent dasboard = new Intent(getApplicationContext(), HistoryActivity.class);
-                   startActivity(dasboard);
+                    if (myProfile == null || myProfile.UserLogin.matches("")) {
+                        Intent LoginIntent = new Intent(HomeActivity.this, LoginActivity.class);
+                        startActivity(LoginIntent);
+                    } else {
+                        Intent dasboard = new Intent(getApplicationContext(), HistoryActivity.class);
+                        startActivity(dasboard);
+                    }
                     return true;
                 case R.id.navigation_bank:
-                    Intent bag = new Intent(getApplicationContext(), BagActivity.class);
-                    startActivity(bag);
+                    if (myProfile == null || myProfile.UserLogin.matches("")) {
+                        Intent LoginIntent = new Intent(HomeActivity.this, LoginActivity.class);
+                        startActivity(LoginIntent);
+                    } else {
+                        Intent bag = new Intent(getApplicationContext(), BagActivity.class);
+                        startActivity(bag);
+                    }
                     return true;
                 case R.id.navigation_cart:
-                    Intent shopping = new Intent(getApplicationContext(),OrdersActivity.class);
-                    startActivity(shopping);
+                    if (myProfile == null || myProfile.UserLogin.matches("")) {
+                        Intent LoginIntent = new Intent(HomeActivity.this, LoginActivity.class);
+                        startActivity(LoginIntent);
+                    } else {
+                        Intent shopping = new Intent(getApplicationContext(), OrdersActivity.class);
+                        startActivity(shopping);
+                    }
                     return true;
                 case R.id.navigation_profile:
-                    Intent profile = new Intent(getApplicationContext(),ProfileActivity.class);
-                    startActivity(profile);
+                    if (myProfile == null || myProfile.UserLogin.matches("")) {
+                        Intent LoginIntent = new Intent(HomeActivity.this, LoginActivity.class);
+                        startActivity(LoginIntent);
+                    } else {
+                        Intent profile = new Intent(getApplicationContext(), ProfileActivity.class);
+                        startActivity(profile);
+                    }
                     return true;
             }
             return false;
         }
     };
+
+    ImageView notice;
+    TextView textOne;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,6 +208,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 mediaPlayer.setLooping(true);
             }// to repeat the video
         });
+        notice = findViewById(R.id.notice);
+        notice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NotificationCount();
+                Intent intent = new Intent(HomeActivity.this, NotificationActivity.class);
+                startActivity(intent);
+            }
+        });
+        textOne = findViewById(R.id.textOne);
 
         videoView.setMediaController(new MediaController(this));
         videoView.start();
@@ -196,7 +238,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Slider1();
         SetFlippers();
         WalletBalance();
-
     }
 
     @Override
@@ -211,9 +252,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         int id = item.getItemId();
         if (id == R.id.action_notification) {
-            Intent profileIntent = new Intent(HomeActivity.this, NotificationActivity.class);
-            startActivity(profileIntent);
-            return true;
+            if (myProfile == null || myProfile.UserLogin.matches("")) {
+                Intent LoginIntent = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(LoginIntent);
+            } else {
+                Intent profileIntent = new Intent(HomeActivity.this, NotificationActivity.class);
+                startActivity(profileIntent);
+                return true;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -221,40 +267,44 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         this.item = item;
         int id = item.getItemId();
-        if (id == R.id.nav_gallery) {
-        } else if (id == R.id.nav_slideshow) {
-        }else if (id == R.id.action_Pan) {
-            Intent intent = new Intent(HomeActivity.this, KYCActivity.class);
-            startActivity(intent);
+        if (myProfile == null || myProfile.UserLogin.matches("")) {
+            Intent LoginIntent = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(LoginIntent);
+        } else {
+
+            if (id == R.id.nav_gallery) {
+            } else if (id == R.id.nav_slideshow) {
+            } else if (id == R.id.action_Pan) {
+                Intent intent = new Intent(HomeActivity.this, KYCActivity.class);
+                startActivity(intent);
+            }else if (id == R.id.action_SWallet) {
+                Intent intent = new Intent(HomeActivity.this, SWalletHistoryActivity.class);
+                startActivity(intent);
+            }else if (id == R.id.action_LogOut) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+                builder.setTitle("Log Out");
+                builder.setMessage("Are you sure?");
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Session.LogOff(getApplicationContext());
+                        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                AlertDialog Alert = builder.create();
+                Alert.show();
+                return true;
+            }
         }
-        else if (id == R.id.action_couponReq) {
-            Intent intent = new Intent(HomeActivity.this, CouponRequestActivity.class);
-            startActivity(intent);
-        }
-        else if (id == R.id.action_LogOut) {
-            AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
-            builder.setTitle("Log Out");
-            builder.setMessage("Are you sure?");
-            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    Session.LogOff(getApplicationContext());
-                    Intent intent = new Intent(HomeActivity.this,LoginActivity.class);
-                    startActivity(intent);
-                }
-            });
-            AlertDialog Alert = builder.create();
-            Alert.show();
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
             return true;
         }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
     public void Slider1(){
         for (int i=0; i<pic.length; i++)
             picArray.add(pic[i]);
@@ -322,7 +372,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             return v;
         }
     }
-
     private void SetFlippers(){
         addMoney =  findViewById(R.id.addMoney);
         addMoney.setOnClickListener(new clicker());
@@ -421,244 +470,249 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     class clicker implements View.OnClickListener{
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.addMoney :{
-                    Intent postpaid = new Intent(HomeActivity.this, AddMoneyActivity.class);
-                    startActivity(postpaid);
-                    break;
-                }
-                case R.id.iconMoneyTransfer :{
-                    Intent prepaid = new Intent(HomeActivity.this, MoneyTransferActivity.class);
-                    startActivity(prepaid);
-                    break;
-                }
-                case R.id.iconRefer :{
-                    Intent electric = new Intent(HomeActivity.this, RefferActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.iconAeps :{
-                    Intent gas = new Intent(HomeActivity.this, AEPSActivity.class);
-                    startActivity(gas);
-                    break;
-                }
-                case R.id.mobilePostpaid :{
-                    Intent postpaid = new Intent(HomeActivity.this, PostpaidActivity.class);
-                    startActivity(postpaid);
-                    break;
-                }
-                case R.id.mobilePrepaid :{
-                    Intent prepaid = new Intent(HomeActivity.this, PrepaidActivity.class);
-                    startActivity(prepaid);
-                    break;
-                }
-                case R.id.electricity :{
-                    Intent electric = new Intent(HomeActivity.this, ElectricityBillActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.iconGas :{
-                    Intent gas = new Intent(HomeActivity.this, GasBillActivity.class);
-                    startActivity(gas);
-                    break;
-                }
-                case R.id.iconWater :{
-                    Intent water = new Intent(HomeActivity.this, WaterActivity.class);
-                    startActivity(water);
-                    break;
-                }
-                case R.id.iconInsurance :{
-                    Intent insurance = new Intent(HomeActivity.this, InsuranceRenualActivity.class);
-                    startActivity(insurance);
-                    break;
-                }
-                case R.id.iconBroadband :{
-                    Intent broadband = new Intent(HomeActivity.this, BroadbandActivity.class);
-                    startActivity(broadband);
-                    break;
-                }
-                case R.id.iconDth :{
-                    Intent dth = new Intent(HomeActivity.this, DTHActivity.class);
-                    startActivity(dth);
-                    break;
-                }
-                case R.id.iconLandline :{
-                    Intent dth = new Intent(HomeActivity.this, LandlineActivity.class);
-                    startActivity(dth);
-                    break;
-                }
-                case R.id.netmeds :{
-                    Intent electric = new Intent(HomeActivity.this, NetMaedsActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.nnnow :{
-                    Intent electric = new Intent(HomeActivity.this, NNNOActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.oyo :{
-                    Intent electric = new Intent(HomeActivity.this, OyoActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.makemytrip :{
-                    Intent electric = new Intent(HomeActivity.this, MakemyTripActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.bigrock :{
-                    Intent dth = new Intent(HomeActivity.this, BigrockActivity.class);
-                    startActivity(dth);
-                    break;
-                }
-                case R.id.iconGift :{
-                    Intent electric = new Intent(HomeActivity.this, GiftActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.IconTheme :{
-                    Intent electric = new Intent(HomeActivity.this, ThemeParkActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.iconEthic :{
-                    Intent electric = new Intent(HomeActivity.this, EthicActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.iconRydon :{
-                    Intent electric = new Intent(HomeActivity.this, RydonActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.iconfirstCry :{
-                    Intent electric = new Intent(HomeActivity.this, FirstCryActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.iconJockey :{
-                    Intent electric = new Intent(HomeActivity.this, JockeyActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.iconGiftAlove :{
-                    Intent electric = new Intent(HomeActivity.this, GiftAloveActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.iconSukhhi :{
-                    Intent dth = new Intent(HomeActivity.this, SukhhiActivity.class);
-                    startActivity(dth);
-                    break;
-                }
-                case R.id.iconPaperFry :{
-                    Intent electric = new Intent(HomeActivity.this, PaperFryActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.icongud2 :{
-                    Intent electric = new Intent(HomeActivity.this, Gud2Activity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.iconFabHotels :{
-                    Intent electric = new Intent(HomeActivity.this, FabHotelsActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.cleartrip :{
-                    Intent electric = new Intent(HomeActivity.this, CleartripActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.iconBookmyFlaours :{
-                    Intent electric = new Intent(HomeActivity.this, BookMyFlavoursActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.iconMedLife :{
-                    Intent electric = new Intent(HomeActivity.this, MedLifeActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.iconPizzaHut :{
-                    Intent electric = new Intent(HomeActivity.this, PizzaHutActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.iconNaturefy :{
-                    Intent electric = new Intent(HomeActivity.this, NutrafyActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.iconZee5 :{
-                    Intent dth = new Intent(HomeActivity.this, Zee5Activity.class);
-                    startActivity(dth);
-                    break;
-                }
-                case R.id.iconReebok :{
-                    Intent electric = new Intent(HomeActivity.this, ReebokActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.imgMen :{
-                    Intent dth = new Intent(HomeActivity.this, MensActivity.class);
-                    startActivity(dth);
-                    break;
-                }
-                case R.id.imgWomen :{
-                    Intent electric = new Intent(HomeActivity.this, WomensActivity.class);
-                    startActivity(electric);
-                    break;
-                }
+            if (myProfile == null || myProfile.UserLogin.matches("")) {
+                Intent LoginIntent = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(LoginIntent);
+            } else {
 
-                case R.id.iconSarees :{
-                    Intent electric = new Intent(HomeActivity.this, SareesActivity.class);
-                    startActivity(electric);
-                    break;
-                }
-                case R.id.iconLehenga :{
-                  //  Intent electric = new Intent(HomeActivity.this, MedLifeActivity.class);
-                  //  startActivity(electric);
-                    AlertSoldOut();
-                    break;
-                }
-                case R.id.iconWestern :{
-                  //  Intent electric = new Intent(HomeActivity.this, PizzaHutActivity.class);
-                   // startActivity(electric);
-                    AlertSoldOut();
-                    break;
-                }
-                case R.id.iconSuits :{
-                  //  Intent electric = new Intent(HomeActivity.this, NutrafyActivity.class);
-                  //  startActivity(electric);
-                    AlertSoldOut();
-                    break;
-                }
-                case R.id.iconEthinic :{
-                    //Intent dth = new Intent(HomeActivity.this, Zee5Activity.class);
-                   // startActivity(dth);
-                    AlertSoldOut();
-                    break;
-                }
-                case R.id.iconCasual :{
-                   // Intent electric = new Intent(HomeActivity.this, ReebokActivity.class);
-                   // startActivity(electric);
-                    AlertSoldOut();
-                    break;
-                }
-                case R.id.iconFormal :{
-                   // Intent dth = new Intent(HomeActivity.this, MensActivity.class);
-                  //  startActivity(dth);
-                    AlertSoldOut();
-                    break;
-                }
-                case R.id.iconSports :{
-                    AlertSoldOut();
-                  //  Intent electric = new Intent(HomeActivity.this, WomensActivity.class);
-                  //  startActivity(electric);
-                    break;
+            switch (v.getId()) {
+                    case R.id.addMoney: {
+                        Intent postpaid = new Intent(HomeActivity.this, AddMoneyActivity.class);
+                        startActivity(postpaid);
+                        break;
+                    }
+                    case R.id.iconMoneyTransfer: {
+                        Intent prepaid = new Intent(HomeActivity.this, MoneyTransferActivity.class);
+                        startActivity(prepaid);
+                        break;
+                    }
+                    case R.id.iconRefer: {
+                        Intent electric = new Intent(HomeActivity.this, RefferActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconAeps: {
+                        Intent gas = new Intent(HomeActivity.this, AEPSActivity.class);
+                        startActivity(gas);
+                        break;
+                    }
+                    case R.id.mobilePostpaid: {
+                        Intent postpaid = new Intent(HomeActivity.this, PostpaidActivity.class);
+                        startActivity(postpaid);
+                        break;
+                    }
+                    case R.id.mobilePrepaid: {
+                        Intent prepaid = new Intent(HomeActivity.this, PrepaidActivity.class);
+                        startActivity(prepaid);
+                        break;
+                    }
+                    case R.id.electricity: {
+                        Intent electric = new Intent(HomeActivity.this, ElectricityBillActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconGas: {
+                        Intent gas = new Intent(HomeActivity.this, GasBillActivity.class);
+                        startActivity(gas);
+                        break;
+                    }
+                    case R.id.iconWater: {
+                        Intent water = new Intent(HomeActivity.this, WaterActivity.class);
+                        startActivity(water);
+                        break;
+                    }
+                    case R.id.iconInsurance: {
+                        Intent insurance = new Intent(HomeActivity.this, InsuranceRenualActivity.class);
+                        startActivity(insurance);
+                        break;
+                    }
+                    case R.id.iconBroadband: {
+                        Intent broadband = new Intent(HomeActivity.this, BroadbandActivity.class);
+                        startActivity(broadband);
+                        break;
+                    }
+                    case R.id.iconDth: {
+                        Intent dth = new Intent(HomeActivity.this, DTHActivity.class);
+                        startActivity(dth);
+                        break;
+                    }
+                    case R.id.iconLandline: {
+                        Intent dth = new Intent(HomeActivity.this, LandlineActivity.class);
+                        startActivity(dth);
+                        break;
+                    }
+                    case R.id.netmeds: {
+                        Intent electric = new Intent(HomeActivity.this, NetMaedsActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.nnnow: {
+                        Intent electric = new Intent(HomeActivity.this, NNNOActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.oyo: {
+                        Intent electric = new Intent(HomeActivity.this, OyoActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.makemytrip: {
+                        Intent electric = new Intent(HomeActivity.this, MakemyTripActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.bigrock: {
+                        Intent dth = new Intent(HomeActivity.this, BigrockActivity.class);
+                        startActivity(dth);
+                        break;
+                    }
+                    case R.id.iconGift: {
+                        Intent electric = new Intent(HomeActivity.this, GiftActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.IconTheme: {
+                        Intent electric = new Intent(HomeActivity.this, ThemeParkActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconEthic: {
+                        Intent electric = new Intent(HomeActivity.this, EthicActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconRydon: {
+                        Intent electric = new Intent(HomeActivity.this, RydonActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconfirstCry: {
+                        Intent electric = new Intent(HomeActivity.this, FirstCryActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconJockey: {
+                        Intent electric = new Intent(HomeActivity.this, JockeyActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconGiftAlove: {
+                        Intent electric = new Intent(HomeActivity.this, GiftAloveActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconSukhhi: {
+                        Intent dth = new Intent(HomeActivity.this, SukhhiActivity.class);
+                        startActivity(dth);
+                        break;
+                    }
+                    case R.id.iconPaperFry: {
+                        Intent electric = new Intent(HomeActivity.this, PaperFryActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.icongud2: {
+                        Intent electric = new Intent(HomeActivity.this, Gud2Activity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconFabHotels: {
+                        Intent electric = new Intent(HomeActivity.this, FabHotelsActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.cleartrip: {
+                        Intent electric = new Intent(HomeActivity.this, CleartripActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconBookmyFlaours: {
+                        Intent electric = new Intent(HomeActivity.this, BookMyFlavoursActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconMedLife: {
+                        Intent electric = new Intent(HomeActivity.this, MedLifeActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconPizzaHut: {
+                        Intent electric = new Intent(HomeActivity.this, PizzaHutActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconNaturefy: {
+                        Intent electric = new Intent(HomeActivity.this, NutrafyActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconZee5: {
+                        Intent dth = new Intent(HomeActivity.this, Zee5Activity.class);
+                        startActivity(dth);
+                        break;
+                    }
+                    case R.id.iconReebok: {
+                        Intent electric = new Intent(HomeActivity.this, ReebokActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.imgMen: {
+                        Intent dth = new Intent(HomeActivity.this, MensActivity.class);
+                        startActivity(dth);
+                        break;
+                    }
+                    case R.id.imgWomen: {
+                        Intent electric = new Intent(HomeActivity.this, WomensActivity.class);
+                        startActivity(electric);
+                        break;
+                    }
+
+                    case R.id.iconSarees: {
+                        Intent electric = new Intent(HomeActivity.this, SareesActivity.class);
+                       // electric.putExtra("Saree","Type");
+                        startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconLehenga: {
+                         Intent electric = new Intent(HomeActivity.this, LehengaActivity.class);
+                         startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconWestern: {
+                        //  Intent electric = new Intent(HomeActivity.this, PizzaHutActivity.class);
+                        // startActivity(electric);
+                        AlertSoldOut();
+                        break;
+                    }
+                    case R.id.iconSuits: {
+                          Intent electric = new Intent(HomeActivity.this, SuitsActivity.class);
+                          startActivity(electric);
+                        break;
+                    }
+                    case R.id.iconEthinic: {
+                        //Intent dth = new Intent(HomeActivity.this, Zee5Activity.class);
+                        // startActivity(dth);
+                        AlertSoldOut();
+                        break;
+                    }
+                    case R.id.iconCasual: {
+                        // Intent electric = new Intent(HomeActivity.this, ReebokActivity.class);
+                        // startActivity(electric);
+                        AlertSoldOut();
+                        break;
+                    }
+                    case R.id.iconFormal: {
+                        // Intent dth = new Intent(HomeActivity.this, MensActivity.class);
+                        //  startActivity(dth);
+                        AlertSoldOut();
+                        break;
+                    }
+                    case R.id.iconSports: {
+                        AlertSoldOut();
+                        //  Intent electric = new Intent(HomeActivity.this, WomensActivity.class);
+                        //  startActivity(electric);
+                        break;
+                    }
                 }
             }
         }
@@ -732,5 +786,37 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }   */
+    }
+    public void NotificationCount(){
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        String Wallet_url= Constants.Application_URL+"/users/index.php/user/notification_count";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Wallet_url, new Response.Listener<String>()  {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    String Count = jObj.getString("count");
+                    textOne.setText(Count);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(HomeActivity.this, "Please Contact Admin", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", myProfile.UserLogin);
+                return params;
+            }
+        };
+        queue.add(stringRequest);
     }
 }

@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -79,28 +80,32 @@ public class EditProfileActivity extends AppCompatActivity {
         txtDistrict = findViewById(R.id.txtDistrict);
         btnSubmit = findViewById(R.id.btnSubmit);
         imageProfile = findViewById(R.id.imageProfile);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                UpdateProfile();
-            }
-        });
-        btnUpload = findViewById(R.id.btnUpload);
-        btnUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadBitmap();
-            }
-        });
-        findViewById(R.id.imageProfile).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i, 100);
-            }
-        });
-
+        if (!myProfile.profileImg.equalsIgnoreCase("")) {
+            String url1 = myProfile.profileImg;
+            Picasso.with(getApplicationContext()).load(url1).into(imageProfile);
+        }else {
+            btnSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UpdateProfile();
+                }
+            });
+            btnUpload = findViewById(R.id.btnUpload);
+            btnUpload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    uploadBitmap();
+                }
+            });
+            findViewById(R.id.imageProfile).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(i, 100);
+                }
+            });
+        }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -121,7 +126,6 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         }
     }
-
     public byte[] getFileDataFromDrawable(Bitmap bit) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bit.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
@@ -166,7 +170,6 @@ public class EditProfileActivity extends AppCompatActivity {
         };
         Volley.newRequestQueue(this).add(volleyMultipartRequest);
     }
-
     public void UpdateProfile(){
         String url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/user/updateprofile";
         progressDialog = progressDialog.show(EditProfileActivity.this, "", "Please wait...", false, false);
@@ -218,6 +221,4 @@ public class EditProfileActivity extends AppCompatActivity {
         };
         requestQueue.add(stringRequest);
     }
-
-
 }

@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     String  Login_url = Constants.Application_URL+"/users/index.php/Login/login";
 
-     Button btnLogin;
+     Button btnLogin,btnSkip;
      TextView btnRegister;
      EditText txtEmail,txtPassword;
     @Override
@@ -55,6 +55,14 @@ public class LoginActivity extends AppCompatActivity {
         txtEmail = findViewById(R.id.txtEmail);
         txtPassword = findViewById(R.id.txtPassword);
         btnLogin = findViewById(R.id.btnLogin);
+        btnSkip = findViewById(R.id.btnSkip);
+        btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this,HomeActivity.class);
+                startActivity(i);
+            }
+        });
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +70,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +125,7 @@ public class LoginActivity extends AppCompatActivity {
                             myProfile.occupation = jObj.getString("occupation");
                             myProfile.JoiningAmount = jObj.getString("joining_amount");
                             myProfile.side = jObj.getString("side");
+                            myProfile.profileImg = jObj.getString("profile");
                             Session.AddProfile(getApplicationContext(), myProfile);
                             Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(i);

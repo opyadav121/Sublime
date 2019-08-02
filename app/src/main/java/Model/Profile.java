@@ -36,8 +36,9 @@ public class Profile {
     public String account ="";
     public String side = "";
     public String status = "";
-
+    public String profileImg = "";
     public String EWallet = "";
     public String SWallet = "";
     public String PendingWallet = "";
+    public String Referal_Code="";
 }

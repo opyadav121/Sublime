@@ -1,15 +1,10 @@
 package com.sublime.sublimecash.sublime.Recharge;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
-import android.provider.Settings;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,7 +24,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.sublime.sublimecash.sublime.R;
 
@@ -51,7 +45,7 @@ public class CouponRequestActivity extends AppCompatActivity {
     Spinner spPlans;
     EditText txtQuantity, txtHolderName, txtBankName, txtBranch, txtState, txtDistrict, editTextTags;
     TextView txtUpload;
-    Button btnSubmit, btnImageUpdate;
+    Button btnImageUpdate;
     ImageView fileImage;
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
@@ -83,10 +77,8 @@ public class CouponRequestActivity extends AppCompatActivity {
         txtState = findViewById(R.id.txtState);
         txtDistrict = findViewById(R.id.txtDistrict);
         txtUpload = findViewById(R.id.txtUpload);
-        btnSubmit = findViewById(R.id.btnSubmit);
         fileImage = findViewById(R.id.fileImage);
         btnImageUpdate = findViewById(R.id.btnImageUpdate);
-        editTextTags = findViewById(R.id.editTextTags);
         txtUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,12 +86,6 @@ public class CouponRequestActivity extends AppCompatActivity {
             }
         });
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 // RequestForCoupon();
-            }
-        });
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.CouponRequest, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -119,8 +105,7 @@ public class CouponRequestActivity extends AppCompatActivity {
                     CoupanName="Plan4";
                 }
             }
-            public void onNothingSelected(AdapterView<?> parent)
-            {
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -129,19 +114,12 @@ public class CouponRequestActivity extends AppCompatActivity {
         findViewById(R.id.btnImageUpdate).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //if the tags edittext is empty
-                //we will throw input error
-                if (editTextTags.getText().toString().trim().isEmpty()) {
-                    editTextTags.setError("Enter tags first");
-                    editTextTags.requestFocus();
-                    return;
-                }
+
                 //if everything is ok we will open image chooser
                 Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, 100);
             }
         });
-
     }
 
     @Override
@@ -155,9 +133,7 @@ public class CouponRequestActivity extends AppCompatActivity {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
 
                 fileImage.setImageBitmap(bitmap);
-                //calling the method uploadBitmap to upload image
                 txtUpload.setVisibility(View.VISIBLE);
-               // uploadBitmap();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -169,14 +145,12 @@ public class CouponRequestActivity extends AppCompatActivity {
         bit.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
-
     private void uploadBitmap() {
-
-       // final String tags = editTextTags.getText().toString().trim();
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST,RequestCoupon_url , new Response.Listener<NetworkResponse>() {
             @Override
             public void onResponse(NetworkResponse response) {
                 Toast.makeText(CouponRequestActivity.this, "file Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                CouponRequestActivity.this.finish();
                 try {
                     JSONObject obj = new JSONObject(new String(response.data));
                     Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
@@ -202,7 +176,6 @@ public class CouponRequestActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                long name1 = System.currentTimeMillis();
                 params.put("email",myProfile.UserLogin);
                 params.put("coupon_name", CoupanName);
                 params.put("district", "null");
@@ -210,7 +183,6 @@ public class CouponRequestActivity extends AppCompatActivity {
                 params.put("bank_holder_name", txtHolderName.getText().toString());
                 params.put("bank_name", txtBankName.getText().toString());
                 params.put("state", "null");
-              //  params.put("imagepath", "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/Assets/uploads/"+name1+".png");
                 params.put("quantity", txtQuantity.getText().toString());
                 params.put("date", "");
                 return params;

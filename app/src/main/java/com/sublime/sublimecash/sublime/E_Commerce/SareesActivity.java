@@ -41,6 +41,7 @@ import java.util.Map;
 
 import Common.Constants;
 import Common.Session;
+import Model.Lehenga;
 import Model.Oparater;
 import Model.Profile;
 import Model.Sarees;
@@ -121,23 +122,34 @@ public class SareesActivity extends AppCompatActivity {
                 Sarees optname  = (Sarees) adapterSarees.getItem(position);
                 String prodID = optname.prod_id;
                 String Name = optname.prod_name;
+                String imageName = optname.prod_img;
                 String SellingPrice = optname.selling_price;
                 String mrp = optname.mrp;
+                String des = optname.description;
                 Intent intent = new Intent(SareesActivity.this, ProductDetailsActivity.class);
                // intent.putExtra("Image", optImageName);
                 intent.putExtra("Name", Name);
                 intent.putExtra("Selling", SellingPrice);
                 intent.putExtra("MRP", mrp);
                 intent.putExtra("Prod_id", prodID);
+                intent.putExtra("imgName", imageName);
+                intent.putExtra("descrip",des);
                 startActivity(intent);
             }
         });
     }
+
+
+//**************************************************************************************************
+
+
+
+
+
     class AdapterSarees extends ArrayAdapter {
         LayoutInflater inflat;
         ViewHolder holder;
         public AdapterSarees(Context context, int resource, List<Sarees> objects) {
-
             super(context, resource,objects);
             // TODO Auto-generated constructor stub
             inflat= LayoutInflater.from(context);

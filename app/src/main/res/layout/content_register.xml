@@ -68,12 +68,11 @@
                 android:drawablePadding="5dp"
                 android:layout_marginTop="5dp"
                 />
-
             <EditText
                 android:id="@+id/txtReferalCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint=" refral_code"
+                android:hint=" referral_code"
                 android:inputType="none"
                 android:drawablePadding="5dp"
                 android:layout_marginTop="5dp"

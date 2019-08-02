@@ -53,6 +53,7 @@ public class NotificationActivity extends AppCompatActivity {
     ArrayList<Notification> NotificationList = new ArrayList<>();
     AdapterNotification adapterNotification;
     ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +69,7 @@ public class NotificationActivity extends AppCompatActivity {
 
         myProfile = Session.GetProfile(getApplicationContext());
         listViewNotification = findViewById(R.id.listViewNotification);
+
         adapterNotification =new AdapterNotification(NotificationActivity.this,0,NotificationList);
         listViewNotification.setAdapter(adapterNotification);
         getNotifications();
@@ -121,7 +123,6 @@ public class NotificationActivity extends AppCompatActivity {
             inflat= LayoutInflater.from(context);
         }
 
-
         @Override
         public int getCount() {
             return NotificationList.size();
@@ -163,7 +164,6 @@ public class NotificationActivity extends AppCompatActivity {
             }
         }
     }
-
     private class ViewHolder
     {
         TextView date,title,msg;

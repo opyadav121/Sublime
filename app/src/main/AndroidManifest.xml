@@ -24,10 +24,34 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".HistoryActivity"
+        <activity android:name=".E_Commerce.SuitsActivity"
+            android:parentActivityName=".HomeActivity"></activity>
+        <activity android:name=".E_Commerce.LehengaActivity"
             android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".EditBankdetailsActivity"
+        <activity android:name=".Recharge.CouponRequestbySWalletActivity"
             android:parentActivityName=".HomeActivity"/>
+        <activity
+            android:name=".CorrespondanceAddressActivity"
+            android:parentActivityName=".E_Commerce.PaymentOptionActivity" />
+        <activity android:name=".E_Commerce.PayUforShopingActivity" />
+        <activity
+            android:name=".Recharge.CouponPaymentGatway"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".E_Commerce.PaymentOptionActivity"
+            android:parentActivityName=".E_Commerce.CheckOutActivity" />
+        <activity
+            android:name=".E_Commerce.CheckOutActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".History.BankDetailsActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".HistoryActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".EditBankdetailsActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".E_Commerce.ProductDetailsActivity"
             android:parentActivityName=".HomeActivity" />
@@ -45,16 +69,16 @@
             android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".History.DirectBonazaActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HistoryActivity" />
         <activity
             android:name=".History.ROIIncomeActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HistoryActivity" />
         <activity
             android:name=".History.RewardsActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HistoryActivity" />
         <activity
             android:name=".History.DailyIncomeActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HistoryActivity" />
         <activity
             android:name=".E_Commerce.WomensActivity"
             android:parentActivityName=".HomeActivity" />
@@ -90,7 +114,7 @@
             android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".Recharge.MoneyTransferlistActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HistoryActivity" />
         <activity
             android:name=".Recharge.AddBenefisiaryActivity"
             android:parentActivityName=".HomeActivity" />
@@ -129,7 +153,7 @@
             android:parentActivityName=".Recharge.GiftActivity" />
         <activity
             android:name=".Recharge.RechargeHistoryActivity"
-            android:parentActivityName=".Recharge.MobilePostpaidActivity" />
+            android:parentActivityName=".HistoryActivity" />
         <activity
             android:name=".Recharge.Zee5Activity"
             android:parentActivityName=".HomeActivity" />
@@ -175,7 +199,7 @@
             android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".Recharge.UserListActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HistoryActivity" />
         <activity
             android:name=".TreeViewActivity"
             android:parentActivityName=".HomeActivity" />
@@ -184,25 +208,25 @@
             android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".Recharge.CouponRequestActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HistoryActivity" />
         <activity
             android:name=".Recharge.CouponActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HistoryActivity" />
         <activity
             android:name=".Recharge.BinaryIncomeActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HistoryActivity" />
         <activity
             android:name=".Recharge.SWalletHistoryActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HistoryActivity" />
         <activity
             android:name=".Recharge.EWalletHistoryActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HistoryActivity" />
         <activity
             android:name=".RefferActivity"
             android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".PaymentHistoryActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HistoryActivity" />
         <activity
             android:name=".OrdersActivity"
             android:parentActivityName=".HomeActivity" />
@@ -276,13 +300,11 @@
             </intent-filter>
         </activity>
         <receiver
-            android:name="com.sublime.sublimecash.sublime.RegisterActivity$InstallReferrerReceiver"
-            android:exported="true"
-            android:permission="android.permission.INSTALL_PACKAGES">
+            android:name="utils.ReferralTracker"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
-
     </application>
 </manifest>

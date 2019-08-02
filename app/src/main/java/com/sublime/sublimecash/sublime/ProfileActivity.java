@@ -14,6 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -112,9 +113,10 @@ public class ProfileActivity extends AppCompatActivity {
         txtleftBusiness.setText(" \u20B9"+myProfile.left_business);
         txtRightBusiness.setText(" \u20B9"+myProfile.right_business);
 
-         // String url1 = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/opt/" + history.optImageName;
-        //  Picasso.with(getApplicationContext()).load(url1).into(imageProfile);
-
+        if (!myProfile.profileImg.equalsIgnoreCase("")) {
+            String url1 = myProfile.profileImg;
+            Picasso.with(getApplicationContext()).load(url1).into(imageProfile);
+        }else {
      /*   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getPackageName()));
             finish();
@@ -125,11 +127,12 @@ public class ProfileActivity extends AppCompatActivity {
         findViewById(R.id.btnImageUpdate).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, 100);
             }
         });  */
+
+        }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

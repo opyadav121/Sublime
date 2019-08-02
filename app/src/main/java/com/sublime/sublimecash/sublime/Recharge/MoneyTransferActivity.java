@@ -76,7 +76,6 @@ public class MoneyTransferActivity extends AppCompatActivity {
             }
         });
     }
-
     public void AddMobile(){
         String Recharge_url= Constants.Application_URL+"/users/index.php/Money/Transfer_money";
         progressDialog = progressDialog.show(MoneyTransferActivity.this, "", "Please wait...", false, false);

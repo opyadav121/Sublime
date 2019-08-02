@@ -17,17 +17,42 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:layout_height="wrap_content">
+                >
                 <ImageView
                     android:src="@drawable/header1"
+                    android:layout_width="0dp"
+                    android:layout_weight="8"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    />
+                <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    >
+                    <ImageView
+                        android:id="@+id/notice"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_notifications" />
+                    <TextView
+                        android:id="@+id/textOne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/notice"
+                        android:layout_alignRight="@id/notice"
+                        android:text="1"
+                        android:textColor="@color/colorOrange"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:background="@drawable/notice_count"/>
+                </RelativeLayout>
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
-
     <include layout="@layout/content_home" />
-
 </android.support.design.widget.CoordinatorLayout>

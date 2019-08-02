@@ -17,13 +17,16 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sublime.sublimecash.sublime.HistoryActivity;
 import com.sublime.sublimecash.sublime.HomeActivity;
 import com.sublime.sublimecash.sublime.R;
+import com.sublime.sublimecash.sublime.Recharge.UserListActivity;
 
 import java.util.ArrayList;
 
 import Model.EComMen;
 import Model.EComWomen;
+import Model.History;
 
 public class WomensActivity extends AppCompatActivity {
     GridView gridViewWomen;
@@ -64,9 +67,18 @@ public class WomensActivity extends AppCompatActivity {
         gridViewWomen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Intent intent = new Intent(WomensActivity.this, WomensActivity.class);
-               // startActivity(intent);
-                //finish();
+                EComWomen operator = (EComWomen) subList.get(position);
+                String name = operator.getsubName();
+                if (name.equalsIgnoreCase("Saree")){
+                    Intent intent = new Intent(WomensActivity.this, SareesActivity.class);
+                    startActivity(intent);
+                }else if (name.equalsIgnoreCase("Lehenga")){
+                    Intent intent = new Intent(WomensActivity.this, LehengaActivity.class);
+                    startActivity(intent);
+                }else if (name.equalsIgnoreCase("Suits")){
+                    Intent intent = new Intent(WomensActivity.this, SuitsActivity.class);
+                    startActivity(intent);
+                }else if (name.equalsIgnoreCase("Western Wear")){
                     AlertDialog.Builder builder= new AlertDialog.Builder(WomensActivity.this);
                     builder.setTitle("Sold Out!");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -76,6 +88,57 @@ public class WomensActivity extends AppCompatActivity {
                     });
                     AlertDialog Alert = builder.create();
                     Alert.show();
+                }else if (name.equalsIgnoreCase("Sports Shoes")){
+                    AlertDialog.Builder builder= new AlertDialog.Builder(WomensActivity.this);
+                    builder.setTitle("Sold Out!");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog Alert = builder.create();
+                    Alert.show();
+                }else if (name.equalsIgnoreCase("Casual Shoes")){
+                    AlertDialog.Builder builder= new AlertDialog.Builder(WomensActivity.this);
+                    builder.setTitle("Sold Out!");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog Alert = builder.create();
+                    Alert.show();
+                }else if (name.equalsIgnoreCase("Flats")){
+                    AlertDialog.Builder builder= new AlertDialog.Builder(WomensActivity.this);
+                    builder.setTitle("Sold Out!");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog Alert = builder.create();
+                    Alert.show();
+                }else if (name.equalsIgnoreCase("Heels")){
+                    AlertDialog.Builder builder= new AlertDialog.Builder(WomensActivity.this);
+                    builder.setTitle("Sold Out!");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog Alert = builder.create();
+                    Alert.show();
+                }else if (name.equalsIgnoreCase("Boots")){
+                    AlertDialog.Builder builder= new AlertDialog.Builder(WomensActivity.this);
+                    builder.setTitle("Sold Out!");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog Alert = builder.create();
+                    Alert.show();
+                }
             }
         });
     }
