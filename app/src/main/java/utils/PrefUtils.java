@@ -7,15 +7,12 @@ import android.preference.PreferenceManager;
 public class PrefUtils {
     public static String referral_code = "reffercode";
 
-    public static void saveToPrefs(Context context,
-                                     String key, String value) {
+    public static void saveToPrefs(Context context, String key, String value) {
         SharedPreferences.Editor edit = PreferenceManager.getDefaultSharedPreferences(context).edit();
         edit.putString(key, value);
         edit.apply();
 
     }
-
-
     /**
      *
      * @param context

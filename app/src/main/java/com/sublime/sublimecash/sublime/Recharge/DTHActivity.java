@@ -81,8 +81,9 @@ public class DTHActivity extends AppCompatActivity {
                         opt.OperatorName = jObj.getString("operator_name");
                         opt.optImageName = jObj.getString("image");
                         opt.OptID = jObj.getString("operator_code");
+                        String Status = jObj.getString("status");
                         opt.opType = jObj.getString("OPType");
-                        if (opt.opType.equalsIgnoreCase("DTH")) {
+                        if (opt.opType.equalsIgnoreCase("DTH")&& Status.equalsIgnoreCase("1")) {
                             DTHList.add(opt);
                         }else {
 

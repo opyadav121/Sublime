@@ -43,7 +43,6 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
         imageProfile = findViewById(R.id.imageProfile);
         txtFirstName = findViewById(R.id.txtFirstName);
         txtMobileNumber = findViewById(R.id.txtMobileNumber);
@@ -113,7 +112,7 @@ public class ProfileActivity extends AppCompatActivity {
         txtleftBusiness.setText(" \u20B9"+myProfile.left_business);
         txtRightBusiness.setText(" \u20B9"+myProfile.right_business);
 
-        if (!myProfile.profileImg.equalsIgnoreCase("")) {
+        if (!myProfile.profileImg.equalsIgnoreCase("null")||myProfile.profileImg.equalsIgnoreCase("null")) {
             String url1 = myProfile.profileImg;
             Picasso.with(getApplicationContext()).load(url1).into(imageProfile);
         }else {
@@ -138,7 +137,6 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
-
             //getting the image Uri
             Uri imageUri = data.getData();
             try {

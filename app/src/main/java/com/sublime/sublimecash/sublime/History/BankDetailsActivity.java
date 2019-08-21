@@ -10,20 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import com.sublime.sublimecash.sublime.OrdersActivity;
 import com.sublime.sublimecash.sublime.R;
 
-import Fragments.AllOrdersFragment;
-import Fragments.AmazonFragment;
 import Fragments.BankDetailsFragment;
 import Fragments.BhimDetailsFragment;
-import Fragments.FlipkartFragment;
-import Fragments.IIAshopingFragment;
-import Fragments.OthersFragment;
-import Fragments.OyoFragment;
 import Fragments.PaytmQRFragment;
-import Fragments.RechargeBillsFragment;
-import Fragments.SwiggyFragment;
 
 public class BankDetailsActivity extends AppCompatActivity {
     ViewPager viewPager;

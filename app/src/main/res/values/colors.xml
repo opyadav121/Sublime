@@ -12,7 +12,7 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorOrangeDark">#FF5722</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorGray">#828386</color>
+    <color name="colorGray">#F8A1A1A1</color>
     <color name="colorOrangeTrans">#80f58634</color>
     <color name="blue">#4193ff</color>
 </resources>

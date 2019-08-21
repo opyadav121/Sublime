@@ -25,57 +25,58 @@
             android:orientation="vertical"
             android:nestedScrollingEnabled="true"
             android:layout_below="@id/appBar">
-       <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            >
-           <TextView
-               android:id="@+id/AmountB"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Pending:"
-               />
-           <TextView
-               android:id="@+id/txtBWallet"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Rs 0.00"
-               android:textColor="@color/colorBlack"
-               android:layout_marginRight="20dp"
-               />
-    <TextView
-        android:id="@+id/AmountE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="E-Wallet:"
-        />
-    <TextView
-        android:id="@+id/txtEWallet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rs 0.00"
-        android:textColor="@color/colorBlack"
-        android:layout_marginRight="20dp"
-        />
-    <TextView
-        android:id="@+id/Amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="S-Wallet:"
-        android:gravity="right"
-        />
-    <TextView
-        android:id="@+id/txtSWallet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rs 0.00"
-        android:gravity="right"
-        android:textColor="@color/colorBlack"
-        android:layout_marginRight="20dp"
-        />
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:padding="7dp"
+                android:gravity="center"
+                >
+                <TextView
+                    android:id="@+id/AmountE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="E-Wallet:"
+                    />
+                <TextView
+                    android:id="@+id/txtEWallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rs 0.00"
+                    android:textColor="@color/colorBlack"
+                    android:layout_marginRight="20dp"
+                    />
+                <TextView
+                    android:id="@+id/AmountB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pending:"
+                    />
+                <TextView
+                    android:id="@+id/txtBWallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rs 0.00"
+                    android:textColor="@color/colorBlack"
+                    android:layout_marginRight="20dp"
+                    />
+                <TextView
+                    android:id="@+id/Amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="S-Wallet:"
+                    android:gravity="right"
+                    />
+                <TextView
+                    android:id="@+id/txtSWallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rs 0.00"
+                    android:gravity="right"
+                    android:textColor="@color/colorBlack"
+                    android:layout_marginRight="20dp" />
+            </LinearLayout>
         <TextView
             android:id="@+id/btnTransfer"
             android:layout_width="match_parent"

@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
@@ -46,8 +47,7 @@ public class EditProfileActivity extends AppCompatActivity {
     CircleImageView imageProfile;
     Bitmap bitmap;
     Profile myProfile;
-
-
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +68,7 @@ public class EditProfileActivity extends AppCompatActivity {
         txtEmail = findViewById(R.id.txtEmail);
         txtMobile = findViewById(R.id.txtMobile);
         txtDob = findViewById(R.id.txtDob);
+        progressBar = findViewById(R.id.progressBar);
         txtOccupation = findViewById(R.id.txtOccupation);
         txtMotherName = findViewById(R.id.txtMotherName);
         txtFatherName = findViewById(R.id.txtFatherName);
@@ -80,11 +81,18 @@ public class EditProfileActivity extends AppCompatActivity {
         txtDistrict = findViewById(R.id.txtDistrict);
         btnSubmit = findViewById(R.id.btnSubmit);
         imageProfile = findViewById(R.id.imageProfile);
-
-        if (!myProfile.profileImg.equalsIgnoreCase("")) {
+        imageProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, 100);
+            }
+        });
+        if (myProfile.profileImg.equalsIgnoreCase("null")|| myProfile.profileImg.equalsIgnoreCase("")) {
+            imageProfile.setImageResource(R.drawable.user_image);
+        }else {
             String url1 = myProfile.profileImg;
             Picasso.with(getApplicationContext()).load(url1).into(imageProfile);
-        }else {
             btnSubmit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -98,13 +106,6 @@ public class EditProfileActivity extends AppCompatActivity {
                     uploadBitmap();
                 }
             });
-            findViewById(R.id.imageProfile).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(i, 100);
-                }
-            });
         }
     }
     @Override
@@ -116,7 +117,6 @@ public class EditProfileActivity extends AppCompatActivity {
             Uri imageUri = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-
                 imageProfile.setImageBitmap(bitmap);
                 //calling the method uploadBitmap to upload image
                 btnUpload.setVisibility(View.VISIBLE);
@@ -131,25 +131,28 @@ public class EditProfileActivity extends AppCompatActivity {
         bit.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
-
     private void uploadBitmap() {
+        progressBar.setVisibility(View.VISIBLE);
         String url_profile = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/kyc/upload_pic";
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST,url_profile , new Response.Listener<NetworkResponse>() {
             @Override
             public void onResponse(NetworkResponse response) {
                 Toast.makeText(EditProfileActivity.this, "file Uploaded Successfully", Toast.LENGTH_SHORT).show();
                 try {
+                    progressBar.setVisibility(View.GONE);
                     btnUpload.setVisibility(View.GONE);
                     JSONObject obj = new JSONObject(new String(response.data));
                     Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
             }
         }) {
             String name;

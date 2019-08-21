@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import com.squareup.picasso.Picasso;
 import com.sublime.sublimecash.sublime.PaymentHistoryActivity;
 import com.sublime.sublimecash.sublime.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,24 +38,25 @@ import java.util.Map;
 
 import Common.Constants;
 import Common.Session;
+import Model.Electric;
 import Model.Profile;
 
 public class ElectricityBillPayActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     String optImage,optName,OptId,optType;
-    TextView txtBWallet,txtEWallet,txtSWallet,btnTransfer,txtOperator,btnPay;
+    TextView txtBWallet,txtEWallet,txtSWallet,btnTransfer,txtOperator,txtsbWallet;
     EditText txtMobileNumber,txtAmount;
-    String SWallet_Balance,Ewalet_Balance,Pending_Balance;
+    Button btnPay;
     ProgressDialog progressDialog;
     Profile myProfile;
     String RandomChildCode="";
     final Context context = this;
-
+    Double Remain,bal,restAmt,amt;
+    String dueAmount,Name,Bill,customerNo,dueDate,refId,billunit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_electricity_bill_pay);
-
         myProfile = Session.GetProfile(getApplicationContext());
         requestQueue = Volley.newRequestQueue(this);
         Intent intent = getIntent();
@@ -67,6 +70,11 @@ public class ElectricityBillPayActivity extends AppCompatActivity {
         txtOperator = findViewById(R.id.txtOperator);
         txtMobileNumber = findViewById(R.id.txtMobileNumber);
         txtAmount = findViewById(R.id.txtAmount);
+        txtOperator.setText(optName);
+        txtBWallet.setText(" \u20B9"+myProfile.PendingWallet);
+        txtEWallet.setText(" \u20B9"+myProfile.EWallet);
+        txtSWallet.setText(" \u20B9"+myProfile.SWallet);
+        bal = Double.parseDouble(myProfile.SWallet);
         btnTransfer = findViewById(R.id.btnTransfer);
         btnTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,13 +86,21 @@ public class ElectricityBillPayActivity extends AppCompatActivity {
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customDialog();
+                GetBill();
+
+              /*  amt = Double.parseDouble(txtAmount.getText().toString());
+                if(bal < amt){
+                    restAmt = amt - bal;
+                    String addAmt = Double.toString(restAmt);
+                    Intent intent = new Intent(ElectricityBillPayActivity.this,AddMoneyActivity.class);
+                    intent.putExtra("addAmt",addAmt);
+                    startActivity(intent);
+
+                }else {
+                    customDialog();
+                }   */
             }
         });
-        txtOperator.setText(optName);
-        txtBWallet.setText(" \u20B9"+myProfile.PendingWallet);
-        txtEWallet.setText(" \u20B9"+myProfile.EWallet);
-        txtSWallet.setText(" \u20B9"+myProfile.SWallet);
     }
     public String ChildCode(){
         int range = 9;
@@ -103,17 +119,20 @@ public class ElectricityBillPayActivity extends AppCompatActivity {
     }
     public void customDialog(){
         final Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.custom_dialog);
+        dialog.setContentView(R.layout.cuatom_dialog1);
 
         // set the custom dialog components - text, image and button
         TextView txtAmt = dialog.findViewById(R.id.txtAmt);
+        TextView txtName = dialog.findViewById(R.id.txtName);
+        TextView txtBill = dialog.findViewById(R.id.txtBill);
         TextView txtopt = dialog.findViewById(R.id.txtopt);
-        TextView txtMobile = dialog.findViewById(R.id.txtMobile);
-        String amt = txtAmount.getText().toString();
-        String mobile= txtMobileNumber.getText().toString();
-        txtAmt.setText("\u20B9 "+amt);
+        TextView txtdate = dialog.findViewById(R.id.txtdate);
+
+        txtAmt.setText("\u20B9 "+dueAmount);
         txtopt.setText(optName);
-        txtMobile.setText(mobile);
+        txtName.setText(Name);
+        txtBill.setText("Bill no: "+Bill);
+        txtdate.setText("DueDate: "+dueDate);
         TextView dialogButton = (TextView) dialog.findViewById(R.id.btnCancel);
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,25 +144,17 @@ public class ElectricityBillPayActivity extends AppCompatActivity {
         Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Recharge();
+                BillPay();
                 dialog.dismiss();
             }
         });
         dialog.show();
     }
-    public void Recharge() {
-        String Mobile = txtMobileNumber.getText().toString();
-        String Amount = txtAmount.getText().toString();
-        if (Mobile.equals("")) {
-            txtMobileNumber.setError("Enter Consumer no.");
-        } else if (Amount.equals("")) {
-            txtAmount.setError("Enter Amount.");
-        } else {
+    public void GetBill() {
+        customerNo = txtMobileNumber.getText().toString();
+        billunit = txtAmount.getText().toString();
             RandomChildCode = ChildCode() + "A";
-            final Date currentTime = Calendar.getInstance().getTime();
-            final int Remain = Integer.parseInt(SWallet_Balance) - Integer.parseInt(txtAmount.getText().toString());
-            String Recharge_url = Constants.Application_URL + "/users/index.php/Recharge/API_recharge";
+            String Recharge_url = Constants.Application_URL + "/users/index.php/Bill/bill_fetch";
             progressDialog = progressDialog.show(ElectricityBillPayActivity.this, "", "Please wait...", false, false);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Recharge_url, new Response.Listener<String>() {
                 @Override
@@ -151,20 +162,14 @@ public class ElectricityBillPayActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     try {
                         JSONObject jObj = new JSONObject(response);
-                        String Status = jObj.getString("Status");
-                        Toast.makeText(ElectricityBillPayActivity.this, "" + Status, Toast.LENGTH_SHORT).show();
-                        String RandomChildCode = jObj.getString("Yourrchid");
-                        String Error = jObj.getString("Errormsg");
-                        String Remaining = jObj.getString("Remain");
-                        String RechargeID = jObj.getString("RechargeID");
-                        Intent confirmation = new Intent(ElectricityBillPayActivity.this, PaymentHistoryActivity.class);
-                        confirmation.putExtra("Yourrchid", RandomChildCode);
-                        confirmation.putExtra("Errormsg", Error);
-                        confirmation.putExtra("Remain", Remaining);
-                        confirmation.putExtra("Status", Status);
-                        confirmation.putExtra("RechargeID", RechargeID);
-                        startActivity(confirmation);
-                        ElectricityBillPayActivity.this.finish();
+                        String Data = jObj.getString("data");
+                        JSONObject jOb = new JSONObject(Data);
+                        dueAmount = jOb.getString("dueamount");
+                        Name = jOb.getString("customername");
+                        Bill = jOb.getString("billnumber");
+                        dueDate = jOb.getString("duedate");
+                        refId = jOb.getString("reference_id");
+                        customDialog();
                     } catch (JSONException e) {
                         e.printStackTrace();
                         progressDialog.dismiss();
@@ -181,20 +186,81 @@ public class ElectricityBillPayActivity extends AppCompatActivity {
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
                     params.put("email", myProfile.UserLogin);
-                    params.put("Customernumber", Mobile);
-                    params.put("Yourrchid", RandomChildCode);
-                    params.put("Optname", txtOperator.getText().toString());
+                    params.put("Customernumber", customerNo);
                     params.put("Optcode", OptId);
-                    params.put("operatorname", txtOperator.getText().toString());
-                    params.put("wallet_bal", SWallet_Balance);
-                    params.put("remaining_bal", Integer.toString(Remain));
-                    params.put("Amount", Amount);
-                    params.put("date", String.valueOf(currentTime));
+                    params.put("bill_unit", billunit);
                     return params;
                 }
             };
             requestQueue.add(stringRequest);
-        }
+    }
+    public void BillPay() {
+           amt = Double.parseDouble(dueAmount);
+                if(bal > amt){
+                    restAmt = amt - bal;
+                    String addAmt = Double.toString(restAmt);
+                    Intent intent = new Intent(ElectricityBillPayActivity.this,AddMoneyActivity.class);
+                    intent.putExtra("addAmt",addAmt);
+                    startActivity(intent);
+                }else {
+                    Remain = Double.parseDouble(myProfile.SWallet) - Double.parseDouble(dueAmount);
+                    String rem = Double.toString(Remain);
+                    String Recharge_url = Constants.Application_URL + "/users/index.php/Bill/ElectricityPayment";
+                    progressDialog = progressDialog.show(ElectricityBillPayActivity.this, "", "Please wait...", false, false);
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, Recharge_url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            progressDialog.dismiss();
+                            try {
+                                JSONObject jObj = new JSONObject(response);
+                                String Status = jObj.getString("status");
+                                if (Status.equalsIgnoreCase("FAIL")) {
+                                    Toast.makeText(ElectricityBillPayActivity.this, "Transaction Failed", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(ElectricityBillPayActivity.this, "" + Status, Toast.LENGTH_SHORT).show();
+                                    String TransId = jObj.getString("transaction_id");
+                                    String Mobile = jObj.getString("mob_no");
+                                    String TransAmount = jObj.getString("amount");
+                                    String Datetime = jObj.getString("date");
+                                    Intent confirmation = new Intent(ElectricityBillPayActivity.this, PaymentHistoryActivity.class);
+                                    confirmation.putExtra("Yourrchid", RandomChildCode);
+                                    confirmation.putExtra("Trans_Id", TransId);
+                                    confirmation.putExtra("Mobile", Mobile);
+                                    confirmation.putExtra("Status", Status);
+                                    confirmation.putExtra("Date", Datetime);
+                                    confirmation.putExtra("TansAmount", TransAmount);
+                                    startActivity(confirmation);
+                                    ElectricityBillPayActivity.this.finish();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                progressDialog.dismiss();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            progressDialog.dismiss();
+                            Toast.makeText(ElectricityBillPayActivity.this, "Please Contact to Admin ", Toast.LENGTH_SHORT).show();
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<>();
+                            params.put("email", myProfile.UserLogin);
+                            params.put("Customernumber", customerNo);
+                            params.put("Yourrchid", RandomChildCode);
+                            params.put("Amount", dueAmount);
+                            params.put("Optcode", OptId);
+                            params.put("reference_id", refId);
+                            params.put("bill_unit",billunit);
+                            params.put("wallet_bal",myProfile.SWallet);
+                            params.put("remaining_bal",rem);
+                            return params;
+                        }
+                    };
+                    requestQueue.add(stringRequest);
+                }
     }
     public void showChangeLangDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);

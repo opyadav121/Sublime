@@ -20,13 +20,17 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
+import com.sublime.sublimecash.sublime.HomeActivity;
+import com.sublime.sublimecash.sublime.LoginActivity;
 import com.sublime.sublimecash.sublime.PaymentHistoryActivity;
 import com.sublime.sublimecash.sublime.R;
 
@@ -49,14 +53,14 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
     String optImage,optName,OptId,optType;
     CircleImageView imageOperator;
     RadioGroup radioGroup;
-    TextView txtEWallet,txtSWallet,btnTransfer,txtOperator,btnPay,txtBWallet;
+    TextView txtEWallet,txtSWallet,btnTransfer,txtOperator,btnPay,txtBWallet,txtsbWallet;
     EditText txtMobileNumber,txtAmount;
     Button browsePlan,Offer;
-    String SWallet_Balance,Ewalet_Balance,Pending_Balance;
     ProgressDialog progressDialog;
     Profile myProfile;
     String RandomChildCode="";
     final Context context = this;
+    Double Remain,bal,amt,restAmt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +91,11 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
         txtAmount = findViewById(R.id.txtAmount);
         browsePlan = findViewById(R.id.browsePlan);
         Offer = findViewById(R.id.Offer);
+        txtBWallet.setText(" \u20B9"+myProfile.PendingWallet);
+        txtEWallet.setText(" \u20B9"+myProfile.EWallet);
+        txtSWallet.setText(" \u20B9"+myProfile.SWallet);
+        bal = Double.parseDouble(myProfile.SWallet);
+
         btnTransfer = findViewById(R.id.btnTransfer);
         btnTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,21 +103,28 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
                 showChangeLangDialog();
             }
         });
+
         btnPay = findViewById(R.id.btnPay);
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customDialog();
+                amt = Double.parseDouble(txtAmount.getText().toString());
+                if(bal < amt){
+                    restAmt = amt - bal;
+                    String addAmt = Double.toString(restAmt);
+                    Intent intent = new Intent(PrepaidRechargeActivity.this,AddMoneyActivity.class);
+                    intent.putExtra("addAmt",addAmt);
+                    startActivity(intent);
+
+                }else {
+                    customDialog();
+                }
             }
         });
-        txtBWallet.setText(" \u20B9"+myProfile.PendingWallet);
-        txtEWallet.setText(" \u20B9"+myProfile.EWallet);
-        txtSWallet.setText(" \u20B9"+myProfile.SWallet);
 
         String url1 = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/opt/" +optImage;
         Picasso.with(getApplicationContext()).load(url1).into(imageOperator);
         txtOperator.setText(optName);
-
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
@@ -163,7 +179,6 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
         Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Recharge();
                 dialog.dismiss();
             }
@@ -180,7 +195,8 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
         } else {
             RandomChildCode = ChildCode() + "A";
             final Date currentTime = Calendar.getInstance().getTime();
-            final int Remain = Integer.parseInt(SWallet_Balance) - Integer.parseInt(txtAmount.getText().toString());
+            Remain = Double.parseDouble(myProfile.SWallet) - Double.parseDouble(txtAmount.getText().toString());
+            String amountRest = Double.toString(Remain);
             String Recharge_url = Constants.Application_URL + "/users/index.php/Recharge/API_recharge";
             progressDialog = progressDialog.show(PrepaidRechargeActivity.this, "", "Please wait...", false, false);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Recharge_url, new Response.Listener<String>() {
@@ -189,20 +205,26 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     try {
                         JSONObject jObj = new JSONObject(response);
-                        String Status = jObj.getString("Status");
+                        if (response.length() == 1) {
+
+                            Toast.makeText(PrepaidRechargeActivity.this, "Transaction Failed", Toast.LENGTH_SHORT).show();
+                        } else{
+                            String Status = jObj.getString("status");
                         Toast.makeText(PrepaidRechargeActivity.this, "" + Status, Toast.LENGTH_SHORT).show();
-                        String RandomChildCode = jObj.getString("Yourrchid");
-                        String Error = jObj.getString("Errormsg");
-                        String Remaining = jObj.getString("Remain");
-                        String RechargeID = jObj.getString("RechargeID");
+                        String TransId = jObj.getString("ipay_id");
+                        String Mobile = jObj.getString("account_no");
+                        String TransAmount = jObj.getString("trans_amt");
+                        String Datetime = jObj.getString("datetime");
                         Intent confirmation = new Intent(PrepaidRechargeActivity.this, PaymentHistoryActivity.class);
                         confirmation.putExtra("Yourrchid", RandomChildCode);
-                        confirmation.putExtra("Errormsg", Error);
-                        confirmation.putExtra("Remain", Remaining);
+                        confirmation.putExtra("Trans_Id", TransId);
+                        confirmation.putExtra("Mobile", Mobile);
                         confirmation.putExtra("Status", Status);
-                        confirmation.putExtra("RechargeID", RechargeID);
+                        confirmation.putExtra("Date", Datetime);
+                        confirmation.putExtra("TansAmount", TransAmount);
                         startActivity(confirmation);
                         PrepaidRechargeActivity.this.finish();
+                    }
                     } catch (JSONException e) {
                         e.printStackTrace();
                         progressDialog.dismiss();
@@ -221,16 +243,19 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
                     params.put("email", myProfile.UserLogin);
                     params.put("Customernumber", Mobile);
                     params.put("Yourrchid", RandomChildCode);
-                    params.put("Optname", txtOperator.getText().toString());
+                    params.put("Optname", optName);
                     params.put("Optcode", OptId);
-                    params.put("operatorname", txtOperator.getText().toString());
-                    params.put("wallet_bal", SWallet_Balance);
-                    params.put("remaining_bal", Integer.toString(Remain));
+                    params.put("operatorname", optName);
+                    params.put("wallet_bal", myProfile.SWallet);
+                    params.put("remaining_bal", amountRest);
                     params.put("Amount", Amount);
+                    params.put("amount",Amount);
                     params.put("date", String.valueOf(currentTime));
                     return params;
                 }
             };
+            RetryPolicy rPolicy = new DefaultRetryPolicy(0,-1,0);
+            stringRequest.setRetryPolicy(rPolicy);
             requestQueue.add(stringRequest);
         }
     }
@@ -277,7 +302,6 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
                     }
                 };
                 queue.add(stringRequest);
-
             }
         });
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

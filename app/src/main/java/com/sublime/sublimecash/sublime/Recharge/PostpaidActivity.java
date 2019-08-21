@@ -80,12 +80,10 @@ public class PostpaidActivity extends AppCompatActivity {
                         opt.optImgName = jObj.getString("image");
                         opt.Optid = jObj.getString("operator_code");
                         opt.optype = jObj.getString("OPType");
-                        if (opt.optype.equalsIgnoreCase("PostPaid")) {
+                        String Status = jObj.getString("status");
+                        if (opt.optype.equalsIgnoreCase("PostPaid")&& Status.equalsIgnoreCase("1")) {
                             OperatorList.add(opt);
-                        }else {
-
                         }
-
                     }
                     adapterOperator.notifyDataSetChanged();
                 } catch (JSONException e) {

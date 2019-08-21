@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class PaymentHistoryActivity extends AppCompatActivity {
 
-    TextView txtTransID,txtError,txtRemaining,txtYourChild,txtRechargeID;
+    TextView txtTransID,txtError,txtRemaining,txtYourChild,txtRechargeID,txtDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,18 +30,20 @@ public class PaymentHistoryActivity extends AppCompatActivity {
         txtRemaining = findViewById(R.id.txtRemaining);
         txtYourChild = findViewById(R.id.txtYourChild);
         txtRechargeID = findViewById(R.id.txtRechargeID);
+        txtDate = findViewById(R.id.txtDate);
 
         Intent intent = getIntent();
         String TransID = intent.getStringExtra("Yourrchid");
-        String Error =  intent.getStringExtra("Errormsg");
-        String Remaining = intent.getStringExtra("Remain");
+        String Trans_Amt =  intent.getStringExtra("TansAmount");
+        String Mobile = intent.getStringExtra("Mobile");
         String Status =  intent.getStringExtra("Status");
-        String RechargeID =intent.getStringExtra("RechargeID");
-
+        String RechargeID =intent.getStringExtra("Trans_Id");
+        String Date =intent.getStringExtra("Date");
         txtTransID.setText(TransID);
-        txtError.setText(Error);
-        txtRemaining.setText(Remaining);
+        txtError.setText(Mobile);
+        txtRemaining.setText(Trans_Amt);
         txtYourChild.setText(Status);
         txtRechargeID.setText(RechargeID);
+        txtDate.setText(Date);
     }
 }

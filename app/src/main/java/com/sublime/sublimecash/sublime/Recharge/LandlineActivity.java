@@ -60,14 +60,12 @@ public class LandlineActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Select Operator");
         actionBar.show();
-
         gridViewLandline = findViewById(R.id.gridViewLandline);
         myProfile = Session.GetProfile(getApplicationContext());
         adapterOperator=new AdapterOperator(LandlineActivity.this, R.layout.gridview_prepaid, OperatorList);
         gridViewLandline.setAdapter(adapterOperator);
         Operators();
     }
-
     public void Operators() {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         String url = Constants.Application_URL+"/users/index.php/Recharge/moblie_recharge";
@@ -83,10 +81,9 @@ public class LandlineActivity extends AppCompatActivity {
                         opt.optImageName = jObj.getString("image");
                         opt.OptID = jObj.getString("operator_code");
                         opt.opType = jObj.getString("OPType");
-                        if (opt.opType.equalsIgnoreCase("Landline")) {
+                        String Status = jObj.getString("status");
+                        if (opt.opType.equalsIgnoreCase("Landline")&& Status.equalsIgnoreCase("1")) {
                             OperatorList.add(opt);
-                        }else {
-
                         }
                     }
                     adapterOperator.notifyDataSetChanged();
@@ -128,7 +125,6 @@ public class LandlineActivity extends AppCompatActivity {
         });
 
     }
-
     class AdapterOperator extends ArrayAdapter {
         LayoutInflater inflat;
         ViewHolder holder;

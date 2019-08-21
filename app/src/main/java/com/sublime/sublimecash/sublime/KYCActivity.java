@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
@@ -41,7 +42,7 @@ public class KYCActivity extends AppCompatActivity {
     Profile myProfile;
     RequestQueue requestQueue;
     Bitmap bitmap;
-
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +63,7 @@ public class KYCActivity extends AppCompatActivity {
         txtIdNumber = findViewById(R.id.txtIdNumber);
         txtIdType = findViewById(R.id.txtIdType);
         btnSubmit = findViewById(R.id.btnSubmit);
+        progressBar = findViewById(R.id.progressBar);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,10 +104,12 @@ public class KYCActivity extends AppCompatActivity {
         return byteArrayOutputStream.toByteArray();
     }
     public void UploadPanCard(){
+        progressBar.setVisibility(View.VISIBLE);
         String url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/kyc/upload_pancard";
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST,url , new Response.Listener<NetworkResponse>() {
             @Override
             public void onResponse(NetworkResponse response) {
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(KYCActivity.this, "file Uploaded Successfully", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(KYCActivity.this,AddressProofActivity.class);
                 startActivity(intent);
@@ -114,12 +118,14 @@ public class KYCActivity extends AppCompatActivity {
                     // Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
             }
         }) {
             @Override

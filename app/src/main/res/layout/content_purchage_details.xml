@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/border_gray"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="10dp"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,6 +13,7 @@
         android:orientation="horizontal"
         >
         <TextView
+            android:id="@+id/txtStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Status"
@@ -29,12 +30,13 @@
             android:id="@+id/txtStatusComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="3dp"
+            android:padding="5dp"
             />
     </LinearLayout>
    <View
        android:layout_width="match_parent"
        android:background="@color/colorGray"
+       android:layout_marginTop="5dp"
        android:layout_height="1dp"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,10 +45,12 @@
         android:layout_marginTop="10dp"
         >
         <ImageView
+            android:id="@+id/imgItem"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="100dp"
-            android:src="@drawable/airtelicon"
+            android:src="@drawable/a"
+            android:padding="10dp"
             />
         <LinearLayout
             android:layout_width="0dp"
@@ -59,10 +63,11 @@
                 android:layout_height="wrap_content"
                 android:text="Bill Name"
                 android:textSize="14sp"
+                android:padding="5dp"
                 android:textColor="@color/colorBlack"
                 />
             <TextView
-                android:id="@+id/bill"
+                android:id="@+id/billDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Details"
@@ -72,12 +77,17 @@
     <View
         android:layout_width="match_parent"
         android:background="@color/colorGray"
+        android:layout_marginTop="5dp"
         android:layout_height="1dp"/>
     <LinearLayout
+        android:id="@+id/btnAnotherPay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="12dp"
+
         >
         <TextView
             android:layout_width="0dp"
@@ -97,6 +107,7 @@
         android:background="@color/colorGray"
         android:layout_height="1dp"/>
     <LinearLayout
+        android:id="@+id/btnShowReceipt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

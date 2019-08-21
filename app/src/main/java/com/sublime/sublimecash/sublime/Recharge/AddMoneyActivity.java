@@ -36,7 +36,7 @@ public class AddMoneyActivity extends AppCompatActivity {
     Profile myProfile;
     RequestQueue requestQueue;
     String id= "1234";
-
+    String Amt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +52,11 @@ public class AddMoneyActivity extends AppCompatActivity {
         actionBar.show();
         requestQueue = Volley.newRequestQueue(this);
         myProfile = Session.GetProfile(this);
+        Intent intent = getIntent();
+        Amt = intent.getStringExtra("addAmt");
         btnAdd = findViewById(R.id.btnAdd);
         txtAmount = findViewById(R.id.txtAmount);
+        txtAmount.setText(Amt);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

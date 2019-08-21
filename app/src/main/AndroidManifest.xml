@@ -24,12 +24,33 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".E_Commerce.SuitsActivity"
-            android:parentActivityName=".HomeActivity"></activity>
-        <activity android:name=".E_Commerce.LehengaActivity"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".Recharge.CouponRequestbySWalletActivity"
-            android:parentActivityName=".HomeActivity"/>
+        <activity android:name=".SupportStatusActivity"
+            android:parentActivityName=""/>
+        <activity android:name=".Recharge.WaterBillActivity" />
+        <activity
+            android:name=".Recharge.SupportActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.IncentiveActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".E_Commerce.GSTINActivity"
+            android:parentActivityName=".E_Commerce.CheckOutActivity" />
+        <activity
+            android:name=".E_Commerce.ReceiptActivity"
+            android:parentActivityName=".E_Commerce.ShophistoryActivity" />
+        <activity
+            android:name=".E_Commerce.ShophistoryActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".E_Commerce.SuitsActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".E_Commerce.LehengaActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Recharge.CouponRequestbySWalletActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".CorrespondanceAddressActivity"
             android:parentActivityName=".E_Commerce.PaymentOptionActivity" />
@@ -299,6 +320,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <receiver
             android:name="utils.ReferralTracker"
             android:exported="true">
@@ -307,4 +329,5 @@
             </intent-filter>
         </receiver>
     </application>
+
 </manifest>

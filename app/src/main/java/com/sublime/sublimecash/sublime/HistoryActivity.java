@@ -111,9 +111,9 @@ public class HistoryActivity extends AppCompatActivity {
         accountHistory.add(new History("My Partner Status", R.drawable.icon1));
         accountHistory.add(new History("Daily Income", R.drawable.icon2));
         accountHistory.add(new History("Rewards", R.drawable.icon3));
-        accountHistory.add(new History("ROI", R.drawable.icon4));
-        accountHistory.add(new History("Direct Bonaza", R.drawable.icon5));
-        accountHistory.add(new History("Binary Income", R.drawable.icon6));
+        accountHistory.add(new History("CashBack", R.drawable.icon4));
+        accountHistory.add(new History("Direct Bonanza", R.drawable.icon5));
+        accountHistory.add(new History("Matching Income", R.drawable.icon6));
         accountHistory.add(new History("E-Cash", R.drawable.icon7));
         accountHistory.add(new History("S-Cash", R.drawable.icon8s));
         accountHistory.add(new History("Coupons", R.drawable.icon9));
@@ -168,7 +168,7 @@ public class HistoryActivity extends AppCompatActivity {
                           Intent intent = new Intent(HistoryActivity.this, RewardsActivity.class);
                           startActivity(intent);
                       }
-                  }else if (name.equalsIgnoreCase("ROI")){
+                  }else if (name.equalsIgnoreCase("CashBack")){
                       if (!Status.equalsIgnoreCase("Active")){
 
                           AlertDialog.Builder builder= new AlertDialog.Builder(HistoryActivity.this);
@@ -184,7 +184,7 @@ public class HistoryActivity extends AppCompatActivity {
                           Intent intent = new Intent(HistoryActivity.this, ROIIncomeActivity.class);
                           startActivity(intent);
                       }
-                  }else if (name.equalsIgnoreCase("Direct Bonaza")){
+                  }else if (name.equalsIgnoreCase("Direct Bonanza")){
                       if (!Status.equalsIgnoreCase("Active")){
                           AlertDialog.Builder builder= new AlertDialog.Builder(HistoryActivity.this);
                           builder.setMessage("You Need to Become a Partner First!");
@@ -199,7 +199,7 @@ public class HistoryActivity extends AppCompatActivity {
                           Intent intent = new Intent(HistoryActivity.this, DirectBonazaActivity.class);
                           startActivity(intent);
                       }
-                  }else if (name.equalsIgnoreCase("Binary Income")) {
+                  }else if (name.equalsIgnoreCase("Matching Income")) {
                       if (!Status.equalsIgnoreCase("Active")){
                           AlertDialog.Builder builder= new AlertDialog.Builder(HistoryActivity.this);
                           builder.setMessage("You Need to Become a Partner First!");
@@ -294,7 +294,6 @@ public class HistoryActivity extends AppCompatActivity {
         };
         requestQueue.add(stringRequest);
     }
-
     public void showChangeLangDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();

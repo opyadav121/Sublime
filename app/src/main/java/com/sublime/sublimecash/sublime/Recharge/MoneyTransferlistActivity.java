@@ -95,7 +95,6 @@ public class MoneyTransferlistActivity extends AppCompatActivity {
 
             }
         });
-
         name.setText(Name);
         txtAccountNumber.setText(AcNumber);
         txtBeneficId.setText(BeneficId);
@@ -110,7 +109,6 @@ public class MoneyTransferlistActivity extends AppCompatActivity {
         });
 
     }
-
     public void MoneyTransfer(){
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         String url= Constants.Application_URL+"/users/index.php/Money/TransferMoney";

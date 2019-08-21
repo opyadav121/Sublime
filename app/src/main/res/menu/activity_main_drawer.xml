@@ -2,7 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_gallery"
@@ -23,6 +22,18 @@
                 android:id="@+id/action_SWallet"
                 android:orderInCategory="50"
                 android:title="S-Cash"/>
+            <item
+                android:id="@+id/action_SBWallet"
+                android:orderInCategory="50"
+                android:title="SB-Cash"/>
+            <item
+                android:id="@+id/action_Incentive"
+                android:orderInCategory="50"
+                android:title="Incentive"/>
+            <item
+                android:id="@+id/action_Support"
+                android:orderInCategory="50"
+                android:title="Support"/>
             <item
                 android:id="@+id/action_LogOut"
                 android:orderInCategory="50"

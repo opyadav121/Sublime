@@ -44,7 +44,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@id/notice"
                         android:layout_alignRight="@id/notice"
-                        android:text="1"
                         android:textColor="@color/colorOrange"
                         android:textSize="10sp"
                         android:textStyle="bold"
@@ -52,7 +51,6 @@
                 </RelativeLayout>
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
-
     </android.support.design.widget.AppBarLayout>
     <include layout="@layout/content_home" />
 </android.support.design.widget.CoordinatorLayout>

@@ -67,7 +67,13 @@ public class CheckOutActivity extends AppCompatActivity {
         imgItem= findViewById(R.id.imgItem);
         btnAdd= findViewById(R.id.btnAdd);
         btnMinus= findViewById(R.id.btnMinus);
-       // txtCount.setText(qnty);
+        txtGSTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(CheckOutActivity.this, GSTINActivity.class);
+                startActivity(intent1);
+            }
+        });
         btnChangeAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

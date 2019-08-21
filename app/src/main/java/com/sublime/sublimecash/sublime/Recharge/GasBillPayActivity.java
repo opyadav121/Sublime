@@ -44,25 +44,24 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class GasBillPayActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     String optImage,optName,OptId,optType;
-    TextView txtBWallet,txtEWallet,txtSWallet,btnTransfer,txtOperator,btnPay;
+    TextView txtBWallet,txtEWallet,txtSWallet,btnTransfer,txtOperator,btnPay,txtsbWallet;
     EditText txtMobileNumber,txtAmount;
-    String SWallet_Balance,Ewalet_Balance,Pending_Balance;
     ProgressDialog progressDialog;
     Profile myProfile;
     String RandomChildCode="";
     final Context context = this;
+    Double Remain,amt,restAmt,bal;
+    String dueAmount,Name,Bill,customerNo,dueDate,refId,billunit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gas_bill_pay);
-
         myProfile = Session.GetProfile(getApplicationContext());
         requestQueue = Volley.newRequestQueue(this);
         Intent intent = getIntent();
         optName = intent.getStringExtra("optName");
         OptId = intent.getStringExtra("OptId");
         optType = intent.getStringExtra("optType");
-
         txtBWallet = findViewById(R.id.txtBWallet);
         txtEWallet = findViewById(R.id.txtEWallet);
         txtSWallet = findViewById(R.id.txtSWallet);
@@ -70,6 +69,10 @@ public class GasBillPayActivity extends AppCompatActivity {
         txtMobileNumber = findViewById(R.id.txtMobileNumber);
         txtAmount = findViewById(R.id.txtAmount);
         btnPay = findViewById(R.id.btnPay);
+        txtBWallet.setText(" \u20B9"+myProfile.PendingWallet);
+        txtEWallet.setText(" \u20B9"+myProfile.EWallet);
+        txtSWallet.setText(" \u20B9"+myProfile.SWallet);
+        bal = Double.parseDouble(myProfile.SWallet);
         btnTransfer = findViewById(R.id.btnTransfer);
         btnTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,12 +83,11 @@ public class GasBillPayActivity extends AppCompatActivity {
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customDialog();
+                GetBill();
             }
         });
         txtOperator.setText(optName);
     }
-
     public String ChildCode(){
         int range = 9;
         int length = 4;
@@ -104,7 +106,6 @@ public class GasBillPayActivity extends AppCompatActivity {
     public void customDialog(){
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.custom_dialog);
-
         // set the custom dialog components - text, image and button
         TextView txtAmt = dialog.findViewById(R.id.txtAmt);
         TextView txtopt = dialog.findViewById(R.id.txtopt);
@@ -125,25 +126,68 @@ public class GasBillPayActivity extends AppCompatActivity {
         Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Recharge();
+                BillPay();
                 dialog.dismiss();
             }
         });
         dialog.show();
     }
-    public void Recharge() {
-        String Mobile = txtMobileNumber.getText().toString();
-        String Amount = txtAmount.getText().toString();
-        if (Mobile.equals("")) {
-            txtMobileNumber.setError("Enter Customer ID");
-        } else if (Amount.equals("")) {
-            txtAmount.setError("Enter Amount.");
-        } else {
-            RandomChildCode = ChildCode() + "A";
-            final Date currentTime = Calendar.getInstance().getTime();
-            final int Remain = Integer.parseInt(SWallet_Balance) - Integer.parseInt(txtAmount.getText().toString());
-            String Recharge_url = Constants.Application_URL + "/users/index.php/Recharge/API_recharge";
+    public void GetBill() {
+        customerNo = txtMobileNumber.getText().toString();
+        billunit = txtAmount.getText().toString();
+        RandomChildCode = ChildCode() + "A";
+        String Recharge_url = Constants.Application_URL + "/users/index.php/Bill/bill_fetch";
+        progressDialog = progressDialog.show(GasBillPayActivity.this, "", "Please wait...", false, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Recharge_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    String Data = jObj.getString("data");
+                    JSONObject jOb = new JSONObject(Data);
+                    dueAmount = jOb.getString("dueamount");
+                    Name = jOb.getString("customername");
+                    Bill = jOb.getString("billnumber");
+                    dueDate = jOb.getString("duedate");
+                    refId = jOb.getString("reference_id");
+                    customDialog();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(GasBillPayActivity.this, "Please Contact to Admin ", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", myProfile.UserLogin);
+                params.put("Customernumber", customerNo);
+                params.put("Optcode", OptId);
+                params.put("bill_unit", billunit);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    public void BillPay() {
+        amt = Double.parseDouble(dueAmount);
+        if(bal > amt){
+            restAmt = amt - bal;
+            String addAmt = Double.toString(restAmt);
+            Intent intent = new Intent(GasBillPayActivity.this,AddMoneyActivity.class);
+            intent.putExtra("addAmt",addAmt);
+            startActivity(intent);
+        }else {
+            Remain = Double.parseDouble(myProfile.SWallet) - Double.parseDouble(dueAmount);
+            String rem = Double.toString(Remain);
+            String Recharge_url = Constants.Application_URL + "/users/index.php/Bill/ElectricityPayment";
             progressDialog = progressDialog.show(GasBillPayActivity.this, "", "Please wait...", false, false);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Recharge_url, new Response.Listener<String>() {
                 @Override
@@ -151,20 +195,25 @@ public class GasBillPayActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     try {
                         JSONObject jObj = new JSONObject(response);
-                        String Status = jObj.getString("Status");
-                        Toast.makeText(GasBillPayActivity.this, "" + Status, Toast.LENGTH_SHORT).show();
-                        String RandomChildCode = jObj.getString("Yourrchid");
-                        String Error = jObj.getString("Errormsg");
-                        String Remaining = jObj.getString("Remain");
-                        String RechargeID = jObj.getString("RechargeID");
-                        Intent confirmation = new Intent(GasBillPayActivity.this, PaymentHistoryActivity.class);
-                        confirmation.putExtra("Yourrchid", RandomChildCode);
-                        confirmation.putExtra("Errormsg", Error);
-                        confirmation.putExtra("Remain", Remaining);
-                        confirmation.putExtra("Status", Status);
-                        confirmation.putExtra("RechargeID", RechargeID);
-                        startActivity(confirmation);
-                        GasBillPayActivity.this.finish();
+                        String Status = jObj.getString("status");
+                        if (Status.equalsIgnoreCase("FAIL")) {
+                            Toast.makeText(GasBillPayActivity.this, "Transaction Failed", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(GasBillPayActivity.this, "" + Status, Toast.LENGTH_SHORT).show();
+                            String TransId = jObj.getString("transaction_id");
+                            String Mobile = jObj.getString("mob_no");
+                            String TransAmount = jObj.getString("amount");
+                            String Datetime = jObj.getString("date");
+                            Intent confirmation = new Intent(GasBillPayActivity.this, PaymentHistoryActivity.class);
+                            confirmation.putExtra("Yourrchid", RandomChildCode);
+                            confirmation.putExtra("Trans_Id", TransId);
+                            confirmation.putExtra("Mobile", Mobile);
+                            confirmation.putExtra("Status", Status);
+                            confirmation.putExtra("Date", Datetime);
+                            confirmation.putExtra("TansAmount", TransAmount);
+                            startActivity(confirmation);
+                            GasBillPayActivity.this.finish();
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                         progressDialog.dismiss();
@@ -181,15 +230,14 @@ public class GasBillPayActivity extends AppCompatActivity {
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
                     params.put("email", myProfile.UserLogin);
-                    params.put("Customernumber", Mobile);
+                    params.put("Customernumber", customerNo);
                     params.put("Yourrchid", RandomChildCode);
-                    params.put("Optname", txtOperator.getText().toString());
+                    params.put("Amount", dueAmount);
                     params.put("Optcode", OptId);
-                    params.put("operatorname", txtOperator.getText().toString());
-                    params.put("wallet_bal", SWallet_Balance);
-                    params.put("remaining_bal", Integer.toString(Remain));
-                    params.put("Amount", Amount);
-                    params.put("date", String.valueOf(currentTime));
+                    params.put("reference_id", refId);
+                    params.put("bill_unit",billunit);
+                    params.put("wallet_bal",myProfile.SWallet);
+                    params.put("remaining_bal",rem);
                     return params;
                 }
             };

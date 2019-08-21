@@ -1,6 +1,7 @@
 package Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
+import com.sublime.sublimecash.sublime.E_Commerce.ShophistoryActivity;
 import com.sublime.sublimecash.sublime.R;
 import com.sublime.sublimecash.sublime.Recharge.RechargeHistoryActivity;
 
@@ -64,11 +67,14 @@ public class IIAshopingFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 EcomShopHistory itemName= adapterHistory.getItem(position);
                 String Name = itemName.name;
-                Fragment orderFragment = new OrderDetailsFragment();
+                Intent intent = new Intent(getActivity(), ShophistoryActivity.class);
+                startActivity(intent);
+
+             /*   Fragment orderFragment = new OrderDetailsFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragmentshop, orderFragment);
                 transaction.addToBackStack(null);
-                transaction.commit();
+                transaction.commit(); */
             }
         });
         String url= "http://www.sublimecash.com/ws2/index.php/front_controller/get_order_histroy";
@@ -89,7 +95,7 @@ public class IIAshopingFragment extends Fragment {
                         shop.created = jObj.getString("created");
                         shop.amount = jObj.getString("amount");
                         shop.phone = jObj.getString("phone");
-                        ItemList.add(shop);
+                       // ItemList.add(shop);
                     }
                     JSONArray jsArray = new JSONArray(Item);
                     for (int j = 0; j < jsArray.length(); j++) {
@@ -132,7 +138,6 @@ public class IIAshopingFragment extends Fragment {
         LayoutInflater inflat;
         ViewHolder holder;
         public AdapterHistory(IIAshopingFragment context, int resource, List<EcomShopHistory> objects) {
-
             super(context.getActivity(), resource,objects);
             // TODO Auto-generated constructor stub
             inflat= (LayoutInflater) LayoutInflater.from(context.getActivity());
@@ -167,7 +172,8 @@ public class IIAshopingFragment extends Fragment {
                 EcomShopHistory history= getItem(position);
                 holder.txtName.setText(history.prod_name);
                 holder.txtDate.setText(history.created);
-                //holder.histAmount.setText(" \u20B9"+history.Amount );
+                String url1 = "http://sublimecash.com/upload/product/" +history.image;
+                Picasso.with(getActivity().getApplicationContext()).load(url1).into(holder.imgItem);
                 return convertView;
             }
             catch (Exception ex)

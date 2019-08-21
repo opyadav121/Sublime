@@ -86,10 +86,9 @@ public class BroadbandActivity extends AppCompatActivity {
                         opt.optImageName = jObj.getString("image");
                         opt.OptID = jObj.getString("operator_code");
                         opt.opType = jObj.getString("OPType");
-                        if (opt.opType.equalsIgnoreCase("Landline")) {
+                        String Status = jObj.getString("status");
+                        if (opt.opType.equalsIgnoreCase("BROADBAND")&& Status.equalsIgnoreCase("1")) {
                             OperatorList.add(opt);
-                        }else {
-
                         }
                     }
                     adapterOperator.notifyDataSetChanged();

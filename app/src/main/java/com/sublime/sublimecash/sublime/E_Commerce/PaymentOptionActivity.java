@@ -40,7 +40,7 @@ public class PaymentOptionActivity extends AppCompatActivity {
     Button payNow,btnPayU;
     Profile myProfile;
     CheckBox checkBox;
-    int amount,SBalance;
+    Double amount,SBalance;
     String toPay,Pay;
 
     ProgressDialog progressDialog;
@@ -72,8 +72,8 @@ public class PaymentOptionActivity extends AppCompatActivity {
         amounttoPay = findViewById(R.id.amounttoPay);
         SWalletBalance.setText(" \u20B9"+myProfile.SWallet);
         payment.setText(" \u20B9"+toPay);
-        SBalance = Integer.parseInt(myProfile.SWallet);
-        amount = Integer.parseInt(toPay);
+        SBalance = Double.parseDouble(myProfile.SWallet);
+        amount = Double.parseDouble(toPay);
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,8 +97,8 @@ public class PaymentOptionActivity extends AppCompatActivity {
     public void payment(){
         if (checkBox.isChecked()){
         if (amount > SBalance){
-          int Payable = amount - SBalance;
-          Pay = Integer.toString(Payable);
+          Double Payable = amount - SBalance;
+          Pay = Double.toString(Payable);
             amounttoPay.setText(" \u20B9"+Pay);
         }else if (amount <= SBalance){
            // int Payable1 = SBalance - amount;

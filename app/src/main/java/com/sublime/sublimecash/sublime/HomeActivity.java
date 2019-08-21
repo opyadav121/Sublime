@@ -66,6 +66,7 @@ import com.sublime.sublimecash.sublime.Recharge.GasBillActivity;
 import com.sublime.sublimecash.sublime.Recharge.GiftActivity;
 import com.sublime.sublimecash.sublime.Recharge.GiftAloveActivity;
 import com.sublime.sublimecash.sublime.Recharge.Gud2Activity;
+import com.sublime.sublimecash.sublime.Recharge.IncentiveActivity;
 import com.sublime.sublimecash.sublime.Recharge.InsuranceRenualActivity;
 import com.sublime.sublimecash.sublime.Recharge.JockeyActivity;
 import com.sublime.sublimecash.sublime.Recharge.LandlineActivity;
@@ -86,6 +87,7 @@ import com.sublime.sublimecash.sublime.Recharge.ReebokActivity;
 import com.sublime.sublimecash.sublime.Recharge.RydonActivity;
 import com.sublime.sublimecash.sublime.Recharge.SWalletHistoryActivity;
 import com.sublime.sublimecash.sublime.Recharge.SukhhiActivity;
+import com.sublime.sublimecash.sublime.Recharge.SupportActivity;
 import com.sublime.sublimecash.sublime.Recharge.ThemeParkActivity;
 import com.sublime.sublimecash.sublime.Recharge.UserListActivity;
 import com.sublime.sublimecash.sublime.Recharge.WaterActivity;
@@ -190,10 +192,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -271,7 +273,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Intent LoginIntent = new Intent(HomeActivity.this, LoginActivity.class);
             startActivity(LoginIntent);
         } else {
-
             if (id == R.id.nav_gallery) {
             } else if (id == R.id.nav_slideshow) {
             } else if (id == R.id.action_Pan) {
@@ -280,6 +281,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }else if (id == R.id.action_SWallet) {
                 Intent intent = new Intent(HomeActivity.this, SWalletHistoryActivity.class);
                 startActivity(intent);
+            }else if (id == R.id.action_Support) {
+                Intent intent = new Intent(HomeActivity.this, SupportActivity.class);
+                startActivity(intent);
+            }else if (id == R.id.action_Incentive) {
+                Intent intent = new Intent(HomeActivity.this, IncentiveActivity.class);
+                startActivity(intent);
+            }else if (id == R.id.action_SBWallet) {
+                item.setTitle("SB-Cash                "+"\u20B9 "+myProfile.SbWallet);
+
             }else if (id == R.id.action_LogOut) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
                 builder.setTitle("Log Out");
@@ -305,6 +315,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
             return true;
         }
+
     public void Slider1(){
         for (int i=0; i<pic.length; i++)
             picArray.add(pic[i]);
@@ -334,6 +345,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         },10000,10000);
 
     }
+
     public class MyAdapter extends PagerAdapter
     {
         private ArrayList<Integer> images;
@@ -360,7 +372,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         {
             container.removeView((View) object);
         }
-
         @NonNull
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position)
@@ -372,6 +383,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             return v;
         }
     }
+
     private void SetFlippers(){
         addMoney =  findViewById(R.id.addMoney);
         addMoney.setOnClickListener(new clicker());
@@ -467,6 +479,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         iconSports =  findViewById(R.id.iconSports);
         iconSports.setOnClickListener(new clicker());
     }
+
     class clicker implements View.OnClickListener{
         @Override
         public void onClick(View v) {
@@ -474,7 +487,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Intent LoginIntent = new Intent(HomeActivity.this, LoginActivity.class);
                 startActivity(LoginIntent);
             } else {
-
             switch (v.getId()) {
                     case R.id.addMoney: {
                         Intent postpaid = new Intent(HomeActivity.this, AddMoneyActivity.class);
@@ -717,6 +729,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
+
     public void AlertSoldOut(){
         AlertDialog.Builder builder= new AlertDialog.Builder(HomeActivity.this);
         builder.setTitle("Sold Out!");
@@ -728,6 +741,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         AlertDialog Alert = builder.create();
         Alert.show();
     }
+
     public void WalletBalance(){
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         String Wallet_url= Constants.Application_URL+"/users/index.php/Recharge/wallet";
@@ -739,11 +753,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     myProfile.EWallet = jObj.getString("E-Wallet");
                     myProfile.SWallet = jObj.getString("S-Wallet");
                     myProfile.PendingWallet = jObj.getString("Pending_balance");
+                    myProfile.SbWallet = jObj.getString("sbcash");
                     Session.AddProfile(getApplicationContext(), myProfile);
-
                 } catch (JSONException e) {
                     e.printStackTrace();
-
                 }
             }
         }, new Response.ErrorListener() {
@@ -787,6 +800,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }   */
     }
+
     public void NotificationCount(){
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         String Wallet_url= Constants.Application_URL+"/users/index.php/user/notification_count";

@@ -102,7 +102,7 @@ public class MoneyTransferActivity extends AppCompatActivity {
                     String TotalLimit = Remitter.getString("remaininglimit");
                     JSONObject beneficiary = data.getJSONObject("beneficiary");
                     if (beneficiary.length()==0){
-                        Intent intent = new Intent(MoneyTransferActivity.this,MoneyTransferlistActivity.class);
+                        Intent intent = new Intent(MoneyTransferActivity.this,AddBenefisiaryActivity.class);
                         intent.putExtra("remitterName",RemitterName);
                         startActivity(intent);
                     }else {

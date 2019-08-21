@@ -41,7 +41,6 @@ public class MoneyTransferAddActivity extends AppCompatActivity {
     EditText txtFirstName,txtLastName,txtMobile,txtPincode;
     Button btnAdd;
     Profile myProfile;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +69,6 @@ public class MoneyTransferAddActivity extends AppCompatActivity {
             }
         });
     }
-
     public void AddRemitter(){
        final String mobile = txtMobile.getText().toString();
        final   String Name = txtFirstName.getText().toString()+ txtLastName.getText().toString();

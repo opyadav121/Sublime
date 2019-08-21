@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="password "
-                android:inputType="textAutoComplete"
+                android:inputType="textPassword"
                 android:drawablePadding="5dp"
                 android:layout_marginTop="5dp"
                 />
@@ -93,13 +93,13 @@
                 android:id="@+id/radioLeft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Left"
+                android:text="left"
                 />
             <RadioButton
                 android:id="@+id/radioRight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Right"
+                android:text="right"
                 />
         </RadioGroup>
         <CheckBox

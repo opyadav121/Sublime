@@ -40,5 +40,5 @@ public class Profile {
     public String EWallet = "";
     public String SWallet = "";
     public String PendingWallet = "";
-    public String Referal_Code="";
+    public String SbWallet="";
 }

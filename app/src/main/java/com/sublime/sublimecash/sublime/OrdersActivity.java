@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import Fragments.AllOrdersFragment;
 import Fragments.AmazonFragment;
 import Fragments.FlipkartFragment;
 import Fragments.IIAshopingFragment;
@@ -40,9 +39,8 @@ public class OrdersActivity extends AppCompatActivity {
 
         TabLayout tabs =  findViewById(R.id.tabs);
         viewPager = findViewById(R.id.pager);
-        tabs.addTab(tabs.newTab().setText("ALL"));
         tabs.addTab(tabs.newTab().setText("Recharge & Bills"));
-        tabs.addTab(tabs.newTab().setText("Shoping"));
+        tabs.addTab(tabs.newTab().setText("Shopping"));
         tabs.addTab(tabs.newTab().setText("Amazon"));
         tabs.addTab(tabs.newTab().setText("Flipkart"));
         tabs.addTab(tabs.newTab().setText("Swiggy"));
@@ -50,8 +48,6 @@ public class OrdersActivity extends AppCompatActivity {
         tabs.addTab(tabs.newTab().setText("Others"));
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mAdapter);
-
-
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -62,33 +58,29 @@ public class OrdersActivity extends AppCompatActivity {
 
                 if(tab.getPosition() == 0)
                 {
-                    CurrentPage = "AllOrdersFragment";
+                    CurrentPage = "RechargeBillsFragment";
                 }
                 else if(tab.getPosition() == 1)
                 {
-                    CurrentPage = "RechargeBillsFragment";
+                    CurrentPage = "IIAshopingFragment";
                 }
                 else if(tab.getPosition() == 2)
                 {
-                    CurrentPage = "IIAshopingFragment";
+                    CurrentPage = "AmazonFragment";
                 }
                 else if(tab.getPosition() == 3)
                 {
-                    CurrentPage = "AmazonFragment";
+                    CurrentPage = "FlipkartFragment";
                 }
                 else if(tab.getPosition() == 4)
                 {
-                    CurrentPage = "FlipkartFragment";
+                    CurrentPage = "SwiggyFragment";
                 }
                 else if(tab.getPosition() == 5)
                 {
-                    CurrentPage = "SwiggyFragment";
-                }
-                else if(tab.getPosition() == 6)
-                {
                     CurrentPage = "OyoFragment";
                 }
-                else if(tab.getPosition() == 7)
+                else if(tab.getPosition() == 6)
                 {
                     CurrentPage = "OthersFragment";
                 }
@@ -108,7 +100,7 @@ public class OrdersActivity extends AppCompatActivity {
 
     public class TabsPagerAdapter extends FragmentPagerAdapter {
 
-        private AllOrdersFragment allOrdersFragment;
+        private RechargeBillsFragment rechargeBillsFragment;
         public TabsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -118,34 +110,31 @@ public class OrdersActivity extends AppCompatActivity {
             // return super.getItemPosition(object);
             return POSITION_UNCHANGED;
         }
-
         @Override
         public Fragment getItem(int position) {
 
             switch (position) {
                 case 0:
-                    if(allOrdersFragment==null)
+                    if(rechargeBillsFragment==null)
                     {
-                        allOrdersFragment = new AllOrdersFragment();
+                        rechargeBillsFragment = new RechargeBillsFragment();
                     }
-                    return allOrdersFragment;
+                    return rechargeBillsFragment;
                 case 1:
-                    return new RechargeBillsFragment();
-                case 2:
                     // Movies fragment activity
                     return new IIAshopingFragment();
-                case 3:
+                case 2:
                     // Movies fragment activity
                     return new AmazonFragment();
-                case 4:
+                case 3:
                     return new FlipkartFragment();
-                case 5:
+                case 4:
                     // Movies fragment activity
                     return new SwiggyFragment();
-                case 6:
+                case 5:
                     // Movies fragment activity
                     return new OyoFragment();
-                case 7:
+                case 6:
                     // Movies fragment activity
                     return new OthersFragment();
             }
@@ -154,41 +143,37 @@ public class OrdersActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 8;
+            return 7;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            if (position==0)
-            {
-                return "All";
-            }
-            else if (position==1)
+           if (position==0)
             {
                 return "Recharge & Bills";
 
             }
-            else if (position==2)
+            else if (position==1)
             {
                 return "Shopping";
             }
-            else if (position==3)
+            else if (position==2)
             {
                 return "Amazon";
             }
-            else if (position==4)
+            else if (position==3)
             {
                 return "Flipkart";
             }
-            else if (position==5)
+            else if (position==4)
             {
                 return "Swiggy";
             }
-            else if (position==6)
+            else if (position==5)
             {
                 return "OYO";
             }
-            else if (position==7)
+            else if (position==6)
             {
                 return "Others";
             }

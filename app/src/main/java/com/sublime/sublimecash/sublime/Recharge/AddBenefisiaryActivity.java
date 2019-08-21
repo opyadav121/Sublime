@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -58,6 +59,13 @@ public class AddBenefisiaryActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         txtAccountNumber = findViewById(R.id.txtAccountNumber);
         txtIFSC = findViewById(R.id.txtIFSC);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddBeneficiary();
+            }
+        });
+
     }
 
     public void AddBeneficiary(){

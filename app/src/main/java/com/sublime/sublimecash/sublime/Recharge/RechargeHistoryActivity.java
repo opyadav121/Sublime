@@ -90,7 +90,7 @@ public class RechargeHistoryActivity extends AppCompatActivity {
                         recharge.TransId = jObj.getString("transaction_id");
                         recharge.RemainingBal = jObj.getString("remaining_bal");
                         recharge.WalletBal = jObj.getString("wallet_bal");
-                       // recharge.OperatorIcon = jObj.getString("");
+                        recharge.OrderId = jObj.getString("order_id");
                         rechargeList.add(recharge);
                     }
                     adapterRecharge.notifyDataSetChanged();
@@ -185,6 +185,5 @@ public class RechargeHistoryActivity extends AppCompatActivity {
     private class ViewHolder
     {
         TextView histMobile,histOperator,histAmount,histOrderId,histDate,histStatus,hisTransId;
-        ImageView OperatorIcon;
     }
 }

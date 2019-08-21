@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Sublime</string>
 
-
     <string name="title_home">Home</string>
     <string name="title_balance">Business</string>
     <string name="title_bag">Wallet</string>
@@ -12,7 +11,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_Open">Open</string>
     <string name="drawer_Close">Close</string>
+    <string name="app_update_default_description">Looks like you have an older\nversion of the app.\nPlease update to get latest\nfeatures and best experience.</string>
+    <string name="app_update_positive_text">UPDATE NOW</string>
 
+    <string name="update_downloaded">Downloaded</string>
+    <string name="restart">Restart</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -36,14 +39,11 @@
     <string name="invitation_cta">Check it out here!</string>
     <string name="invitation_subject">I want to give you 100 baht</string>
     <string name="invitation_no_id">No invitation id: %s \n\n</string>
-
-
     <string-array name="AddressProof">
         <item>Aadhar Card</item>
         <item>DL(Driver License)</item>
         <item>Voter ID</item>
     </string-array>
-
     <string-array name="CouponRequest">
         <item>2240</item>
         <item>6720</item>
@@ -53,56 +53,30 @@
     <string-array name="TransferType">
         <item>IMPS</item>
         <item>NEFT</item>
-
     </string-array>
-    <string-array name="states">
-        <item>Andaman and Nicobar</item>
-        <item>Andhra Pradesh</item>
-        <item>Arunachal Pradesh</item>
-        <item>Assam</item>
-        <item>Bihar</item>
-        <item>Chandigarh</item>
-        <item>Chhattisgarh</item>
-        <item>Dadar and Nagar Haveli</item>
-        <item>Daman and Diu</item>
-        <item>Delhi</item>
-        <item>Goa</item>
-        <item>Gujarat</item>
-        <item>Haryana</item>
-        <item>Himachal Pradesh</item>
-        <item>Jammu and Kashmir</item>
-        <item>Jharkhand</item>
-        <item>Karnataka</item>
-        <item>Kerala</item>
-        <item>Lakshadweep</item>
-        <item>Madhya Pradesh</item>
-        <item>Maharashtra</item>
-        <item>Manipur</item>
-        <item>Meghalaya</item>
-        <item>Mizoram</item>
-        <item>Nagaland</item>
-        <item>Odisha</item>
-        <item>Puducherry</item>
-        <item>Punjab</item>
-        <item>Rajasthan</item>
-        <item>Sikkim</item>
-        <item>Tamil Nadu</item>
-        <item>Telangana</item>
-        <item>Tripura</item>
-        <item>Uttar Pradesh</item>
-        <item>Uttarakhand</item>
-        <item>West Bengal</item>
-        <item>Jammu and Kashmir</item>
-        <item>Jharkhand</item>
-        <item>Karnataka</item>
-        <item>Kerala</item>
-        <item>Madhya Pradesh</item>
-        <item>Maharashtra</item>
-        <item>Manipur</item>
-        <item>Meghalaya</item>
-        <item>Mizoram</item>
-        <item>Nagaland</item>
-        <item>Odisha</item>
+
+    <string-array name="BankName">
+        <item> ALLAHABAD BANK</item>
+        <item> ANDHRA BANK</item>
+        <item> BANK OF BARODA</item>
+        <item>BANK OF INDIA</item>
+        <item> BANK OF MAHARASHTRA</item>
+        <item>CANARA BANK</item>
+        <item>CENTRAL BANK OF INDIA</item>
+        <item> CORPORATION BANK</item>
+        <item> IDBI BANK LTD.</item>
+        <item> IND BANK HOUSING LTD.</item>
+        <item>INDBANK MERCHANT BANKING SERVICES LTD.</item>
+        <item>INDIAN BANK</item>
+        <item>INDIAN OVERSEAS BANK</item>
+        <item>JAMMU and KASHMIR BANK</item>
+        <item>PUNJAB and SIND BANK</item>
+        <item> PUNJAB NATIONAL BANK</item>
+        <item> STATE BANK OF INDIA</item>
+        <item>SYNDICATE BANK</item>
+        <item>UCO BANK</item>
+        <item>UNION BANK OF INDIA</item>
+        <item>UNITED BANK OF INDIA</item>
     </string-array>
 
 </resources>

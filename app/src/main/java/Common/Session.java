@@ -49,6 +49,7 @@ public class Session {
             editor.putString("E-Wallet",UserProfile.EWallet);
             editor.putString("S-Wallet",UserProfile.SWallet);
             editor.putString("Pending_balance",UserProfile.PendingWallet);
+            editor.putString("SbWallet",UserProfile.SbWallet);
             editor.commit();
             return true;
         }
@@ -98,6 +99,7 @@ public class Session {
             mProfile.EWallet = prefs.getString("E-Wallet","");
             mProfile.SWallet = prefs.getString("S-Wallet","");
             mProfile.PendingWallet=prefs.getString("Pending_balance","");
+            mProfile.SbWallet = prefs.getString("SbWallet","");
             mProfile.profileImg= prefs.getString("profile","");
             return mProfile;
         }

@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:background="@drawable/background_orange"
+                android:background="@drawable/backgraund_btn"
                 android:layout_marginRight="10dp"
                 android:text="Add"
                 android:textColor="@color/colorWhite"

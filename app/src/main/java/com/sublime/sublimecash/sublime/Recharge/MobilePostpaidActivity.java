@@ -64,8 +64,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MobilePostpaidActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     EditText txtMobileNumber,txtAmount;
-    TextView myContact,txtSWallet,txtEWallet,btnTransfer,txtrecentRecharge,btnPay,txtOperator,txtBWallet;
-    ListView listViewPostpaid,listViewPrepaid,ListRecharges;
+    TextView myContact,txtSWallet,txtEWallet,btnTransfer,txtrecentRecharge,btnPay,txtOperator,txtBWallet,txtsbWallet;
+    ListView ListRecharges;
     CircleImageView imageOperator;
     Button transfer;
     String RandomChildCode="";
@@ -75,8 +75,9 @@ public class MobilePostpaidActivity extends AppCompatActivity {
     AdapterRecharge adapterRecharge;
     final Context context = this;
     Profile myProfile;
-    String SWallet_Balance,Ewalet_Balance,Pending_Balance,optImage,optName,OptId,optType;
+    String optImage,optName,OptId,optType;
     Button browsePlan,Offer;
+    Double Remain, bal,restAmt,amt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +111,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         txtBWallet.setText(" \u20B9"+myProfile.PendingWallet);
         txtEWallet.setText(" \u20B9"+myProfile.EWallet);
         txtSWallet.setText(" \u20B9"+myProfile.SWallet);
-
+        bal = Double.parseDouble(myProfile.SWallet);
         txtrecentRecharge = findViewById(R.id.txtrecentRecharge);
         txtrecentRecharge.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,14 +135,23 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         txtOperator.setText(optName);
         ChildCode();
         requestQueue = Volley.newRequestQueue(getApplicationContext());
-        myContact = findViewById(R.id.myContact);
         txtMobileNumber = findViewById(R.id.txtMobileNumber);
         txtOperator = findViewById(R.id.txtOperator);
         txtAmount = findViewById(R.id.txtAmount);
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customDialog();
+                amt = Double.parseDouble(txtAmount.getText().toString());
+                if(bal < amt){
+                    restAmt = amt - bal;
+                    String addAmt = Double.toString(restAmt);
+                    Intent intent = new Intent(MobilePostpaidActivity.this,AddMoneyActivity.class);
+                    intent.putExtra("addAmt",addAmt);
+                    startActivity(intent);
+
+                }else {
+                    customDialog();
+                }
             }
         });
       /*  myContact.setOnClickListener(new View.OnClickListener() {
@@ -217,9 +227,9 @@ public class MobilePostpaidActivity extends AppCompatActivity {
       } else {
           RandomChildCode = ChildCode() + "A";
           final Date currentTime = Calendar.getInstance().getTime();
-          final int Remain = Integer.parseInt(SWallet_Balance) - Integer.parseInt(txtAmount.getText().toString());
-
-          String Recharge_url = Constants.Application_URL + "/users/index.php/Recharge/API_recharge";
+          Remain = Double.parseDouble(myProfile.SWallet) - Double.parseDouble(txtAmount.getText().toString());
+          String restAmount = Double.toString(Remain);
+          String Recharge_url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/Bill/PostpaidPayment";
           progressDialog = progressDialog.show(MobilePostpaidActivity.this, "", "Please wait...", false, false);
           StringRequest stringRequest = new StringRequest(Request.Method.POST, Recharge_url, new Response.Listener<String>() {
               @Override
@@ -227,20 +237,25 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                   progressDialog.dismiss();
                   try {
                       JSONObject jObj = new JSONObject(response);
-                      String Status = jObj.getString("Status");
-                      Toast.makeText(MobilePostpaidActivity.this, "" + Status, Toast.LENGTH_SHORT).show();
-                      String RandomChildCode = jObj.getString("Yourrchid");
-                      String Error = jObj.getString("Errormsg");
-                      String Remaining = jObj.getString("Remain");
-                      String RechargeID = jObj.getString("RechargeID");
-                      Intent confirmation = new Intent(MobilePostpaidActivity.this, PaymentHistoryActivity.class);
-                      confirmation.putExtra("Yourrchid", RandomChildCode);
-                      confirmation.putExtra("Errormsg", Error);
-                      confirmation.putExtra("Remain", Remaining);
-                      confirmation.putExtra("Status", Status);
-                      confirmation.putExtra("RechargeID", RechargeID);
-                      startActivity(confirmation);
-                      MobilePostpaidActivity.this.finish();
+                      String Status = jObj.getString("status");
+                      if (Status.equalsIgnoreCase("FAIL")) {
+                          Toast.makeText(MobilePostpaidActivity.this, "Transaction Failed", Toast.LENGTH_SHORT).show();
+                      } else{
+                          Toast.makeText(MobilePostpaidActivity.this, "" + Status, Toast.LENGTH_SHORT).show();
+                          String TransId = jObj.getString("transaction_id");
+                          String Mobile = jObj.getString("mob_no");
+                          String TransAmount = jObj.getString("amount");
+                          String Datetime = jObj.getString("date");
+                          Intent confirmation = new Intent(MobilePostpaidActivity.this, PaymentHistoryActivity.class);
+                          confirmation.putExtra("Yourrchid", RandomChildCode);
+                          confirmation.putExtra("Trans_Id", TransId);
+                          confirmation.putExtra("Mobile", Mobile);
+                          confirmation.putExtra("Status", Status);
+                          confirmation.putExtra("Date", Datetime);
+                          confirmation.putExtra("TansAmount", TransAmount);
+                          startActivity(confirmation);
+                          MobilePostpaidActivity.this.finish();
+                      }
                   } catch (JSONException e) {
                       e.printStackTrace();
                       progressDialog.dismiss();
@@ -259,12 +274,13 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                   params.put("email", myProfile.UserLogin);
                   params.put("Customernumber", Mobile);
                   params.put("Yourrchid", RandomChildCode);
-                  params.put("Optname", txtOperator.getText().toString());
+                  params.put("opname", optName);
                   params.put("Optcode", OptId);
-                  params.put("operatorname", txtOperator.getText().toString());
-                  params.put("wallet_bal", SWallet_Balance);
-                  params.put("remaining_bal", Integer.toString(Remain));
+                  params.put("operatorname", optName);
+                  params.put("wallet_bal", myProfile.SWallet);
+                  params.put("remaining_bal", restAmount);
                   params.put("Amount", Amount);
+                  params.put("amount",Amount);
                   params.put("date", String.valueOf(currentTime));
                   return params;
               }
@@ -333,7 +349,6 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                     holder.histDate = convertView.findViewById(R.id.histDate);
                     holder.histStatus = convertView.findViewById(R.id.histStatus);
                     holder.hisTransId = convertView.findViewById(R.id.hisTransId);
-                    //holder.OperatorIcon = convertView.findViewById(R.id.OperatorIcon);
                     convertView.setTag(holder);
                 }
                 holder = (ViewHolder) convertView.getTag();
@@ -345,9 +360,6 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                 holder.histDate.setText(history.Date);
                 holder.histStatus.setText(history.Status );
                 holder.hisTransId.setText(history.TransId);
-               // holder.OperatorIcon.setVisibility(View.VISIBLE);
-               // String url1 = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/opt/idea.jpg";
-               // Picasso.with(getApplicationContext()).load(url1).into(holder.OperatorIcon);
                 return convertView;
             }
             catch (Exception ex)
@@ -362,7 +374,6 @@ public class MobilePostpaidActivity extends AppCompatActivity {
     private class ViewHolder
     {
         TextView histMobile,histOperator,histAmount,histOrderId,histDate,histStatus,hisTransId,txtOperatorName;
-        CircleImageView iconOperator;
     }
     public void showChangeLangDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);

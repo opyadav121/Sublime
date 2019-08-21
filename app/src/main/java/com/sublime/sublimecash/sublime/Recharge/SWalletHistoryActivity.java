@@ -41,7 +41,7 @@ public class SWalletHistoryActivity extends AppCompatActivity {
     AdapterSWallet adapterSWallet;
     ListView listViewS_wallet;
     Profile myProfile;
-
+    TextView txtSCash;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,14 +55,13 @@ public class SWalletHistoryActivity extends AppCompatActivity {
         actionBar.setTitle("S Wallet ");
         actionBar.show();
         myProfile = Session.GetProfile(getApplicationContext());
-
+        txtSCash = findViewById(R.id.txtSCash);
+        txtSCash.setText("\u20B9"+myProfile.SWallet);
         listViewS_wallet = findViewById(R.id.listViewS_wallet);
         adapterSWallet =new AdapterSWallet(SWalletHistoryActivity.this,0,SWalletHistory);
         listViewS_wallet.setAdapter(adapterSWallet);
-
         SwalletHistory();
     }
-
     public void SwalletHistory(){
         RequestQueue queue = Volley.newRequestQueue(SWalletHistoryActivity.this);
         String SWalletHistory_url = Constants.Application_URL+"/users/index.php/Payment/S_WalletHistory";
