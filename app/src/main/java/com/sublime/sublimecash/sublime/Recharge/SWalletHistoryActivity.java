@@ -78,6 +78,8 @@ public class SWalletHistoryActivity extends AppCompatActivity {
                         recharge.Amount = jObj.getString("amount");
                         recharge.Date = jObj.getString("date");
                         recharge.Debit = jObj.getString("debit");
+                        recharge.prev_bal = jObj.getString("prev_bal");
+                        recharge.new_bal = jObj.getString("new_bal");
                         SWalletHistory.add(recharge);
                     }
                     adapterSWallet.notifyDataSetChanged();
@@ -138,6 +140,8 @@ public class SWalletHistoryActivity extends AppCompatActivity {
                     holder.EwType = convertView.findViewById(R.id.EwType);
                     holder.EwCredit = convertView.findViewById(R.id.EwCredit);
                     holder.EwDebit = convertView.findViewById(R.id.EwDebit);
+                    holder.preBal = convertView.findViewById(R.id.preBal);
+                    holder.NewBal = convertView.findViewById(R.id.NewBal);
                     convertView.setTag(holder);
                 }
                 holder = (ViewHolder) convertView.getTag();
@@ -147,6 +151,8 @@ public class SWalletHistoryActivity extends AppCompatActivity {
                 holder.EwType.setText(history.Type );
                 holder.EwCredit.setText(history.Credit);
                 holder.EwDebit.setText(history.Debit);
+                holder.NewBal.setText("\u20B9 "+history.new_bal);
+                holder.preBal.setText("\u20B9 "+history.prev_bal);
                 return convertView;
             }
             catch (Exception ex)
@@ -160,6 +166,6 @@ public class SWalletHistoryActivity extends AppCompatActivity {
 
     private class ViewHolder
     {
-        TextView EwAmount,EwDate,EwType,EwCredit,EwDebit;
+        TextView EwAmount,EwDate,EwType,EwCredit,EwDebit,NewBal,preBal;
     }
 }

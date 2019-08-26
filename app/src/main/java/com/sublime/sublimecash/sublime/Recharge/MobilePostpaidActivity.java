@@ -37,6 +37,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
+import com.sublime.sublimecash.sublime.AddRemainingActivity;
 import com.sublime.sublimecash.sublime.PaymentHistoryActivity;
 import com.sublime.sublimecash.sublime.R;
 
@@ -64,9 +65,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MobilePostpaidActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     EditText txtMobileNumber,txtAmount;
-    TextView myContact,txtSWallet,txtEWallet,btnTransfer,txtrecentRecharge,btnPay,txtOperator,txtBWallet,txtsbWallet;
+    TextView txtSWallet,txtEWallet,btnTransfer,txtrecentRecharge,btnPay,txtOperator,txtBWallet,txtsbWallet;
     ListView ListRecharges;
     CircleImageView imageOperator;
+    ImageView myContact;
     Button transfer;
     String RandomChildCode="";
     ProgressDialog progressDialog;
@@ -105,13 +107,12 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         transfer_E_to_S = findViewById(R.id.transfer_E_to_S);
         transfer = findViewById(R.id.transfer);
         btnPay = findViewById(R.id.btnPay);
+        myContact = findViewById(R.id.myContact);
         Offer = findViewById(R.id.Offer);
         txtOperator = findViewById(R.id.txtOperator);
-
         txtBWallet.setText(" \u20B9"+myProfile.PendingWallet);
         txtEWallet.setText(" \u20B9"+myProfile.EWallet);
         txtSWallet.setText(" \u20B9"+myProfile.SWallet);
-        bal = Double.parseDouble(myProfile.SWallet);
         txtrecentRecharge = findViewById(R.id.txtrecentRecharge);
         txtrecentRecharge.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,11 +142,13 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                myProfile = Session.GetProfile(getApplicationContext());
+                bal = Double.parseDouble(myProfile.SWallet);
                 amt = Double.parseDouble(txtAmount.getText().toString());
                 if(bal < amt){
                     restAmt = amt - bal;
                     String addAmt = Double.toString(restAmt);
-                    Intent intent = new Intent(MobilePostpaidActivity.this,AddMoneyActivity.class);
+                    Intent intent = new Intent(MobilePostpaidActivity.this, AddRemainingActivity.class);
                     intent.putExtra("addAmt",addAmt);
                     startActivity(intent);
 
@@ -154,7 +157,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
                 }
             }
         });
-      /*  myContact.setOnClickListener(new View.OnClickListener() {
+        myContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
@@ -165,9 +168,8 @@ public class MobilePostpaidActivity extends AppCompatActivity {
         {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS },0);
             return;
-        }  */
+        }
     }
-
   public String ChildCode() {
       int range = 9;
       int length = 4;
@@ -290,8 +292,8 @@ public class MobilePostpaidActivity extends AppCompatActivity {
   }
 
   //--------------------------------------------------------------------------------------------------
-  //  @Override
- /*   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Uri uri=data.getData();
         Cursor cursor=getContentResolver().query(uri,null,null,null,null);
         while (cursor.moveToNext())
@@ -309,7 +311,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }   */
+    }
 
     class AdapterRecharge extends ArrayAdapter<Recharge_History>{
         LayoutInflater inflat;

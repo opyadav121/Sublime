@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
+import com.sublime.sublimecash.sublime.AddRemainingActivity;
 import com.sublime.sublimecash.sublime.PaymentHistoryActivity;
 import com.sublime.sublimecash.sublime.R;
 
@@ -82,7 +83,6 @@ public class DTHRechargeActivity extends AppCompatActivity {
         txtBWallet.setText(" \u20B9"+myProfile.PendingWallet);
         txtEWallet.setText(" \u20B9"+myProfile.EWallet);
         txtSWallet.setText(" \u20B9"+myProfile.SWallet);
-        bal = Double.parseDouble(myProfile.SWallet);
         btnTransfer = findViewById(R.id.btnTransfer);
         btnTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,11 +94,13 @@ public class DTHRechargeActivity extends AppCompatActivity {
         btnPay.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                myProfile = Session.GetProfile(getApplicationContext());
+                bal = Double.parseDouble(myProfile.SWallet);
                 amt = Double.parseDouble(txtAmount.getText().toString());
                 if(bal < amt){
                     restAmt = amt - bal;
                     String addAmt = Double.toString(restAmt);
-                    Intent intent = new Intent(DTHRechargeActivity.this,AddMoneyActivity.class);
+                    Intent intent = new Intent(DTHRechargeActivity.this, AddRemainingActivity.class);
                     intent.putExtra("addAmt",addAmt);
                     startActivity(intent);
 
@@ -163,6 +165,7 @@ public class DTHRechargeActivity extends AppCompatActivity {
         dialog.show();
     }
     public void Recharge() {
+        myProfile = Session.GetProfile(getApplicationContext());
         String Mobile = txtMobileNumber.getText().toString();
         String Amount = txtAmount.getText().toString();
         if (Mobile.equals("")) {

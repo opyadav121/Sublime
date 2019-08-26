@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -46,6 +47,7 @@ public class PostpaidActivity extends AppCompatActivity {
     List<operatorPost> OperatorList=new ArrayList<>();
     AdapterPost adapterOperator;
     Profile myProfile;
+    private static final int MY_SOCKET_TIMEOUT_MS = 30000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +60,6 @@ public class PostpaidActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Select Operator");
         actionBar.show();
-
         myProfile = Session.GetProfile(getApplicationContext());
         gridViewPostpaid = findViewById(R.id.gridViewPostpaid);
         adapterOperator=new AdapterPost(PostpaidActivity.this, R.layout.gridview_prepaid, OperatorList);
@@ -104,6 +105,8 @@ public class PostpaidActivity extends AppCompatActivity {
                 return params;
             }
         };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(stringRequest);
 
         gridViewPostpaid.setOnItemClickListener(new AdapterView.OnItemClickListener() {

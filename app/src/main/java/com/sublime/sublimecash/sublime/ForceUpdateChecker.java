@@ -32,17 +32,13 @@ public class ForceUpdateChecker {
         this.context = context;
         this.onUpdateNeededListener = onUpdateNeededListener;
     }
-
     public void check() {
-        final FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.getInstance();
-
+        FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.getInstance();
         if (remoteConfig.getBoolean(KEY_UPDATE_REQUIRED)) {
             String currentVersion = remoteConfig.getString(KEY_CURRENT_VERSION);
             String appVersion = getAppVersion(context);
             String updateUrl = remoteConfig.getString(KEY_UPDATE_URL);
-
-            if (!TextUtils.equals(currentVersion, appVersion)
-                    && onUpdateNeededListener != null) {
+            if (!TextUtils.equals(currentVersion, appVersion) && onUpdateNeededListener != null) {
                 onUpdateNeededListener.onUpdateNeeded(updateUrl);
             }
         }
@@ -59,12 +55,9 @@ public class ForceUpdateChecker {
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, e.getMessage());
         }
-
         return result;
     }
-
     public static class Builder {
-
         private Context context;
         private MainActivity onUpdateNeededListener;
 
@@ -78,13 +71,12 @@ public class ForceUpdateChecker {
         }
 
         public ForceUpdateChecker build() {
+
             return new ForceUpdateChecker(context, onUpdateNeededListener);
         }
-
         public ForceUpdateChecker check() {
             ForceUpdateChecker forceUpdateChecker = build();
             forceUpdateChecker.check();
-
             return forceUpdateChecker;
         }
     }

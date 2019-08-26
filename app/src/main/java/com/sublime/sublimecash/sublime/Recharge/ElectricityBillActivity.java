@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -50,6 +51,7 @@ public class ElectricityBillActivity extends AppCompatActivity {
     List<Electric> OperatorList=new ArrayList<>();
     AdapterOperator adapterElectric;
     Profile myProfile;
+    private static final int MY_SOCKET_TIMEOUT_MS = 30000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +109,8 @@ public class ElectricityBillActivity extends AppCompatActivity {
                 return params;
             }
         };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(stringRequest);
 
         gridViewElectricity.setOnItemClickListener(new AdapterView.OnItemClickListener() {

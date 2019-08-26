@@ -24,18 +24,14 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
     private Response.ErrorListener mErrorListener;
     private Map<String, String> mHeaders;
 
-    public VolleyMultipartRequest(String url, Map<String, String> headers,
-                                  Response.Listener<NetworkResponse> listener,
-                                  Response.ErrorListener errorListener) {
+    public VolleyMultipartRequest(String url, Map<String, String> headers, Response.Listener<NetworkResponse> listener, Response.ErrorListener errorListener) {
         super(Method.POST, url, errorListener);
         this.mListener = listener;
         this.mErrorListener = errorListener;
         this.mHeaders = headers;
     }
 
-    public VolleyMultipartRequest(int method, String url,
-                                  Response.Listener<NetworkResponse> listener,
-                                  Response.ErrorListener errorListener) {
+    public VolleyMultipartRequest(int method, String url, Response.Listener<NetworkResponse> listener, Response.ErrorListener errorListener) {
         super(method, url, errorListener);
         this.mListener = listener;
         this.mErrorListener = errorListener;
@@ -86,9 +82,7 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
     @Override
     protected Response<NetworkResponse> parseNetworkResponse(NetworkResponse response) {
         try {
-            return Response.success(
-                    response,
-                    HttpHeaderParser.parseCacheHeaders(response));
+            return Response.success(response, HttpHeaderParser.parseCacheHeaders(response));
         } catch (Exception e) {
             return Response.error(new ParseError(e));
         }
@@ -119,6 +113,7 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
             buildDataPart(dataOutputStream, entry.getValue(), entry.getKey());
         }
     }
+
     private void buildTextPart(DataOutputStream dataOutputStream, String parameterName, String parameterValue) throws IOException {
         dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
         dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"" + parameterName + "\"" + lineEnd);
@@ -126,10 +121,10 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
         dataOutputStream.writeBytes(lineEnd);
         dataOutputStream.writeBytes(parameterValue + lineEnd);
     }
+
     private void buildDataPart(DataOutputStream dataOutputStream, DataPart dataFile, String inputName) throws IOException {
         dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
-        dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"" +
-                inputName + "\"; filename=\"" + dataFile.getFileName() + "\"" + lineEnd);
+        dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"" + inputName + "\"; filename=\"" + dataFile.getFileName() + "\"" + lineEnd);
         if (dataFile.getType() != null && !dataFile.getType().trim().isEmpty()) {
             dataOutputStream.writeBytes("Content-Type: " + dataFile.getType() + lineEnd);
         }
@@ -161,30 +156,38 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
 
         public DataPart() {
         }
+
         public DataPart(String name, byte[] data) {
             fileName = name;
             content = data;
         }
+
         public DataPart(String name, byte[] data, String mimeType) {
             fileName = name;
             content = data;
             type = mimeType;
         }
+
         public String getFileName() {
             return fileName;
         }
+
         public void setFileName(String fileName) {
             this.fileName = fileName;
         }
+
         public byte[] getContent() {
             return content;
         }
+
         public void setContent(byte[] content) {
             this.content = content;
         }
+
         public String getType() {
             return type;
         }
+
         public void setType(String type) {
             this.type = type;
         }

@@ -1,11 +1,17 @@
 package com.sublime.sublimecash.sublime.Recharge;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.ContactsContract;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +35,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
+import com.sublime.sublimecash.sublime.AddRemainingActivity;
 import com.sublime.sublimecash.sublime.HomeActivity;
 import com.sublime.sublimecash.sublime.LoginActivity;
 import com.sublime.sublimecash.sublime.PaymentHistoryActivity;
@@ -58,9 +65,11 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
     Button browsePlan,Offer;
     ProgressDialog progressDialog;
     Profile myProfile;
+    ImageView myContact;
     String RandomChildCode="";
     final Context context = this;
     Double Remain,bal,amt,restAmt;
+    String balance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,11 +99,12 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
         txtMobileNumber = findViewById(R.id.txtMobileNumber);
         txtAmount = findViewById(R.id.txtAmount);
         browsePlan = findViewById(R.id.browsePlan);
+        myContact = findViewById(R.id.myContact);
         Offer = findViewById(R.id.Offer);
         txtBWallet.setText(" \u20B9"+myProfile.PendingWallet);
         txtEWallet.setText(" \u20B9"+myProfile.EWallet);
         txtSWallet.setText(" \u20B9"+myProfile.SWallet);
-        bal = Double.parseDouble(myProfile.SWallet);
+
 
         btnTransfer = findViewById(R.id.btnTransfer);
         btnTransfer.setOnClickListener(new View.OnClickListener() {
@@ -103,16 +113,29 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
                 showChangeLangDialog();
             }
         });
-
+          myContact.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                        startActivityForResult(intent,0);
+                    }
+                });
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)!= PackageManager.PERMISSION_GRANTED )
+                {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS },0);
+                    return;
+                }
         btnPay = findViewById(R.id.btnPay);
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                myProfile = Session.GetProfile(getApplicationContext());
+                bal = Double.parseDouble(myProfile.SWallet);
                 amt = Double.parseDouble(txtAmount.getText().toString());
                 if(bal < amt){
                     restAmt = amt - bal;
                     String addAmt = Double.toString(restAmt);
-                    Intent intent = new Intent(PrepaidRechargeActivity.this,AddMoneyActivity.class);
+                    Intent intent = new Intent(PrepaidRechargeActivity.this, AddRemainingActivity.class);
                     intent.putExtra("addAmt",addAmt);
                     startActivity(intent);
 
@@ -135,6 +158,26 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
                 btnPay.setText(type + " " + "\u20B9 " + amt);
             }
         });
+    }
+    @Override
+     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Uri uri=data.getData();
+        Cursor cursor=getContentResolver().query(uri,null,null,null,null);
+        while (cursor.moveToNext())
+        {
+            if (Integer.parseInt(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)))>0)
+            {
+                Cursor c=getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,
+                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID+"=?",
+                        new String[]{cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))}, null);
+                while (c.moveToNext())
+                {
+                    String phone=c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    txtMobileNumber.setText(phone);
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
     public String ChildCode(){
         int range = 9;
@@ -179,20 +222,23 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
         Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Recharge();
+
+                String Mobile = txtMobileNumber.getText().toString();
+                String Amount = txtAmount.getText().toString();
+                if (Mobile.equals("")) {
+                    txtMobileNumber.setError("Enter Mobile no.");
+                } else if (Amount.equals("")) {
+                    txtAmount.setError("Enter Amount.");
+                } else {
+                    Recharge();
+                }
                 dialog.dismiss();
             }
         });
         dialog.show();
     }
-    public void Recharge() {
-        String Mobile = txtMobileNumber.getText().toString();
-        String Amount = txtAmount.getText().toString();
-        if (Mobile.equals("")) {
-            txtMobileNumber.setError("Enter Mobile no.");
-        } else if (Amount.equals("")) {
-            txtAmount.setError("Enter Amount.");
-        } else {
+    private void Recharge() {
+            myProfile = Session.GetProfile(getApplicationContext());
             RandomChildCode = ChildCode() + "A";
             final Date currentTime = Calendar.getInstance().getTime();
             Remain = Double.parseDouble(myProfile.SWallet) - Double.parseDouble(txtAmount.getText().toString());
@@ -205,8 +251,8 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     try {
                         JSONObject jObj = new JSONObject(response);
-                        if (response.length() == 1) {
-
+                        int x = response.length();
+                        if (x == 19) {
                             Toast.makeText(PrepaidRechargeActivity.this, "Transaction Failed", Toast.LENGTH_SHORT).show();
                         } else{
                             String Status = jObj.getString("status");
@@ -241,23 +287,22 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
                     params.put("email", myProfile.UserLogin);
-                    params.put("Customernumber", Mobile);
+                    params.put("Customernumber", txtMobileNumber.getText().toString());
                     params.put("Yourrchid", RandomChildCode);
                     params.put("Optname", optName);
                     params.put("Optcode", OptId);
                     params.put("operatorname", optName);
                     params.put("wallet_bal", myProfile.SWallet);
                     params.put("remaining_bal", amountRest);
-                    params.put("Amount", Amount);
-                    params.put("amount",Amount);
+                    params.put("Amount", txtAmount.getText().toString());
+                    params.put("amount",txtAmount.getText().toString());
                     params.put("date", String.valueOf(currentTime));
                     return params;
                 }
             };
-            RetryPolicy rPolicy = new DefaultRetryPolicy(0,-1,0);
-            stringRequest.setRetryPolicy(rPolicy);
+           // RetryPolicy rPolicy = new DefaultRetryPolicy(0,-1,0);
+           // stringRequest.setRetryPolicy(rPolicy);
             requestQueue.add(stringRequest);
-        }
     }
     public void showChangeLangDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -312,4 +357,5 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
         AlertDialog b = dialogBuilder.create();
         b.show();
     }
+
 }

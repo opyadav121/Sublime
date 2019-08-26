@@ -87,7 +87,7 @@
             android:layout_marginRight="30dp"
             android:padding="10dp"
             />
-            <include layout="@layout/content_prepaid"/>
+            <include layout="@layout/content_postpaid"/>
         <TextView
             android:id="@+id/txtrecentRecharge"
             android:layout_width="match_parent"

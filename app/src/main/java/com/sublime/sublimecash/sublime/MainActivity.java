@@ -30,9 +30,8 @@ public class MainActivity extends AppCompatActivity implements ForceUpdateChecke
                // startActivity(i);
                 //finish();
             }
-        },1000);
+        },2000);
     }
-
     private void CheckLogin() {
         myProfile = Session.GetProfile(this);
         if (myProfile == null || myProfile.UserLogin.matches("")) {
@@ -45,8 +44,7 @@ public class MainActivity extends AppCompatActivity implements ForceUpdateChecke
             MainActivity.this.finish();
         }
     }
-
-    @Override
+  @Override
     public void onUpdateNeeded(String updateUrl) {
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("New version available")
@@ -70,9 +68,5 @@ public class MainActivity extends AppCompatActivity implements ForceUpdateChecke
         final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(updateUrl));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-    }
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
     }
 }

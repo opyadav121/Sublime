@@ -109,6 +109,8 @@ public class AddressProofActivity extends AppCompatActivity {
             public void onResponse(NetworkResponse response) {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(AddressProofActivity.this, "file Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AddressProofActivity.this,HomeActivity.class));
+                AddressProofActivity.this.finish();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -124,7 +126,6 @@ public class AddressProofActivity extends AppCompatActivity {
                 params.put("image", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
                 return params;
             }
-
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();

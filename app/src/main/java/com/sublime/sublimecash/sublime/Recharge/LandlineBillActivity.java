@@ -27,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
+import com.sublime.sublimecash.sublime.AddRemainingActivity;
 import com.sublime.sublimecash.sublime.PaymentHistoryActivity;
 import com.sublime.sublimecash.sublime.R;
 
@@ -62,7 +63,6 @@ public class LandlineBillActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landline_bill);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -201,11 +201,13 @@ public class LandlineBillActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
     public void BillPay() {
+        myProfile = Session.GetProfile(getApplicationContext());
+        bal = Double.parseDouble(myProfile.SWallet);
         amt = Double.parseDouble(dueAmount);
         if(bal > amt){
             restAmt = amt - bal;
             String addAmt = Double.toString(restAmt);
-            Intent intent = new Intent(LandlineBillActivity.this,AddMoneyActivity.class);
+            Intent intent = new Intent(LandlineBillActivity.this, AddRemainingActivity.class);
             intent.putExtra("addAmt",addAmt);
             startActivity(intent);
         }else {

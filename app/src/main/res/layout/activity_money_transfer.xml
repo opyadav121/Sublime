@@ -103,7 +103,6 @@
             android:textColor="@color/colorWhite"
             android:layout_margin="10dp"
             />
-
         <include
             android:id="@+id/listBenific"
             layout="@layout/moneytransferlist"/>

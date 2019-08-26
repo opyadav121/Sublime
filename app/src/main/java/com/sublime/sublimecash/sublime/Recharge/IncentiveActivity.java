@@ -115,7 +115,6 @@ public class IncentiveActivity extends AppCompatActivity {
             int a = 1;
         }
     }
-
     class AdapterIncentive extends ArrayAdapter<Incentive> {
         LayoutInflater inflat;
         ViewHolder holder;
@@ -169,7 +168,6 @@ public class IncentiveActivity extends AppCompatActivity {
             }
         }
     }
-
     private class ViewHolder
     {
         TextView txtType,txtName,txtAmount,txtDate;

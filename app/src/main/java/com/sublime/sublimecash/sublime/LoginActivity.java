@@ -30,7 +30,6 @@ import Model.Profile;
 public class LoginActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
-    //String MobilePattern = "[0-9]{10}";
     ProgressDialog progressDialog;
     String  Login_url = Constants.Application_URL+"/users/index.php/Login/login";
 

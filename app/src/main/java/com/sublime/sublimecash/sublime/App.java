@@ -22,7 +22,7 @@ public class App extends Application {
         // set in-app defaults
         Map<String, Object> remoteConfigDefaults = new HashMap();
         remoteConfigDefaults.put(ForceUpdateChecker.KEY_UPDATE_REQUIRED, true);
-        remoteConfigDefaults.put(ForceUpdateChecker.KEY_CURRENT_VERSION, "3.0.8");
+        remoteConfigDefaults.put(ForceUpdateChecker.KEY_CURRENT_VERSION, "3.0.9");
         remoteConfigDefaults.put(ForceUpdateChecker.KEY_UPDATE_URL,
                 "https://play.google.com/store/apps/details?id=com.sublime.sublimecash.sublime&hl=en");
 

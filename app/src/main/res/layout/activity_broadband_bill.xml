@@ -22,8 +22,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:nestedScrollingEnabled="true"
-        android:layout_below="@id/appBar"
-        >
+        android:layout_below="@id/appBar">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

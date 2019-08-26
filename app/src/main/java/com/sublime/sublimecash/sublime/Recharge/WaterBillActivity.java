@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.sublime.sublimecash.sublime.AddRemainingActivity;
 import com.sublime.sublimecash.sublime.PaymentHistoryActivity;
 import com.sublime.sublimecash.sublime.R;
 
@@ -68,7 +69,7 @@ public class WaterBillActivity extends AppCompatActivity {
         txtBWallet.setText(" \u20B9"+myProfile.PendingWallet);
         txtEWallet.setText(" \u20B9"+myProfile.EWallet);
         txtSWallet.setText(" \u20B9"+myProfile.SWallet);
-        bal = Double.parseDouble(myProfile.SWallet);
+      //  bal = Double.parseDouble(myProfile.SWallet);
         btnTransfer = findViewById(R.id.btnTransfer);
         btnTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,11 +177,13 @@ public class WaterBillActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
     public void BillPay() {
+        myProfile = Session.GetProfile(getApplicationContext());
+        bal = Double.parseDouble(myProfile.SWallet);
         amt = Double.parseDouble(dueAmount);
-        if(bal > amt){
+        if(bal < amt){
             restAmt = amt - bal;
             String addAmt = Double.toString(restAmt);
-            Intent intent = new Intent(WaterBillActivity.this,AddMoneyActivity.class);
+            Intent intent = new Intent(WaterBillActivity.this, AddRemainingActivity.class);
             intent.putExtra("addAmt",addAmt);
             startActivity(intent);
         }else {

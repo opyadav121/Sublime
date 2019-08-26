@@ -24,8 +24,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SupportStatusActivity"
-            android:parentActivityName=""/>
+        <activity android:name=".Recharge.PaymentRemainingActivity"></activity>
+        <activity android:name=".AddRemainingActivity" />
+        <activity
+            android:name=".SupportStatusActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity android:name=".Recharge.WaterBillActivity" />
         <activity
             android:name=".Recharge.SupportActivity"

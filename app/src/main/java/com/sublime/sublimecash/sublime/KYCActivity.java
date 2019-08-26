@@ -70,11 +70,9 @@ public class KYCActivity extends AppCompatActivity {
                 UploadPanCard();
             }
         });
-
         findViewById(R.id.imgPancard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, 100);
             }
@@ -113,6 +111,7 @@ public class KYCActivity extends AppCompatActivity {
                 Toast.makeText(KYCActivity.this, "file Uploaded Successfully", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(KYCActivity.this,AddressProofActivity.class);
                 startActivity(intent);
+                KYCActivity.this.finish();
                 try {
                     JSONObject obj = new JSONObject(new String(response.data));
                     // Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();

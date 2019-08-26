@@ -26,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
+import com.sublime.sublimecash.sublime.AddRemainingActivity;
 import com.sublime.sublimecash.sublime.PaymentHistoryActivity;
 import com.sublime.sublimecash.sublime.R;
 
@@ -77,7 +78,7 @@ public class BroadbandBillActivity extends AppCompatActivity {
         optName = intent.getStringExtra("optName");
         OptId = intent.getStringExtra("OptId");
         optType = intent.getStringExtra("optType");
-        bal = Double.parseDouble(myProfile.SWallet);
+       // bal = Double.parseDouble(myProfile.SWallet);
         txtBWallet = findViewById(R.id.txtBWallet);
         imageOperator = findViewById(R.id.imageOperator);
         txtEWallet = findViewById(R.id.txtEWallet);
@@ -203,11 +204,13 @@ public class BroadbandBillActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
     public void BillPay() {
+        myProfile = Session.GetProfile(getApplicationContext());
+        bal = Double.parseDouble(myProfile.SWallet);
         amt = Double.parseDouble(dueAmount);
-        if(bal > amt){
+        if(bal < amt){
             restAmt = amt - bal;
             String addAmt = Double.toString(restAmt);
-            Intent intent = new Intent(BroadbandBillActivity.this,AddMoneyActivity.class);
+            Intent intent = new Intent(BroadbandBillActivity.this, AddRemainingActivity.class);
             intent.putExtra("addAmt",addAmt);
             startActivity(intent);
         }else {

@@ -504,8 +504,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         break;
                     }
                     case R.id.iconAeps: {
-                        Intent gas = new Intent(HomeActivity.this, AEPSActivity.class);
-                        startActivity(gas);
+                       // Intent gas = new Intent(HomeActivity.this, AEPSActivity.class);
+                       // startActivity(gas);
                         break;
                     }
                     case R.id.mobilePostpaid: {

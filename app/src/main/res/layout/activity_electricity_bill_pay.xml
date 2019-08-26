@@ -86,8 +86,7 @@
             android:layout_marginRight="30dp"
             android:padding="10dp"
             />
+        <include layout="@layout/content_bill"/>
         <include layout="@layout/content_elecric"/>
-
     </LinearLayout>
-
 </RelativeLayout>

@@ -12,33 +12,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
+import com.sublime.sublimecash.sublime.AddRemainingActivity;
 import com.sublime.sublimecash.sublime.PaymentHistoryActivity;
 import com.sublime.sublimecash.sublime.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.security.SecureRandom;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import Common.Constants;
 import Common.Session;
-import Model.Electric;
 import Model.Profile;
 
 public class ElectricityBillPayActivity extends AppCompatActivity {
@@ -47,12 +44,14 @@ public class ElectricityBillPayActivity extends AppCompatActivity {
     TextView txtBWallet,txtEWallet,txtSWallet,btnTransfer,txtOperator,txtsbWallet;
     EditText txtMobileNumber,txtAmount;
     Button btnPay;
+    LinearLayout maharastra,general;
     ProgressDialog progressDialog;
     Profile myProfile;
     String RandomChildCode="";
     final Context context = this;
     Double Remain,bal,restAmt,amt;
     String dueAmount,Name,Bill,customerNo,dueDate,refId,billunit;
+    private static final int MY_SOCKET_TIMEOUT_MS = 30000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +63,17 @@ public class ElectricityBillPayActivity extends AppCompatActivity {
         OptId = intent.getStringExtra("OptId");
         optType = intent.getStringExtra("optType");
 
+
+        general = findViewById(R.id.general);
+        maharastra = findViewById(R.id.maharastra);
+        if (optName.equalsIgnoreCase("")){
+            maharastra.setVisibility(View.VISIBLE);
+            general.setVisibility(View.GONE);
+        }else {
+            general.setVisibility(View.VISIBLE);
+            maharastra.setVisibility(View.GONE);
+        }
+
         txtBWallet = findViewById(R.id.txtBWallet);
         txtEWallet = findViewById(R.id.txtEWallet);
         txtSWallet = findViewById(R.id.txtSWallet);
@@ -74,7 +84,6 @@ public class ElectricityBillPayActivity extends AppCompatActivity {
         txtBWallet.setText(" \u20B9"+myProfile.PendingWallet);
         txtEWallet.setText(" \u20B9"+myProfile.EWallet);
         txtSWallet.setText(" \u20B9"+myProfile.SWallet);
-        bal = Double.parseDouble(myProfile.SWallet);
         btnTransfer = findViewById(R.id.btnTransfer);
         btnTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,14 +201,18 @@ public class ElectricityBillPayActivity extends AppCompatActivity {
                     return params;
                 }
             };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             requestQueue.add(stringRequest);
     }
     public void BillPay() {
+        myProfile = Session.GetProfile(getApplicationContext());
+        bal = Double.parseDouble(myProfile.SWallet);
            amt = Double.parseDouble(dueAmount);
                 if(bal > amt){
                     restAmt = amt - bal;
                     String addAmt = Double.toString(restAmt);
-                    Intent intent = new Intent(ElectricityBillPayActivity.this,AddMoneyActivity.class);
+                    Intent intent = new Intent(ElectricityBillPayActivity.this, AddRemainingActivity.class);
                     intent.putExtra("addAmt",addAmt);
                     startActivity(intent);
                 }else {
@@ -259,6 +272,8 @@ public class ElectricityBillPayActivity extends AppCompatActivity {
                             return params;
                         }
                     };
+                    stringRequest.setRetryPolicy(new DefaultRetryPolicy(MY_SOCKET_TIMEOUT_MS,
+                            DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                     requestQueue.add(stringRequest);
                 }
     }

@@ -111,7 +111,7 @@ public class WaterActivity extends AppCompatActivity {
                 String optName = optname.OperatorName;
                 String optId = optname.OptID;
                 String optType = optname.opType;
-                Intent intent = new Intent(WaterActivity.this, ElectricityBillPayActivity.class);
+                Intent intent = new Intent(WaterActivity.this, WaterBillActivity.class);
                 intent.putExtra("optName", optName);
                 intent.putExtra("OptId", optId);
                 intent.putExtra("optType", optType);
