@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class App extends Application {
-    private static final String TAG = App.class.getSimpleName();
+ /*   private static final String TAG = App.class.getSimpleName();
 
     @Override
     public void onCreate() {
@@ -37,5 +37,5 @@ public class App extends Application {
                         }
                     }
                 });
-    }
+    }   */
 }

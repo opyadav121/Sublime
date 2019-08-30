@@ -30,6 +30,7 @@ import java.util.Map;
 import Common.Constants;
 import Common.Session;
 import Model.Profile;
+import Model.RemitterDetails;
 
 public class AddBenefisiaryActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
@@ -38,6 +39,7 @@ public class AddBenefisiaryActivity extends AppCompatActivity {
     TextView txtName;
     Button btnAdd;
     Profile myProfile;
+    String Name,remmitId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +52,15 @@ public class AddBenefisiaryActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(" Sublime Cash ");
         actionBar.show();
+        Intent intent = getIntent();
+        Name = intent.getStringExtra("remitterName");
+        remmitId = intent.getStringExtra("remitterId");
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         myProfile = Session.GetProfile(getApplicationContext());
         txtMobile = findViewById(R.id.txtMobile);
         btnAdd = findViewById(R.id.btnAdd);
         txtName = findViewById(R.id.txtName);
-        name = findViewById(R.id.name);
         txtAccountNumber = findViewById(R.id.txtAccountNumber);
         txtIFSC = findViewById(R.id.txtIFSC);
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +69,6 @@ public class AddBenefisiaryActivity extends AppCompatActivity {
                 AddBeneficiary();
             }
         });
-
     }
 
     public void AddBeneficiary(){
@@ -99,7 +102,7 @@ public class AddBenefisiaryActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("mobile", txtMobile.getText().toString());
                 params.put("name",name.getText().toString());
-              //params.put("remitterid", txtMobileNumber.getText().toString());
+                params.put("remitterid", remmitId);
                 params.put("ifsc",txtIFSC.getText().toString());
                 params.put("account", txtAccountNumber.getText().toString());
                 return params;

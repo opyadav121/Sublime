@@ -1,28 +1,47 @@
 package com.sublime.sublimecash.sublime.Recharge;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.support.v4.text.HtmlCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
-import com.bumptech.glide.Glide;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 import com.sublime.sublimecash.sublime.R;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.util.HashMap;
+import java.util.Map;
+import Common.Session;
+import Model.Profile;
 
 public class GiftBuyActivity extends AppCompatActivity {
     TextView txtTC,txtDescription;
     Button btnBuy,btnClose;
     ImageView imagebuy;
-    EditText txtAmount,txtSenderName,txtSenderEmail,txtReceiverName,txtReceiverEmail,txtMsg;
-    Bitmap bmp;
+    EditText txtAmount,txtSenderName,txtSenderEmail,txtSenderPincode,txtReceiverName,txtReceiverEmail,txtMsg,txtReceiverMob,
+            txtReceiverAddress,txtReceiverPinCode,txtReceiverCity,txtReceiverState;
+    String imgName,CardNane,cardId,tnc_mobile;
+    ProgressDialog progressDialog;
+    RequestQueue requestQueue;
+    Profile myProfile;
+    ToggleButton toggle1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +55,14 @@ public class GiftBuyActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Gift Card");
         actionBar.show();
-    /*    imagebuy = findViewById(R.id.imagebuy);
+        myProfile = Session.GetProfile(getApplicationContext());
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        Intent intent = getIntent();
+        imgName = intent.getStringExtra("Image");
+        CardNane = intent.getStringExtra("optName");
+        cardId = intent.getStringExtra("OptId");
+
+        imagebuy = findViewById(R.id.imagebuy);
         txtDescription = findViewById(R.id.txtDescription);
         txtAmount = findViewById(R.id.txtAmount);
         txtSenderName = findViewById(R.id.txtSenderName);
@@ -44,33 +70,127 @@ public class GiftBuyActivity extends AppCompatActivity {
         txtReceiverName = findViewById(R.id.txtReceiverName);
         txtReceiverEmail = findViewById(R.id.txtReceiverEmail);
         txtMsg = findViewById(R.id.txtMsg);
+        txtSenderPincode = findViewById(R.id.txtSenderPincode);
+        txtReceiverMob = findViewById(R.id.txtReceiverMob);
+        txtReceiverAddress = findViewById(R.id.txtReceiverAddress);
+        txtReceiverPinCode = findViewById(R.id.txtReceiverPinCode);
+        txtReceiverCity = findViewById(R.id.txtReceiverCity);
+        txtReceiverState = findViewById(R.id.txtReceiverState);
         btnClose = findViewById(R.id.btnClose);
-        btnBuy= findViewById(R.id.btnBuy);
+        txtTC = findViewById(R.id.txtTC);
+        btnBuy = findViewById(R.id.btnBuy);
+        toggle1 = findViewById(R.id.toggle1);
         btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                Purchage();
+            }
+        });
 
-            }
-        });
-        txtTC = findViewById(R.id.txtTC);
-        txtTC.setOnClickListener(new View.OnClickListener() {
+        String url1 = "http://www.sublimecash.com/users/opt/gift/" + imgName;
+        Picasso.with(getApplicationContext()).load(url1).into(imagebuy);
+        GetDetails();
+        toggle1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder= new AlertDialog.Builder(GiftBuyActivity.this);
-                builder.setTitle("Terms and Conditions");
-                builder.setMessage("1.Amazon.in E-Gift Cards (“EGCs”) are issued by Qwikcilver Solutions Private Limited (“Qwikcilver”).\n" + "EGCs may be used only for the purchase of eligible products on Amazon.in.\n" + "2.This E- Gift Card can be redeemed only once.\n" + "3.EGC balances must be used within 1 year of the date of purchase.\n" + "EGCs cannot be transferred for value or redeemed for cash.\n" + "4.Qwikcilver, Amazon Seller Services Private Limited (“Amazon”) or their affiliates are not responsible if an EGC is lost, stolen, destroyed or used without permission.\n" + "5.To redeem your EGC, visit www.amazon.in/addgiftcard.\n" + "6.For complete terms and conditions, see www.amazon.in/giftcardtnc.\n" + "7.E-Gift Cards are normally delivered instantly. But sometimes due to system issues, the delivery can be delayed up-to 24 hours.\n" + "8.No returns and no refunds on gift cards, E- gift cards and gift vouchers shipped by woohoo.in. Please check the refund policy at http://www.woohoo.in/faq for further details.\n" + "10.To login & view your gift card transaction statement, please click here and go to the tab Amazon.in");
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog Alert = builder.create();
-                Alert.show();
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                txtTC.setText(HtmlCompat.fromHtml(tnc_mobile, 0));
+                if (isChecked) {
+                    txtTC.setVisibility(View.VISIBLE);
+                } else {
+                    txtTC.setVisibility(View.GONE);
+                }
             }
         });
-        byte[] byteArray = getIntent().getByteArrayExtra("image");
-        bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-        Glide.with(this).load(bmp).into(imagebuy);  */
+
+    }
+    public void GetDetails() {
+        String Recharge_url = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/ws/users/index.php/Voucher/Voucherdetail";
+        progressDialog = progressDialog.show(GiftBuyActivity.this, "", "Please wait...", false, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Recharge_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    String Data = jObj.getString("data");
+                    JSONObject jOb = new JSONObject(Data);
+                    String desc = jOb.getString("description");
+                    tnc_mobile = jOb.getString("tnc_mobile");
+                    String sku = jOb.getString("sku");
+                    txtDescription.setText(desc);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(GiftBuyActivity.this, "Please Contact to Admin ", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", myProfile.UserLogin);
+                params.put("id", cardId);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 
+    public void Purchage() {
+        String Recharge_url = "http://www.digitalepay.co.in/Webservice/RT/index.php/Report/Vouchertransaction";
+        progressDialog = progressDialog.show(GiftBuyActivity.this, "", "Please wait...", false, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Recharge_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    String Data = jObj.getString("data");
+                    JSONObject jOb = new JSONObject(Data);
+                    String desc = jOb.getString("description");
+                    String tnc_mobile = jOb.getString("tnc_mobile");
+                    String sku = jOb.getString("sku");
+                    txtDescription.setText(desc);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(GiftBuyActivity.this, "Please Contact to Admin ", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", myProfile.UserLogin);
+                params.put("spkey",cardId);
+                params.put("amount", txtAmount.getText().toString());
+                params.put("sender_name",txtSenderName.getText().toString());
+                params.put("sender_email", txtSenderEmail.getText().toString());
+                params.put("sender_pincode",txtSenderPincode.getText().toString());
+                params.put("receiver_name", txtReceiverName.getText().toString());
+                params.put("receiver_email",txtReceiverEmail.getText().toString());
+                params.put("gift_message", txtMsg.getText().toString());
+                params.put("receiver_mobile",txtReceiverMob.getText().toString());
+                params.put("receiver_address", txtReceiverAddress.getText().toString());
+                params.put("receiver_pincode",txtSenderPincode.getText().toString());
+                params.put("receiver_city", txtReceiverCity.getText().toString());
+                params.put("receiver_state",txtReceiverState.getText().toString());
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
 }

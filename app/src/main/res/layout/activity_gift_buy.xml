@@ -18,17 +18,9 @@
             android:layout_height="56dp"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
     </android.support.design.widget.AppBarLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Updating Soon....."
-        android:textSize="18sp"
-        android:gravity="center"
-        />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         >
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,8 +37,8 @@
         >
         <ImageView
             android:id="@+id/imagebuy"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
             android:src="@drawable/aa2"
             />
         <TextView
@@ -55,25 +47,34 @@
             android:text="Description:"
             android:textStyle="bold"
             android:textSize="14sp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/colorBlack"
             />
         <TextView
             android:id="@+id/txtDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="11sp"
             android:layout_marginTop="5dp"
             android:text="This Gift Card is valid for a period of 1 year from the date of issue. This Gift Card can be redeemed against purchase of any product available at Croma stores."
             />
+        <ToggleButton
+            android:id="@+id/toggle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_white"
+            android:checked="true"
+            android:textColor="@color/blue"
+            android:textOff="T$C +"
+            android:layout_gravity="right"
+            android:textOn="T$C -"/>
         <TextView
             android:id="@+id/txtTC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="T and C"
-            android:gravity="right"
             android:layout_marginRight="20dp"
-            android:textColor="@color/blue"
-            android:textSize="16sp"
+            android:textColor="#494949"
+            android:textSize="11sp"
             />
     </LinearLayout>
     <LinearLayout
@@ -88,44 +89,46 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/mobile"
             >
             <EditText
                 android:id="@+id/txtAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:hint="Amount"
                 android:inputType="number"
-                android:textColorHint="@color/colorOrangeDark"
                 />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/mobile"
             >
             <EditText
                 android:id="@+id/txtSenderName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:hint="Sender Name"
-                android:textColorHint="@color/colorOrangeDark"
                 />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/mobile"
             >
             <EditText
                 android:id="@+id/txtSenderEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:hint="Sender Email_Id"
-                android:textColorHint="@color/colorOrangeDark"
+                android:hint="Sender Email"
+                />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <EditText
+                android:id="@+id/txtSenderPincode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Sender PinCode"
                 />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
@@ -136,9 +139,7 @@
                 android:id="@+id/txtReceiverName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:hint="Receiver Name"
-                android:textColorHint="@color/colorOrangeDark"
                 />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
@@ -149,9 +150,7 @@
                 android:id="@+id/txtReceiverEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:hint="Receiver Email"
-                android:textColorHint="@color/colorOrangeDark"
                 />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
@@ -162,9 +161,62 @@
                 android:id="@+id/txtMsg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:hint="Message for Receiver"
-                android:textColorHint="@color/colorOrangeDark"
+                />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <EditText
+                android:id="@+id/txtReceiverMob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Receiver Mobile"
+                />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <EditText
+                android:id="@+id/txtReceiverAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Receiver Address"
+                />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <EditText
+                android:id="@+id/txtReceiverPinCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Receiver PinCode"
+                />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <EditText
+                android:id="@+id/txtReceiverCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Receiver City"
+                />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <EditText
+                android:id="@+id/txtReceiverState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Receiver State"
                 />
         </android.support.design.widget.TextInputLayout>
         <LinearLayout

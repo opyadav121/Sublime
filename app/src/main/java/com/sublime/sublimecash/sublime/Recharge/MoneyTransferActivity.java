@@ -35,7 +35,9 @@ import java.util.Map;
 
 import Common.Constants;
 import Common.Session;
+import Model.BeneficiaryDetails;
 import Model.Profile;
+import Model.RemitterDetails;
 
 public class MoneyTransferActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
@@ -86,7 +88,6 @@ public class MoneyTransferActivity extends AppCompatActivity {
                 try {
                     JSONObject jObj = new JSONObject(response);
                     String Status = jObj.getString("status");
-
                     if (Status.equalsIgnoreCase("Invalid Mobile Number"))
                     {
                         Toast.makeText(MoneyTransferActivity.this, "Invalid Mobile Number", Toast.LENGTH_SHORT).show();
@@ -96,45 +97,58 @@ public class MoneyTransferActivity extends AppCompatActivity {
                         startActivity(intent);
                         MoneyTransferActivity.this.finish();
                     }
+                    RemitterDetails remitterDetails = new RemitterDetails();
                     JSONObject data = jObj.getJSONObject("data");
                     JSONObject Remitter = data.getJSONObject("remitter");
-                    String RemitterName = Remitter.getString("name");
-                    String TotalLimit = Remitter.getString("remaininglimit");
+                    remitterDetails.remmitName = Remitter.getString("name");
+                    remitterDetails.remmitLimit = Remitter.getString("remaininglimit");
+                    remitterDetails.remmitId = Remitter.getString("id");
+                    remitterDetails.remmitAddress = Remitter.getString("address");
+                    remitterDetails.remmitMobile = Remitter.getString("mobile");
+                    remitterDetails.remmitMonthLimit = Remitter.getString("perm_txn_limit");
+                    remitterDetails.remmitPinCode = Remitter.getString("pincode");
                     JSONObject beneficiary = data.getJSONObject("beneficiary");
                     if (beneficiary.length()==0){
                         Intent intent = new Intent(MoneyTransferActivity.this,AddBenefisiaryActivity.class);
-                        intent.putExtra("remitterName",RemitterName);
+                        intent.putExtra("remitterName",remitterDetails.remmitName);
+                        intent.putExtra("remitterId",remitterDetails.remmitId);
                         startActivity(intent);
                     }else {
                     JSONObject item = beneficiary.getJSONObject("item");
-                    final String beneficId = item.getString("id");
-                    final String Name = item.getString("name");
-                    final String Account = item.getString("account");
-                    final String ifsc = item.getString("ifsc");
+                        BeneficiaryDetails beneficiaryDetails = new BeneficiaryDetails();
+                        beneficiaryDetails.beneficId = item.getString("id");
+                        beneficiaryDetails.beneficName = item.getString("name");
+                        beneficiaryDetails.beneficAccount = item.getString("account");
+                        beneficiaryDetails.beneficIFSC = item.getString("ifsc");
+                        beneficiaryDetails.beneficMobile= item.getString("mobile");
+                        beneficiaryDetails.beneficBank = item.getString("bank");
+                        beneficiaryDetails.beneficStatus= item.getString("status");
                     Toast.makeText(MoneyTransferActivity.this, ""+Status, Toast.LENGTH_SHORT).show();
                     if(Status.equalsIgnoreCase("Transaction Successful")) {
                         listBenific.setVisibility(View.VISIBLE);
-                        txtName.setText(Name);
-                        acNumber.setText(Account);
-                        txtIFSC.setText(ifsc);
-                        txtLimit.setText(TotalLimit);
-                        btnTransfer.setOnClickListener(new View.OnClickListener() {
+                        txtName.setText(beneficiaryDetails.beneficName);
+                        acNumber.setText(beneficiaryDetails.beneficAccount);
+                        txtIFSC.setText(beneficiaryDetails.beneficIFSC);
+                        txtLimit.setText(remitterDetails.remmitLimit);
+                    }
+                    btnTransfer.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(MoneyTransferActivity.this, MoneyTransferlistActivity.class);
-                                intent.putExtra("name", Name);
-                                intent.putExtra("AcNumber", Account);
-                                intent.putExtra("ifsc", ifsc);
-                                intent.putExtra("Benefic", beneficId);
+                                intent.putExtra("name", beneficiaryDetails.beneficName);
+                                intent.putExtra("AcNumber", beneficiaryDetails.beneficAccount);
+                                intent.putExtra("ifsc", beneficiaryDetails.beneficIFSC);
+                                intent.putExtra("Benefic", beneficiaryDetails.beneficId);
+                                intent.putExtra("remitterName",remitterDetails.remmitName);
                                 startActivity(intent);
                             }
                         });
-                    }
                     } if(Status.equalsIgnoreCase("OTP sent successfully")){
                         OtpDialog();
                     }else {
                         Toast.makeText(MoneyTransferActivity.this, ""+Status, Toast.LENGTH_SHORT).show();
-                        MoneyTransferActivity.this.finish();
+
+                       // MoneyTransferActivity.this.finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

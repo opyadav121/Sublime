@@ -107,7 +107,6 @@ public class MoneyTransferlistActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
     public void MoneyTransfer(){
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());

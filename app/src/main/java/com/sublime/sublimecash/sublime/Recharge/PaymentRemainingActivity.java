@@ -52,15 +52,15 @@ public class PaymentRemainingActivity extends Activity {
     private String hash,hashSequence;
     ProgressDialog progressDialog ;
 
-   // String merchant_key="V70k7TwL"; // live
-   // String salt="G2tSvurAlX"; // live
+    String merchant_key="V70k7TwL"; // live
+    String salt="G2tSvurAlX"; // live
 
-      String merchant_key="kYz2vV"; // test
-     String salt="zhoXe53j"; // test
+    //  String merchant_key="kYz2vV"; // test
+    // String salt="zhoXe53j"; // test
     String action1 ="";
-     String base_url="https://test.payu.in";
+   //  String base_url="https://test.payu.in";
     //https://secure.payu.in
-   // String base_url="https://secure.payu.in";//
+    String base_url="https://secure.payu.in";//
     int error=0;
     String hashString="";
     Map<String,String> params;

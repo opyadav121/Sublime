@@ -50,7 +50,6 @@ public class BroadbandActivity extends AppCompatActivity {
     List<Broadband> OperatorList=new ArrayList<>();
     AdapterOperator adapterOperator;
     Profile myProfile;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +68,6 @@ public class BroadbandActivity extends AppCompatActivity {
         adapterOperator=new AdapterOperator(BroadbandActivity.this, R.layout.gridview_prepaid, OperatorList);
         gridViewBroadband.setAdapter(adapterOperator);
         Operators();
-
     }
     public void Operators() {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
