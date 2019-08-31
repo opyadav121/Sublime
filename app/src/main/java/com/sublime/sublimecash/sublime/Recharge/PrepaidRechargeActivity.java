@@ -105,7 +105,9 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
         txtEWallet.setText(" \u20B9"+myProfile.EWallet);
         txtSWallet.setText(" \u20B9"+myProfile.SWallet);
 
-
+        String url1 = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/opt/" +optImage;
+        Picasso.with(getApplicationContext()).load(url1).into(imageOperator);
+        txtOperator.setText(optName);
         btnTransfer = findViewById(R.id.btnTransfer);
         btnTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,9 +147,6 @@ public class PrepaidRechargeActivity extends AppCompatActivity {
             }
         });
 
-        String url1 = "http://202.66.174.167/plesk-site-preview/sublimecash.com/202.66.174.167/users/opt/" +optImage;
-        Picasso.with(getApplicationContext()).load(url1).into(imageOperator);
-        txtOperator.setText(optName);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override

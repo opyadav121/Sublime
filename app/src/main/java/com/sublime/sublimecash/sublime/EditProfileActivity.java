@@ -53,7 +53,6 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -89,7 +88,7 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
         if (myProfile.profileImg.equalsIgnoreCase("null")|| myProfile.profileImg.equalsIgnoreCase("")) {
-            imageProfile.setImageResource(R.drawable.user_image);
+
         }else {
             String url1 = myProfile.profileImg;
             Picasso.with(getApplicationContext()).load(url1).into(imageProfile);

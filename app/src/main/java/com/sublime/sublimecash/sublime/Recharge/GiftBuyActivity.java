@@ -83,7 +83,9 @@ public class GiftBuyActivity extends AppCompatActivity {
         btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Purchage();
+               // Purchage();
+                Intent intent1 = new Intent(GiftBuyActivity.this,PurchageActivity.class);
+                startActivity(intent1);
             }
         });
 

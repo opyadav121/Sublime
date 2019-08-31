@@ -112,10 +112,11 @@ public class ProfileActivity extends AppCompatActivity {
         txtleftBusiness.setText(" \u20B9"+myProfile.left_business);
         txtRightBusiness.setText(" \u20B9"+myProfile.right_business);
 
-        if (!myProfile.profileImg.equalsIgnoreCase("null")||myProfile.profileImg.equalsIgnoreCase("null")) {
+        if (!myProfile.profileImg.equalsIgnoreCase("null")||myProfile.profileImg.equalsIgnoreCase("")) {
+
+        }else {
             String url1 = myProfile.profileImg;
             Picasso.with(getApplicationContext()).load(url1).into(imageProfile);
-        }else {
      /*   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getPackageName()));
             finish();
@@ -155,7 +156,6 @@ public class ProfileActivity extends AppCompatActivity {
         return byteArrayOutputStream.toByteArray();
     }
     private void uploadBitmap(final Bitmap bitmap) {
-
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST,url , new Response.Listener<NetworkResponse>() {
             @Override
             public void onResponse(NetworkResponse response) {

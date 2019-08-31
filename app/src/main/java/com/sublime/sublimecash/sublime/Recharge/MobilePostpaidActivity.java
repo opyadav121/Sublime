@@ -185,7 +185,7 @@ public class MobilePostpaidActivity extends AppCompatActivity {
       }
       return Child;
   }
-    public void customDialog(){
+  public void customDialog(){
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.confirm_dialog);
 

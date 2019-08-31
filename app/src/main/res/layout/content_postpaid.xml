@@ -8,8 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="5dp"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +22,6 @@
             android:id="@+id/imageOperator"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/airtelicon"
             app:civ_border_width="1dp"
             app:civ_border_color="#949393"
             android:layout_centerHorizontal="true"
@@ -34,7 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:text="Airtel"
             android:textStyle="bold"
             android:textSize="18sp"
             android:textColor="@color/colorBlack"
@@ -76,8 +73,7 @@
             android:orientation="horizontal"
             android:layout_below="@id/radioGroup"
             android:layout_marginTop="20dp"
-            android:background="@drawable/border2"
-            >
+            android:background="@drawable/border2">
             <EditText
                 android:id="@+id/txtMobileNumber"
                 android:layout_width="0dp"

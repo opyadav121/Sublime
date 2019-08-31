@@ -24,7 +24,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Recharge.PaymentRemainingActivity"></activity>
+        <activity android:name=".Recharge.PurchageActivity"></activity>
+        <activity android:name=".Recharge.PaymentRemainingActivity" />
         <activity android:name=".AddRemainingActivity" />
         <activity
             android:name=".SupportStatusActivity"
